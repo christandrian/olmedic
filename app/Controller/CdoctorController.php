@@ -63,4 +63,51 @@ class CdoctorController extends AppController {
 	 $this->set('title_for_layout', 'Dashboard');
 	$this->layout = 'c_frontdesk';
 	}
+	
+	public function finishPatient()	{
+			$this->init();
+			$id_store = "Clin000";
+			$queueNumber = "1"; //Ini harus diinput dari patient
+			$id_doctor = 1;//Ini harus diinput dari patient			
+			$date_time =  date("Y-m-d H:i:s");
+			//Change queue status into 2 (Wait For Payment)
+			$this->DashBoard_Clinic->changeQueueStatus($id_store, $queueNumber, $id_doctor, 2, $date_time);
+	}
+		
+		
+	public function addDoctor()		{
+			$this->init();
+			$social_number = "TestSocialNumber";
+			$first_name =  "FirstNameDoctor";
+			$last_name =  "Last Name Doctor";
+			$birth_date =  date("Y-m-d");
+			$address =  "Test Address Doctor";
+			$gender =  "Laki-Laki";
+			$blood_type = "O Positif";;
+			$handphone = "08123456789";
+			$this->DashBoard_Clinic->addDoctor($social_number, $first_name, $last_name, $birth_date, $address, $gender, $blood_type, $handphone);
+		}
+		public function editDoctor()	{
+			$this->init();
+			$id_doctor = 2;
+			$address = "Edit Address";
+			$gender = "Male";
+			$first_name = "Doctor";
+			$last_name = "Penyakit";
+			$birth_date =  date("Y-m-d");
+			$blood_type = "O Positif";;
+			$handphone = "08123456789";
+			$this->DashBoard_Clinic->editDoctor($id_doctor, $address, $gender, $first_name, $last_name,$birth_date, $blood_type, $handphone);
+		}
+		public function loadDoctor()	{
+			$this->init();
+			$id_doctor = 2;
+			$result = $this->DashBoard_Clinic->loadDoctor($id_doctor);
+			$this->set("data",$result);
+		}
+		public function loadListDoctor()	{
+			$this->init();
+			$result = $this->DashBoard_Clinic->loadListDoctor();
+			$this->set("data",$result);
+		}
 }

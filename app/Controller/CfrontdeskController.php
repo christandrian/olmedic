@@ -142,6 +142,7 @@ class CfrontdeskController extends AppController {
 		//masukin pasien k dokter
 	}else if($proc==2){
 		//cancel pasien
+		$this->cancelPatient($id_store,$queue_num,$id_visit);	
 	}else if($proc==3){
 		//payment
 		$this->patientFinishPay($id_store,$queue_num,$id_doctor,$id_visit);
@@ -180,7 +181,14 @@ class CfrontdeskController extends AppController {
 			//Remove patient from queue
 			$this->DashBoard_Clinic->removePatientFromQueue($id_store, $queueNumber);
 		}
-	
+	public function cancelPatient($id_store,$queueNumber,$id_visit)	{
+			$this->init();
+			$date_time =  date("Y-m-d H:i:s");
+			//Update visit history status to -1 (Canceled)
+			$this->DashBoard_Clinic->cancelVisitHistory($id_visit);
+			//Remove patient from queue
+			$this->DashBoard_Clinic->removePatientFromQueue($id_store, $queueNumber);			
+		}
 	public function stock() {
         $this->init();
 		$id_clinic = CakeSession::read('idStore');

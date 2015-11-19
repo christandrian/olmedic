@@ -966,6 +966,42 @@ class DashBoard_Clinic extends AppModel {
 		}
 		return $result;
 	}	
+	//buat di dokter
+	public function loadPatientByDoctor($id_clinic,$id_doctor)	{
+		$sql = "SELECT `patient_clinic`.`ID_Patient`, `Social_Number`, `First_Name`, `Last_Name`, `Birth_Date`, `Address`, `Gender`, `Blood_Type`, `Weight`, `Handphone_Number`, `Emergency_Contact` 
+FROM `patient_clinic`  
+JOIN 
+	(
+        SELECT `ID_Patient` 
+        FROM `visit_history_clinic` 
+        JOIN (
+            SELECT `Queue_Number`
+            FROM `queue_clinic`
+            Where `ID_Store` = '$id_clinic' AND `ID_Doctor` = '$id_doctor' AND `Status` = '1'
+        ) as `Inner_Temp`
+        ON `visit_history_clinic`.`Queue_Number` = `Inner_Temp`.`Queue_Number`
+        WHERE `visit_history_clinic`.`Status` = '0' AND `visit_history_clinic`.`ID_Store` = '$id_clinic'
+    ) as `Temp`
+ON `patient_clinic`.`ID_Patient`= `Temp`.`ID_Patient`";
+		$res = $this->query($sql);
+		$result = array();
+		foreach($res as $r)	{
+			$result[] = $r['patient_clinic']; 
+		}
+		return $result;
+	}	
+	public function loadPatientForFrontDeskClinic($id_clinic)	{
+		$sql = "SELECT `patient_clinic`.`ID_Patient`, `Social_Number`, `First_Name`, `Last_Name`, `Birth_Date`, `Address`, `Gender`, `Blood_Type`, `Weight`, `Handphone_Number`, `Emergency_Contact` 
+FROM `patient_clinic`  
+JOIN (SELECT `ID_Patient` FROM `visit_history_clinic` WHERE `ID_Store` = '$id_clinic' AND `Status` = '0') as `Temp`
+ON `patient_clinic`.`ID_Patient`= `Temp`.`ID_Patient`";
+		$res = $this->query($sql);
+		$result = array();
+		foreach($res as $r)	{
+			$result[] = $r['patient_clinic']; 
+		}
+		return $result;
+	}
 	
 	//VISIT_HISTORY
 	public function createVisitHistory($id_patient, $id_doctor, $id_store, $date_time, $queue_number, $status)	{
@@ -976,6 +1012,11 @@ class DashBoard_Clinic extends AppModel {
 	
 	public function finishVisitHistory($id_visit)	{
 		$sql = "UPDATE `ol_medic`.`visit_history_clinic` SET `Status` = '1' WHERE `visit_history_clinic`.`ID_Visit` = $id_visit;";
+		$res = $this->query($sql);
+		return $res;
+	}
+	public function cancelVisitHistory($id_visit)	{
+		$sql = "UPDATE `ol_medic`.`visit_history_clinic` SET `Status` = '-1' WHERE `visit_history_clinic`.`ID_Visit` = $id_visit;";
 		$res = $this->query($sql);
 		return $res;
 	}
