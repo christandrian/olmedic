@@ -25,32 +25,42 @@ echo $this->Html->link(
 
     </li>
     <li class="treeview">
-        <a href="#">
-            <i class="fa fa-file"></i>
-            <span>Prescription</span>
-            <i class="fa fa-angle-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu">
-            <li>
-<?php
-echo $this->Html->link(
-        '<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>', array('controller' => 'cfrontdesk',
-    'action' => 'prescription',
-    'full_base' => true
-        ), array('escape' => false)
-);
-?>
-            </li>
-            <li><?php
-                echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>', array('controller' => 'cfrontdesk',
-                    'action' => 'list_prescription',
-                    'full_base' => true
-                        ), array('escape' => false)
-                );
-?></li>
-        </ul>
-    </li>
+                            <a href="#">
+                                <i class="fa fa-file"></i>
+                                <span>Patients</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li>
+								<?php echo $this->Html->link(
+								'<i class="fa fa-angle-double-right"></i><span>Add New Patient</span>',
+								array('controller' => 'cfrontdesk',
+										'action' => 'addNewPatient',
+										'full_base' => true
+								),
+								array('escape'=>false)
+								);?>
+								</li>
+                                <li><?php echo $this->Html->link(
+								'<i class="fa fa-angle-double-right"></i><span>List Patients</span>',
+								array('controller' => 'cfrontdesk',
+										'action' => 'list_patients',
+										'full_base' => true
+								),
+								array('escape'=>false)
+								);?></li>
+                            </ul>
+                        </li>
+						<li >
+							<?php echo $this->Html->link(
+								'<i class="fa fa-stack-exchange"></i> <span>Queue</span>',
+								array('controller' => 'cfrontdesk',
+										'action' => 'queue',
+										'full_base' => true
+								),
+								array('escape'=>false)
+								);?>
+                        </li>
     <li class="treeview active">
         <a href="#">
             <i class="fa fa-file"></i>

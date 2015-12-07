@@ -120,14 +120,18 @@
 											<?php foreach ($queue as $f): ?>
                                             <tr>
                                                 <td></td>
-												<td><?php echo $f['pc']['fm_pat'].' '.$f['pc']['lm_pat']; ?></td>
-                                                <td><?php echo $f['dc']['fm_doc'].' '.$f['dc']['lm_doc']; ?></td>
+												<td id="nama_lengkap"><?php echo $f['Patient First Name'].' '.$f['Patient Last Name']; ?></td>
+                                                <td><?php echo $f['Doctor First Name'].' '.$f['Doctor Last Name']; ?></td>
                                                 
-												<td class="status"><?php echo $f['vhc']['Status'];?></td>
+												<td class="status"><?php echo $f['Queue Status'];?></td>
                                                 <td>
-												<input class="id_visit" type="hidden" value="<?php echo $f['vhc']['ID_Visit'] ;?>">
-												<input class="queue_num" type="hidden" value="<?php echo $f['vhc']['Queue_Number'] ;?>">
-												<input class="id_doc" type="hidden" value="<?php echo $f['vhc']['ID_Doc'] ;?>">
+												<input class="id_visit" type="hidden" value="<?php echo $f['ID_Visit'] ;?>">
+												<input class="queue_num" type="hidden" value="<?php echo $f['Queue Number'] ;?>">
+												<input class="id_doc" type="hidden" value="<?php echo $f['ID_Doctor'] ;?>">
+												<input id="soc_number" type="hidden" value="<?php echo $f['Social_Number'] ;?>">
+												<input id="address" type="hidden" value="<?php echo $f['Address'] ;?>">
+												<input id="birthdate" type="hidden" value="<?php echo $f['Birth_Date'] ;?>">
+												
 												<button class="btn btn-primary detail"  >Detail</button></td>
                                             </tr>
 											<?php endforeach; ?>
@@ -163,6 +167,10 @@
 			<div class="box" >
 							<div class="box-body text-center">
 							<form action="processQueue" method="POST">
+							<p id="nama">Test</p>
+							<p id="soc_num">Test</p>
+							<p id="alamat">Test</p>
+							<p id="birth_date">Test</p>
 							<input type="hidden" id="id_visit" name="id_visit">
 							<input type="hidden" id="status" name="status">
 							<input type="hidden" id="queue_num" name="queue_num">
@@ -213,6 +221,7 @@ echo $this->Html->script('plugins/datatables/dataTables.bootstrap');
 		$(document).on('click', '.detail' ,function(){
 		
 		idv=$(this).siblings('.id_visit').val();
+		
 		queue_num=$(this).siblings('.queue_num').val();
 		id_doc=$(this).siblings('.id_doc').val();
 		stat = $(this).parent().parent().find('.status').text();
@@ -220,6 +229,10 @@ echo $this->Html->script('plugins/datatables/dataTables.bootstrap');
 		$('#status').val(stat);
 		$('#id_doctor').val(id_doc);
 		$('#queue_num').val(queue_num);
+		$('#nama').text($('#nama_lengkap').text());
+		$('#soc_num').text($('#soc_number').val());
+		$('#alamat').text($('#address').val());
+		$('#birth_date').text($('#birthdate').val());
 		$('#detail').modal('show');
 		
 		

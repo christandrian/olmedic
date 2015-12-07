@@ -884,6 +884,7 @@ class DashBoard_Clinic extends AppModel {
 		$res = $this->query($sql);
 		return $res[0]['notes_clinic']['Value'];
 	}
+	
 	public function updateQueueNotes($last_value,$id_store)	{
 		$table_name = "Queue_Clinic";
 		$column_name = "Queue_Number";
@@ -910,14 +911,30 @@ class DashBoard_Clinic extends AppModel {
 	}
 	
 	public function getCurrentQueue($id_store)	{
-		$sql = "SELECT dc.First_Name as fm_doc ,dc.Last_Name as lm_doc , pc.First_Name as fm_pat , pc.Last_Name as lm_pat,
+		$sql = "SELECT dc.First_Name as fm_doc ,dc.Last_Name as lm_doc , pc.First_Name as fm_pat , pc.Last_Name as lm_pat, pc.Birth_Date as bd_pat,
+				pc.Address as add_pat, pc.Social_Number as sn_pat,
 			vhc.Status, vhc.ID_Visit, vhc.Queue_Number, vhc.ID_Doc
 			FROM `visit_history_clinic` as vhc
 			JOIN `doctor_clinic` as dc ON dc.ID_Doctor = vhc.ID_Doc
-			JOIN `patient_clinic` as pc on pc.ID_Patient = vhc.ID_Patient 
-		WHERE vhc.`ID_Store`= '$id_store'";
+			JOIN `patient_clinic` as pc on pc.ID_Patient = vhc.ID_Patient
+			JOIN `queue_clinic` as qc on qc.Queue_Number = vhc.Queue_Number
+		WHERE vhc.`ID_Store`= '$id_store' AND (qc.`Status` = '0' OR qc.`Status` = '1' OR qc.`Status` = '2') " ;
 		$res = $this->query($sql);
 		return $res;
+	}
+	
+	
+	public function loadPatientForFrontDeskClinic($id_clinic)	{
+		$sql = "SELECT `patient_clinic`.`ID_Patient`, `Social_Number`, `First_Name`, `Last_Name`, `Birth_Date`, `Address`, `Gender`, `Blood_Type`, `Weight`, `Handphone_Number`, `Emergency_Contact` 
+FROM `patient_clinic`  
+JOIN (SELECT `ID_Patient` FROM `visit_history_clinic` WHERE `ID_Store` = '$id_clinic' AND `Status` = '0') as `Temp`
+ON `patient_clinic`.`ID_Patient`= `Temp`.`ID_Patient`";
+		$res = $this->query($sql);
+		$result = array();
+		foreach($res as $r)	{
+			$result[] = $r['patient_clinic']; 
+		}
+		return $result;
 	}
 	
 	public function loadPatientHistory($id_store,$id_patient)	{
@@ -967,34 +984,41 @@ class DashBoard_Clinic extends AppModel {
 		return $result;
 	}	
 	//buat di dokter
-	public function loadPatientByDoctor($id_clinic,$id_doctor)	{
-		$sql = "SELECT `patient_clinic`.`ID_Patient`, `Social_Number`, `First_Name`, `Last_Name`, `Birth_Date`, `Address`, `Gender`, `Blood_Type`, `Weight`, `Handphone_Number`, `Emergency_Contact` 
-FROM `patient_clinic`  
-JOIN 
-	(
-        SELECT `ID_Patient` 
-        FROM `visit_history_clinic` 
-        JOIN (
-            SELECT `Queue_Number`
-            FROM `queue_clinic`
-            Where `ID_Store` = '$id_clinic' AND `ID_Doctor` = '$id_doctor' AND `Status` = '1'
-        ) as `Inner_Temp`
-        ON `visit_history_clinic`.`Queue_Number` = `Inner_Temp`.`Queue_Number`
-        WHERE `visit_history_clinic`.`Status` = '0' AND `visit_history_clinic`.`ID_Store` = '$id_clinic'
-    ) as `Temp`
-ON `patient_clinic`.`ID_Patient`= `Temp`.`ID_Patient`";
+	public function loadPatientByDoctor($id_clinic,$id_doctor,$status)	{
+		$sql = "SELECT `ID_Visit`,`patient_clinic`.`ID_Patient`, `Social_Number`, `First_Name`, 
+			`Last_Name`, `Birth_Date`, `Address`, `Gender`, `Blood_Type`, `Weight`, 
+			`Handphone_Number`, `Emergency_Contact`
+		FROM `patient_clinic`  
+		JOIN 
+			(
+				SELECT `ID_Patient`, `ID_Visit`
+				FROM `visit_history_clinic` 
+				JOIN (
+					SELECT `Queue_Number`
+					FROM `queue_clinic`
+					Where `ID_Store` = '$id_clinic' AND `ID_Doctor` = '$id_doctor' AND `Status` = '$status'
+				) as `Inner_Temp`
+				ON `visit_history_clinic`.`Queue_Number` = `Inner_Temp`.`Queue_Number`
+				WHERE `visit_history_clinic`.`Status` = '0' AND `visit_history_clinic`.`ID_Store` = '$id_clinic'
+			) as `Temp`
+		ON `patient_clinic`.`ID_Patient`= `Temp`.`ID_Patient`";
 		$res = $this->query($sql);
 		$result = array();
+		$counter = 0;
 		foreach($res as $r)	{
-			$result[] = $r['patient_clinic']; 
+			$result[$counter] = $r['patient_clinic']; 
+			$result[$counter]['ID_Visit'] = $r['Temp']['ID_Visit'];
+			$counter++;
 		}
 		return $result;
 	}	
-	public function loadPatientForFrontDeskClinic($id_clinic)	{
-		$sql = "SELECT `patient_clinic`.`ID_Patient`, `Social_Number`, `First_Name`, `Last_Name`, `Birth_Date`, `Address`, `Gender`, `Blood_Type`, `Weight`, `Handphone_Number`, `Emergency_Contact` 
-FROM `patient_clinic`  
-JOIN (SELECT `ID_Patient` FROM `visit_history_clinic` WHERE `ID_Store` = '$id_clinic' AND `Status` = '0') as `Temp`
-ON `patient_clinic`.`ID_Patient`= `Temp`.`ID_Patient`";
+	
+	//New!
+	public function loadPatientVisitHistoryByDoctor($id_doctor, $id_store)	{
+		$sql = "SELECT `pc`.`ID_Patient`, `Social_Number`, `First_Name`, `Last_Name`, `Birth_Date`, `Address`, `Gender`, `Blood_Type`, `Weight`, `Handphone_Number`, `Emergency_Contact`, `vhc`.`anamnesa`, `vhc`.`Time`
+		FROM `patient_clinic` as `pc`
+		JOIN (SELECT `ID_Patient`,`Status`,`Date_Time` as `Time`, `anamnesa` FROM `visit_history_clinic` WHERE `ID_Store` = '$id_store' AND `ID_Doc`='$id_doctor') AS `vhc`
+		ON `pc`.`ID_Patient` = `vhc`.`ID_Patient`";
 		$res = $this->query($sql);
 		$result = array();
 		foreach($res as $r)	{
@@ -1002,21 +1026,62 @@ ON `patient_clinic`.`ID_Patient`= `Temp`.`ID_Patient`";
 		}
 		return $result;
 	}
-	
-	//VISIT_HISTORY
-	public function createVisitHistory($id_patient, $id_doctor, $id_store, $date_time, $queue_number, $status)	{
-		$sql = "INSERT INTO `ol_medic`.`visit_history_clinic` (`ID_Visit`, `ID_Patient`, `ID_Doc`, `ID_Store`, `Date_Time`, `Queue_Number`, `Status`) VALUES (NULL, '$id_patient', '$id_doctor', '$id_store', '$date_time', '$queue_number', '$status');";
+	//New!
+	public function LoadPatientListAnamnesa($id_patient,$id_store)	{
+		$sql = "SELECT `ID_Visit`, `Anamnesa` 
+		FROM `visit_history_clinic` 
+		WHERE `ID_Patient` = '$id_patient' AND `ID_Store` = '$id_store';";
 		$res = $this->query($sql);
-		return $res;
+		$result = array();
+		foreach($res as $r)	{
+			$result[] = $r['visit_history_clinic']; 
+		}
+		return $result;
+	}
+	//New!
+	public function PatientLoadDoctorDiagnose($id_patient, $id_store)	{
+		$sql = "SELECT `ddc`.`ID_Visit`, `ID_Diagnosis`, `Treatment`, `Prescription_List`, `Image`, `Memo`, `Time_Created` 
+		FROM `doctor_diagnosis_clinic` as `ddc` 
+		JOIN (
+			SELECT `ID_Visit`,`ID_Patient` 
+			FROM `visit_history_clinic` 
+			WHERE `ID_Patient` = '$id_patient' AND `ID_Store` = '$id_store'
+		) as `iv` 
+		ON `iv`.`ID_Visit` = `ddc`.`ID_Visit`;";
+		$res = $this->query($sql);
+		$result = array();
+		foreach($res as $r)	{
+			$result[] = $r['ddc']; 
+		}
+		return $result;
+	}
+	//New!
+	public function LoadDetailDiagnose($id_diagnosis)	{
+		$sql = "SELECT `ID_Detail`, `Diagnosis`, `Memo` 
+		FROM `detail_doctor_diagnosis_clinic`  as `dddc`
+		WHERE `ID_Diagnosis` = '$id_diagnosis'";
+		$res = $this->query($sql);
+		$result = array();
+		foreach($res as $r)	{
+			$result[] = $r['dddc']; 
+		}
+		return $result;
 	}
 	
+	
+	//VISIT_HISTORY
+	public function createVisitHistory($id_patient, $id_doctor, $id_store, $date_time, $queue_number, $status, $via, $anamnesa,$keterangan)	{
+		$sql = "INSERT INTO `ol_medic`.`visit_history_clinic` (`ID_Visit`, `ID_Patient`, `ID_Doc`, `ID_Store`, `Date_Time`, `Queue_Number`, `Status`, `Via`, `Keterangan`, `Anamnesa`) VALUES (NULL, '$id_patient', '$id_doctor', '$id_store', '$date_time', '$queue_number', '$status', '$via', '$keterangan', '$anamnesa');";
+		$res = $this->query($sql);
+		return $res;
+	}	
 	public function finishVisitHistory($id_visit)	{
 		$sql = "UPDATE `ol_medic`.`visit_history_clinic` SET `Status` = '1' WHERE `visit_history_clinic`.`ID_Visit` = $id_visit;";
 		$res = $this->query($sql);
 		return $res;
 	}
-	public function cancelVisitHistory($id_visit)	{
-		$sql = "UPDATE `ol_medic`.`visit_history_clinic` SET `Status` = '-1' WHERE `visit_history_clinic`.`ID_Visit` = $id_visit;";
+	public function cancelVisitHistory($id_visit, $detail)	{
+		$sql = "UPDATE `ol_medic`.`visit_history_clinic` SET `Status` = '-1' , `Keterangan` = '$detail' WHERE `visit_history_clinic`.`ID_Visit` = $id_visit;";
 		$res = $this->query($sql);
 		return $res;
 	}
@@ -1037,11 +1102,157 @@ ON `patient_clinic`.`ID_Patient`= `Temp`.`ID_Patient`";
 		return $res[0]['doctor_clinic'];
 	}
 	public function loadListDoctor($id_clinic)	{
-		$sql = "SELECT `ID_Doctor`, `Address`, `Gender`, `First_Name`, `Last_Name`, `Social_Number`, `Birth_Date`, `Blood_Type`, `Handphone_Number` FROM `doctor_clinic`  WHERE `ID_Store` = '$id_clinic'";
+		$sql = "SELECT `ID_Doctor`, `Address`, `Gender`, `First_Name`, `Last_Name`, `Social_Number`, `Birth_Date`, `Blood_Type`, `Handphone_Number` FROM `doctor_clinic`  WHERE `ID_Clinic` = '$id_clinic'";
 		$res = $this->query($sql);
 		$result = array();
 		foreach($res as $r)	{
 			$result[] = $r['doctor_clinic']; 
+		}
+		return $result;
+	}
+	
+	public function loadListDoctorAnamnesa($id_doctor, $id_store)	{
+		$sql = "SELECT `vhc`.`ID_Visit`, `vhc`.`ID_Patient`, `pc`.`First_Name`, `pc`.`Last_Name`, `pc`.`Birth_Date`, `pc`.`Gender`, `pc`.`Blood_Type`,`vhc`.`Date_Time`, `vhc`.`Anamnesa`
+		FROM `visit_history_clinic` as `vhc`
+		JOIN (
+			SELECT `ID_Patient`, `First_Name`, `Last_Name`, `Birth_Date`, `Gender`, `Blood_Type`
+			FROM `patient_clinic` 
+			WHERE `ID_Store` = '$id_store'
+		) AS `pc`
+		ON `pc`.`ID_Patient` = `vhc`.`ID_Patient`
+		WHERE `ID_Doc` = '1' AND `vhc`.`ID_Store`= '$id_store'";
+		$res = $this->query($sql);
+		$result = array();
+		$counter = 0;
+		foreach($res as $r)	{
+			$result[$counter]['ID_Visit'] = $r['vhc']['ID_Visit']; 
+			$result[$counter]['ID_Patient'] = $r['vhc']['ID_Patient']; 
+			$result[$counter]['First_Name'] = $r['pc']['First_Name']; 
+			$result[$counter]['Last_Name'] = $r['pc']['Last_Name']; 
+			$result[$counter]['Birth_Date'] = $r['pc']['Birth_Date']; 
+			$result[$counter]['Gender'] = $r['pc']['Gender']; 
+			$result[$counter]['Blood_Type']  = $r['pc']['Blood_Type']; 
+			$result[$counter]['Date_Time'] = $r['vhc']['Date_Time']; 
+			$result[$counter]['Anamnesa'] = $r['vhc']['Anamnesa']; 
+			$counter++;
+		}
+		return $result;
+	}
+	//New!
+	public function insertDiagnose($id_visit, $detail, $time)	{
+		$sql = "INSERT INTO `ol_medic`.`doctor_diagnosis_clinic` 
+		(`ID_Diagnosis`, `ID_Visit`, `Treatment`, `Prescription_List`, `Image`, `Memo`, `Time_Created`) 
+		VALUES 
+		(NULL, '$id_visit', '$detail[treatment]', '$detail[prescription_list]', '$detail[image]', '$detail[memo]', '$time');";
+		$res = $this->query($sql);
+	}
+	//New!
+	public function insertDetailDiagnose($id_diagnose, $detail)	{
+		$sql = "INSERT INTO `ol_medic`.`detail_doctor_diagnosis_clinic` 
+		(`ID_Detail`, `ID_Diagnosis`, `Diagnosis`, `Memo`) 
+		VALUES 
+		(NULL, '$id_diagnose', '$detail[diagnose_code]', '$detail[memo]');";
+		$res = $this->query($sql);
+	}	
+	
+	public function searchPatient($id_clinic, $partName)	{
+		$sql = "SELECT `ID_Patient`, `Social_Number`, `First_Name`, `Last_Name`, `Birth_Date`, `Address`, `Gender`, `Blood_Type`, `Weight`, `Handphone_Number`, `Emergency_Contact` FROM `patient_clinic` WHERE `ID_Store` = '$id_clinic' AND (`First_Name`  LIKE '%$partName%' OR `Last_Name` LIKE '%$partName%')";
+		$res = $this->query($sql);
+		$result = array();
+		foreach($res as $r)	{
+			$result[] = $r['patient_clinic']; 
+		}
+		return $result;
+	}	
+	//New!
+	public function loadPatientQueue($id_clinic)	{
+	//Tanya: Kalo semua queue status di load, nanti berdasarkan statusnya bisa d lakuin hal yang beda2 dong? ga mending queue statusnya yang belom diprocess aja (0)?
+		$sql = "SELECT `pc`.`ID_Patient`, `Social_Number`, 
+		`pc`.`First_Name` as `Patient First Name`, 
+			`pc`.`Last_Name` as `Patient Last Name`, `Birth_Date`, `Address`, `Gender`, 
+			`Temp`.`First_Name` as `Doctor First Name`, 
+			`Temp`.`Last_Name` as `Doctor Last Name`, 
+			`Temp`.`ID_Doc` as `ID_Doctor`,
+			`Temp`.`Queue Number` as `Queue Number`,
+			`Temp`.`Queue Status`,`Temp`.`ID_Visit`
+		FROM `patient_clinic` as `pc`
+		JOIN (
+			SELECT `ID_Patient`, `ID_Doc`, `First_Name`, `Last_Name`, `ID_Visit`, `qc`.`Status` as `Queue Status`, `qc`.`Queue_Number` as `Queue Number`
+			FROM `visit_history_clinic` as vhc 
+			JOIN `doctor_clinic` as `dc` 
+			ON dc.`ID_Doctor` = vhc.`ID_Doc` 
+            JOIN (
+                SELECT `Status`,`Queue_Number`
+                FROM `queue_clinic`
+                WHERE `ID_Store` = '$id_clinic'
+            ) as `qc`
+            ON `qc`.`Queue_Number` = `vhc`.`Queue_Number`
+			WHERE `ID_Store` = '$id_clinic' AND `vhc`.`Status` = 0
+		) as `Temp`
+		ON `pc`.`ID_Patient`= `Temp`.`ID_Patient`
+		ORDER BY `Temp`.`Queue Status` ASC";		
+		$res = $this->query($sql);
+		$result = array();
+		$counter = 0;
+		foreach($res as $r)	{
+			$result[$counter]['ID_Patient'] = $r['pc']['ID_Patient']; 
+			$result[$counter]['Social_Number'] = $r['pc']['Social_Number']; 
+			$result[$counter]['Patient First Name'] = $r['pc']['Patient First Name']; 
+			$result[$counter]['Patient Last Name'] = $r['pc']['Patient Last Name']; 
+			$result[$counter]['Birth_Date'] = $r['pc']['Birth_Date']; 
+			$result[$counter]['Address'] = $r['pc']['Address']; 
+			$result[$counter]['Gender'] = $r['pc']['Gender']; 
+			$result[$counter]['Doctor First Name'] = $r['Temp']['Doctor First Name']; 
+			$result[$counter]['Doctor Last Name'] = $r['Temp']['Doctor Last Name']; 
+			$result[$counter]['Queue Status'] = $r['Temp']['Queue Status']; 
+			$result[$counter]['ID_Visit'] = $r['Temp']['ID_Visit'];
+			$result[$counter]['Queue Number'] = $r['Temp']['Queue Number'];
+			$result[$counter]['ID_Doctor'] = $r['Temp']['ID_Doctor'];
+			$counter++;
+		}
+		return $result;
+	}
+	//New!
+	public function searchInQueue($id_clinic, $partName)	{
+		$sql = "SELECT `pc`.`ID_Patient`, `Social_Number`, 
+		`pc`.`First_Name` as `Patient First Name`, 
+			`pc`.`Last_Name` as `Patient Last Name`, `Birth_Date`, `Address`, `Gender`, 
+			`Temp`.`First_Name` as `Doctor First Name`, 
+			`Temp`.`Last_Name` as `Doctor Last Name`, 
+			`Temp`.`Queue Status`,`Temp`.`ID_Visit`
+		FROM `patient_clinic` as `pc`
+		JOIN (
+			SELECT `ID_Patient`, `ID_Doc`, `First_Name`, `Last_Name`, `ID_Visit`, `qc`.`Status` as `Queue Status`
+			FROM `visit_history_clinic` as vhc 
+			JOIN `doctor_clinic` as `dc` 
+			ON dc.`ID_Doctor` = vhc.`ID_Doc` 
+            JOIN (
+                SELECT `Status`,`Queue_Number`
+                FROM `queue_clinic`
+                WHERE `ID_Store` = '$id_clinic'
+            ) as `qc`
+            ON `qc`.`Queue_Number` = `vhc`.`Queue_Number`
+			WHERE `ID_Store` = '$id_clinic' AND `vhc`.`Status` = 0
+		) as `Temp`
+		ON `pc`.`ID_Patient`= `Temp`.`ID_Patient`
+		WHERE `pc`.`First_Name` LIKE '%$partName%' OR `pc`.`Last_Name` LIKE '%$partName%'
+		ORDER BY `Temp`.`Queue Status` ASC";		
+		$res = $this->query($sql);
+		$result = array();
+		$counter = 0;
+		foreach($res as $r)	{
+			$result[$counter]['ID_Patient'] = $r['pc']['ID_Patient']; 
+			$result[$counter]['Social_Number'] = $r['pc']['Social_Number']; 
+			$result[$counter]['Patient First Name'] = $r['pc']['Patient First Name']; 
+			$result[$counter]['Patient Last Name'] = $r['pc']['Patient Last Name']; 
+			$result[$counter]['Birth_Date'] = $r['pc']['Birth_Date']; 
+			$result[$counter]['Address'] = $r['pc']['Address']; 
+			$result[$counter]['Gender'] = $r['pc']['Gender']; 
+			$result[$counter]['Doctor First Name'] = $r['Temp']['Doctor First Name']; 
+			$result[$counter]['Doctor Last Name'] = $r['Temp']['Doctor Last Name']; 
+			$result[$counter]['Queue Status'] = $r['Temp']['Queue Status']; 
+			$result[$counter]['ID_Visit'] = $r['Temp']['ID_Visit']; 
+			$counter++;
 		}
 		return $result;
 	}

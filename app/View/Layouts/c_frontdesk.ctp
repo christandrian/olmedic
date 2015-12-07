@@ -33,6 +33,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->Html->css('font-awesome.min');
 		echo $this->Html->css('ionicons.min');
 		echo $this->Html->css('AdminLTE');
+		echo $this->Html->css('timepicker/bootstrap-timepicker.min');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');

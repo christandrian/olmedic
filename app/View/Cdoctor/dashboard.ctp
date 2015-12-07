@@ -1,3 +1,15 @@
+<?php
+$this->start('store');
+echo $data['storeName'];
+$this->end();
+?>
+
+
+<?php
+$this->start('user');
+echo '<p>'.$data['username'].'- '.$data['storeName'].'<small>Frontdesk</small></p>';
+$this->end();
+?>
 <?php $this->start('sidebar'); ?>
 <ul class="sidebar-menu">
                         <li class="active">
@@ -51,44 +63,7 @@
 
                     <div class="row">
 					
-                        <div class="col-lg-6 col-xs-12">
-                   
-                            <div class="small-box bg-aqua">
-                                <div class="inner">
-                                    <h3>
-                                        Klinik Satu
-                                    </h3>
-                                    <p>
-                                       <br> 
-                                    </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-home"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">
-                                    Enter <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div>
                         
-                        <div class="col-lg-6 col-xs-12">
-                            
-                            <div class="small-box bg-yellow">
-                                <div class="inner">
-                                    <h3>
-                                        Klinik Dua
-                                    </h3>
-                                    <p>
-                                        <br>
-                                    </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-home"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">
-                                    Enter <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
                         </div><!-- ./col -->
                         
                     </div><!-- /.row -->

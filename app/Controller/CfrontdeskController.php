@@ -23,14 +23,14 @@ class CfrontdeskController extends AppController {
         
     }
 
-	
+	//page add new patient
 	public function addNewPatient() {
 	$this->init();
-	 $id_clinic = CakeSession::read('idStore');
+	$id_clinic = CakeSession::read('idStore');
 	$this->set('title_for_layout', 'Add New Patient');
-	$this->layout = 'c_frontdesk';
 	}
 	
+	//function add new patient
 	public function addPatient()	{
 			$this->init();
 			$this->autoRender = false;
@@ -46,10 +46,56 @@ class CfrontdeskController extends AppController {
 			$handphone = $this->request['data']['handphone'];
 			$emergency_contact = $this->request['data']['contact'];
 			$this->DashBoard_Clinic->addPatient($social_number, $first_name, $last_name, $birth_date, $address, $gender, $blood_type, $weight, $handphone, $emergency_contact, $id_store);
-			$this->redirect(array("controller" => "Cfrontdesk",
+			$this->redirect(array("controller" => "cfrontdesk",
             "action" => "list_patients"));
 		}
-		
+	//page list patients
+		public function list_patients() {
+			$this->init();
+			$id_store = CakeSession::read('idStore');
+			$result = $this->DashBoard_Clinic->loadPatientByClinic($id_store);
+			$doctor = $this->DashBoard_Clinic->loadListDoctor($id_store);
+			$this->set("result",$result);
+			$this->set("doctor",$doctor);
+			$this->set('title_for_layout', 'List Patients');
+	}
+	
+	
+	
+	//function add to queue
+	public function queuePatient()	{
+	
+			$this->init();
+			$id_store = CakeSession::read('idStore');
+			$id_patient = $this->request['data']['id'];//Ini harus diinput dari patient
+			$id_doctor = $this->request['data']['doctor'];//Ini harus diinput dari patient	
+			$date_time = $this->request['data']['time'];	
+			$via = $this->request['data']['via'];	
+			$anamnesa= $this->request['data']['anamnesa'];	
+			$keterangan= $this->request['data']['keterangan'];			
+			
+			//Create queue number
+			$queueNumber = $this->DashBoard_Clinic->getQueueNumber($id_store);			
+			//create visit history with status 0
+			$this->DashBoard_Clinic->createVisitHistory($id_patient, $id_doctor, $id_store, $date_time, $queueNumber,0, $via, $anamnesa, $keterangan);
+			//create queue with status 0
+			$this->DashBoard_Clinic->createQueue($id_store, $queueNumber, $id_doctor, 0, $date_time);
+			//Update queue number			
+			$this->DashBoard_Clinic->updateQueueNotes($queueNumber,$id_store);
+			$this->set("data",$queueNumber);
+			$this->redirect(array("controller" => "cfrontdesk","action" => "queue"));
+		}
+		//page patient detail
+	public function patient($id) {
+	$this->init();
+	$id_store = CakeSession::read('idStore');
+	$id_patient = $id;
+	$result = $this->DashBoard_Clinic->loadPatientByID($id_store,$id_patient);
+	$result2 = $this->DashBoard_Clinic->loadPatientHistory($id_store,$id_patient);
+	$this->set("patient",$result);
+	$this->set("history",$result2);
+	}
+		//function update patient
 		public function updatePatient()	{
 			$this->init();
 			$this->autoRender = false;
@@ -65,66 +111,17 @@ class CfrontdeskController extends AppController {
 			$handphone = $this->request['data']['handphone'];
 			$emergency_contact = $this->request['data']['contact'];
 			$res = $this->DashBoard_Clinic->editPatient($social_number, $first_name, $last_name, $birth_date, $address, $gender, $blood_type, $weight, $handphone, $emergency_contact);
-			$id = $res[0]["patient_clinic"] ["ID_Patient"];
+			$id = $res[0]["patient_clinic"]["ID_Patient"];
 			
-			$this->redirect(array("controller" => "Cfrontdesk",
-            "action" => "patient", $id));
+			$this->redirect(array("controller" => "Cfrontdesk",	"action" => "patient", $id));
 		}
-	
-	public function list_patients() {
-			$this->init();
-			$id_store = CakeSession::read('idStore');
-			$result = $this->DashBoard_Clinic->loadPatientByClinic($id_store);
-			$doctor = $this->DashBoard_Clinic->loadListDoctor($id_store);
-			$this->set("result",$result);
-			$this->set("doctor",$doctor);
-			$this->set('title_for_layout', 'List Patients');
-			$this->layout = 'c_frontdesk';
-	}
-	
-	public function queuePatient()	{
-	//$this->autoRender = false;
-			//echo $this->request['data']['id'];
-			//return '';
-			$this->init();
-			$id_store = CakeSession::read('idStore');
-			$id_patient = $this->request['data']['id'];//Ini harus diinput dari patient
-			$id_doctor = $this->request['data']['doctor'];//Ini harus diinput dari patient	
-//$this->request['data']['time'];	
-//$this->request['data']['via'];	
-//$this->request['data']['anamnesa'];			
-			$date_time =  date("Y-m-d H:i:s");
-			//Create queue number
-			$queueNumber = $this->DashBoard_Clinic->getQueueNumber($id_store);			
-			//create visit history with status 0
-			$this->DashBoard_Clinic->createVisitHistory($id_patient, $id_doctor, $id_store, $date_time, $queueNumber,0);
-			//create queue with status 0
-			$this->DashBoard_Clinic->createQueue($id_store, $queueNumber, $id_doctor, 0, $date_time);
-			//Update queue number			
-			$this->DashBoard_Clinic->updateQueueNotes($queueNumber,$id_store);
-			$this->set("data",$queueNumber);
-			$this->redirect(array("controller" => "Cfrontdesk",
-            "action" => "queue"));
-		}
-		
-		
-	public function patient($id) {
-	$this->init();
-	$id_store = CakeSession::read('idStore');
-	$id_patient = $id;
-	$result = $this->DashBoard_Clinic->loadPatientByID($id_store,$id_patient);
-	$result2 = $this->DashBoard_Clinic->loadPatientHistory($id_store,$id_patient);
-	$this->set("patient",$result);
-	$this->set("history",$result2);
-	$this->layout = 'c_frontdesk';
-	}
-	
+
+	//page queue patient
 	public function queue() {
 	$this->init();
 	$id_store = CakeSession::read('idStore');
-	$queue = $this->DashBoard_Clinic->getCurrentQueue($id_store);
+	$queue = $this->DashBoard_Clinic->loadPatientQueue($id_store);
 	$this->set("queue",$queue);
-	$this->layout = 'c_frontdesk';
 	}
 	
 	public function processQueue() {
@@ -189,6 +186,31 @@ class CfrontdeskController extends AppController {
 			//Remove patient from queue
 			$this->DashBoard_Clinic->removePatientFromQueue($id_store, $queueNumber);			
 		}
+		
+	public function loadPatientAnamnesaList()	{
+			$this->init();
+			$id_store = 'Clin000';
+			$id_patient = '1';
+			$result = $this->DashBoard_Clinic->LoadPatientListAnamnesa($id_patient,$id_store);
+			$this->set("data",$result);
+		}
+		//New!
+		public function loadPatientDoctorDiagnose()	{
+			$this->init();
+			$id_store = 'Clin000';
+			$id_patient = '1';
+			$result = $this->DashBoard_Clinic->PatientLoadDoctorDiagnose($id_patient,$id_store);
+			$this->set("data",$result);		
+		}
+		//New!
+		public function loadPatientDetailDiagnose()	{
+			$this->init();
+			$id_diagnose = '1';
+			$result = $this->DashBoard_Clinic->LoadDetailDiagnose($id_diagnose);
+			$this->set("data",$result);		
+		}
+		
+		
 	public function stock() {
         $this->init();
 		$id_clinic = CakeSession::read('idStore');

@@ -220,9 +220,18 @@ $this->end();
                                         <label for="nomor" class="col-sm-2 control-label">Anamnesa:</label>
                                         <div class="col-sm-8">
                                         <textarea name="anamnesa" class="form-control" id="anamnesa"></textarea>
-                                        </div>                                      
+                                        </div>
+
+										
                                         
                                         </div>
+										
+										<div class="form-group">
+                                        <label for="nomor" class="col-sm-2 control-label">Keterangan:</label>
+                                        <div class="col-sm-8">
+                                        <textarea name="keterangan" class="form-control" id="keterangan"></textarea>
+                                        </div>
+										</div>
                                         <div class="form-group">
                                         
                                         <div class="col-sm-2 col-md-offset-10">
@@ -274,7 +283,10 @@ $(document).on("click", ".add", function() {
 			$('#id_patient_distinct').val(id);
         });		
 
-	
+		$(".timepicker").timepicker({
+            showInputs: true
+        });	
+
                                     });
 								
 									

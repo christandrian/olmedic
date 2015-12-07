@@ -25,12 +25,19 @@ class PagesController extends AppController {
 		
 		if($data['Store1']!=null){
 			$this->Session->write('idStore', $data['Store1']);
-		}else{
+			return $this->redirect(
+                        array('controller' => $data['Domain_Target'], 'action' => 'dashboard'));
+		}else if($data['Store2']!=null){
 			$this->Session->write('idStore', $data['Store2']);
+			return $this->redirect(
+                        array('controller' => $data['Domain_Target'], 'action' => 'dashboard'));
+		}else{
+			$this->Session->setFlash('Wrong password or username');
+			return $this->redirect(
+                        array('controller' => 'pages', 'action' => 'login'));
 		}
 		
-        return $this->redirect(
-                        array('controller' => $data['Domain_Target'], 'action' => 'dashboard'));
+        
     }
 
     public function logout() {

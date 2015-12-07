@@ -33,6 +33,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->Html->css('font-awesome.min');
 		echo $this->Html->css('ionicons.min');
 		echo $this->Html->css('AdminLTE');
+		echo $this->Html->css('timepicker/bootstrap-timepicker.min');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -44,7 +45,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
  <header class="header">
             <a href="" class="logo">
 			
-                SUNWELL APOTEK
+               <?php echo $this->fetch('store'); ?>
             </a>
 			
             <nav class="navbar navbar-static-top" role="navigation">
@@ -61,16 +62,13 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span>Ani <i class="caret"></i></span>
+                               <span><?php echo $data['username'];?> <i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
 							
                                 <li class="user-header bg-light-blue">
 								
-                                    <p>
-                                        Ani - Apotik Segar
-                                        <small>Cashier</small>
-                                    </p>
+                                    <?php echo $this->fetch('user'); ?>
                                 </li>
 								
                                 <li class="user-footer">
@@ -78,7 +76,15 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                       <?php echo $this->Html->link(
+								'Sign out',
+								array('controller' => 'pages',
+										'action' => 'logout',
+										'full_base' => true
+										
+								),
+								array('escape'=>false, 'class' => 'btn btn-default btn-flat')
+								);?>
                                     </div>
                                 </li>
                             </ul>

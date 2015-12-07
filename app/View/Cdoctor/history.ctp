@@ -1,3 +1,15 @@
+<?php
+$this->start('store');
+echo $data['storeName'];
+$this->end();
+?>
+
+
+<?php
+$this->start('user');
+echo '<p>'.$data['username'].'- '.$data['storeName'].'<small>Frontdesk</small></p>';
+$this->end();
+?>
 <?php $this->start('sidebar'); ?>
 <ul class="sidebar-menu">
                        <li >
