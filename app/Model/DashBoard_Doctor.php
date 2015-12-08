@@ -2,26 +2,7 @@
 
 App::uses('AppModel', 'Model');
 
-/**
- * DashBoard Model
- *
- */
 class DashBoard_Doctor extends AppModel {
-
-    /**
-     * Use table
-     *
-     * @var mixed False or table name
-     */
-    public $useTable = 'store';
-
-    /**
-     * Primary key field
-     *
-     * @var string
-     */
-    //GENERAL FUNCTION//
-
 
     public function findAll($tableName) {
         $sql = "SELECT * FROM $tableName;";

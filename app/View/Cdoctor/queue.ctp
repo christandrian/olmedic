@@ -290,7 +290,6 @@ $this->end();
                 <button type="button" class="btn btn-primary save">Save</button>
 
             </div>
-            </form>
         </div>
     </div>
 </div>      

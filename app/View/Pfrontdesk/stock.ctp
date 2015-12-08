@@ -14,14 +14,14 @@ $this->end();
 <?php $this->start('sidebar'); ?>
 <ul class="sidebar-menu">
     <li>
-<?php
-echo $this->Html->link(
+        <?php
+        echo $this->Html->link(
         '<i class="fa fa-dashboard"></i> <span>Dashboard</span>', array('controller' => 'pfrontdesk',
-    'action' => 'dashboard',
-    'full_base' => true
+        'action' => 'dashboard',
+        'full_base' => true
         ), array('escape' => false)
-);
-?>
+        );
+        ?>
 
     </li>
     <li class="treeview">
@@ -32,23 +32,23 @@ echo $this->Html->link(
         </a>
         <ul class="treeview-menu">
             <li>
-<?php
-echo $this->Html->link(
-        '<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>', array('controller' => 'pfrontdesk',
-    'action' => 'prescription',
-    'full_base' => true
-        ), array('escape' => false)
-);
-?>
+                <?php
+                echo $this->Html->link(
+                '<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>', array('controller' => 'pfrontdesk',
+                'action' => 'prescription',
+                'full_base' => true
+                ), array('escape' => false)
+                );
+                ?>
             </li>
             <li><?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>', array('controller' => 'pfrontdesk',
-                    'action' => 'list_prescription',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>', array('controller' => 'pfrontdesk',
+                'action' => 'list_prescription',
+                'full_base' => true
+                ), array('escape' => false)
                 );
-?></li>
+                ?></li>
         </ul>
     </li>
     <li class="treeview active">
@@ -59,70 +59,70 @@ echo $this->Html->link(
         </a>
         <ul class="treeview-menu">
             <li>
-<?php
-echo $this->Html->link(
-        '<i class="fa fa-angle-double-right"></i><span>Add New Product</span>', array('controller' => 'pfrontdesk',
-    'action' => 'addNewProduct',
-    'full_base' => true
-        ), array('escape' => false)
-);
-?>
+                <?php
+                echo $this->Html->link(
+                '<i class="fa fa-angle-double-right"></i><span>Add New Product</span>', array('controller' => 'pfrontdesk',
+                'action' => 'addNewProduct',
+                'full_base' => true
+                ), array('escape' => false)
+                );
+                ?>
             </li>
             <li>
-<?php
-echo $this->Html->link(
-        '<i class="fa fa-angle-double-right"></i><span>Add New Packet</span>', array('controller' => 'pfrontdesk',
-    'action' => 'addNewPacket',
-    'full_base' => true
-        ), array('escape' => false)
-);
-?></li>
-            <li><?php
+                <?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>Add New Service</span>', array('controller' => 'pfrontdesk',
-                    'action' => 'addNewService',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>Add New Packet</span>', array('controller' => 'pfrontdesk',
+                'action' => 'addNewPacket',
+                'full_base' => true
+                ), array('escape' => false)
                 );
                 ?></li>
             <li><?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>Add New Category</span>', array('controller' => 'pfrontdesk',
-                    'action' => 'addNewCategory',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>Add New Service</span>', array('controller' => 'pfrontdesk',
+                'action' => 'addNewService',
+                'full_base' => true
+                ), array('escape' => false)
                 );
                 ?></li>
             <li><?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>Add New Brand</span>', array('controller' => 'pfrontdesk',
-                    'action' => 'addNewBrand',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>Add New Category</span>', array('controller' => 'pfrontdesk',
+                'action' => 'addNewCategory',
+                'full_base' => true
+                ), array('escape' => false)
+                );
+                ?></li>
+            <li><?php
+                echo $this->Html->link(
+                '<i class="fa fa-angle-double-right"></i><span>Add New Brand</span>', array('controller' => 'pfrontdesk',
+                'action' => 'addNewBrand',
+                'full_base' => true
+                ), array('escape' => false)
                 );
                 ?></li>
         </ul>
     </li>
     <li>
-<?php
-echo $this->Html->link(
+        <?php
+        echo $this->Html->link(
         '<i class="fa fa-money"></i> <span>Payment</span>', array('controller' => 'pfrontdesk',
-    'action' => 'payment',
-    'full_base' => true
+        'action' => 'payment',
+        'full_base' => true
         ), array('escape' => false)
-);
-?>
+        );
+        ?>
 
     </li>
     <li>
-<?php
-echo $this->Html->link(
+        <?php
+        echo $this->Html->link(
         '<i class="fa fa-file-text"></i> <span>Reports</span>', array('controller' => 'pfrontdesk',
-    'action' => 'reports',
-    'full_base' => true
+        'action' => 'reports',
+        'full_base' => true
         ), array('escape' => false)
-);
-?>
+        );
+        ?>
     </li>
 
 </ul>
@@ -152,7 +152,7 @@ echo $this->Html->link(
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Item List </h3>
-<?php //echo var_dump($data_meds[0]) ?>
+                        <?php //echo var_dump($data_meds[0]) ?>
                     </div>
                     <div class="box-body table-responsive">
                         <table id="example1" class="table table-bordered table-striped">
@@ -168,41 +168,41 @@ echo $this->Html->link(
                                 </tr>
                             </thead>
                             <tbody>
-<?php foreach ($data_meds as $f): ?>
-                                    <tr>
-                                        <td></td>
+                                <?php foreach ($data_meds as $f): ?>
+                                <tr>
+                                    <td></td>
 
-                                        <td class="id_med"><?php echo $f['Id_Product']; ?></td>
-                                        <td class="name_med"><?php echo $f['Product_Name']; ?></td>
-                                <input type="hidden" class="desc_med" value="<?php echo $f['Description']; ?>" />
-                                <input type="hidden" class="category_med" value="<?php echo $f['Id_Category']; ?>" />							
-                                <td class="category_name_med"><?php echo $f['Category_Name']; ?></td>
-                                <td><span class="stock_med"><?php echo $f['Stock']; ?></span> <?php echo $f['Metric_Sales']; ?></td>
-                                <td><span class="price_sell_med"><?php echo $f['Price']; ?></span></td>
-                                                            <!--<input type="hidden" class="merk_med" value="<?php echo $f['Merk_Name']; ?>" />-->
+                                    <td class="id_med"><?php echo $f['Id_Product']; ?></td>
+                                    <td class="name_med"><?php echo $f['Product_Name']; ?></td>
+                            <input type="hidden" class="desc_med" value="<?php echo $f['Description']; ?>" />
+                            <input type="hidden" class="category_med" value="<?php echo $f['Id_Category']; ?>" />							
+                            <td class="category_name_med"><?php echo $f['Category_Name']; ?></td>
+                            <td><span class="stock_med"><?php echo $f['Stock']; ?></span> <?php echo $f['Metric_Sales']; ?></td>
+                            <td><span class="price_sell_med"><?php echo $f['Price']; ?></span></td>
+                            <!--<input type="hidden" class="merk_med" value="<?php echo $f['Merk_Name']; ?>" />-->
 
-                                <input type="hidden" class="price_purch_med" value="<?php echo $f['Purch_Price']; ?>" />
-								<input type="hidden" class="code_med" value="<?php echo $f['Item_Code']; ?>" />
+                            <input type="hidden" class="price_purch_med" value="<?php echo $f['Purch_Price']; ?>" />
+                            <input type="hidden" class="code_med" value="<?php echo $f['Item_Code']; ?>" />
 
-                                <input type="hidden" class="po_name_med" value="<?php echo $f['Metric_Po']; ?>" />
-                                <input type="hidden" class="sales_name_med" value="<?php echo $f['Metric_Sales']; ?>" />
-                                <input type="hidden" class="inv_name_med" value="<?php echo $f['Metric_Inv']; ?>" />
-                                <input type="hidden" class="packaging_med" value="<?php echo $f['Packaging']; ?>" />
-                                <input type="hidden" class="indikasi_med" value="<?php echo $f['Indikasi']; ?>" />
-                                <input type="hidden" class="efek_samping_med" value="<?php echo $f['Efek_Samping']; ?>" />
-                                <input type="hidden" class="min_stock_med" value="<?php echo $f['Min_Stock']; ?>" />
-                                <input type="hidden" class="shelf_life_med" value="<?php echo $f['Shelf_Life']; ?>" />
-                                <input type="hidden" class="sku_med" value="<?php echo $f['SKU']; ?>" />
-                                <input type="hidden" class="image_med" value="<?php echo $f['Image']; ?>" />
-                                <input type="hidden" class="disc_med" value="<?php echo $f['Percentage_Amount']; ?>" />
-                                <input type="hidden" class="disc2_med" value="<?php echo $f['Fixed_Amount']; ?>" />
-                                <input type="hidden" class="desc_disc_med" value="<?php echo $f['Description_Discount']; ?>" />
-                                <td>
-                                    <button class="btn btn-primary updateMed"  >Update Product</button>
-                                    <button class="btn btn-info addMed" >Restock Product</button>
-                                    <button class="btn btn-danger delMed">Delete Item</button></td>
-                                </tr>
-<?php endforeach; ?>
+                            <input type="hidden" class="po_name_med" value="<?php echo $f['Metric_Po']; ?>" />
+                            <input type="hidden" class="sales_name_med" value="<?php echo $f['Metric_Sales']; ?>" />
+                            <input type="hidden" class="inv_name_med" value="<?php echo $f['Metric_Inv']; ?>" />
+                            <input type="hidden" class="packaging_med" value="<?php echo $f['Packaging']; ?>" />
+                            <input type="hidden" class="indikasi_med" value="<?php echo $f['Indikasi']; ?>" />
+                            <input type="hidden" class="efek_samping_med" value="<?php echo $f['Efek_Samping']; ?>" />
+                            <input type="hidden" class="min_stock_med" value="<?php echo $f['Min_Stock']; ?>" />
+                            <input type="hidden" class="shelf_life_med" value="<?php echo $f['Shelf_Life']; ?>" />
+                            <input type="hidden" class="sku_med" value="<?php echo $f['SKU']; ?>" />
+                            <input type="hidden" class="image_med" value="<?php echo $f['Image']; ?>" />
+                            <input type="hidden" class="disc_med" value="<?php echo $f['Percentage_Amount']; ?>" />
+                            <input type="hidden" class="disc2_med" value="<?php echo $f['Fixed_Amount']; ?>" />
+                            <input type="hidden" class="desc_disc_med" value="<?php echo $f['Description_Discount']; ?>" />
+                            <td>
+                                <button class="btn btn-primary updateMed"  >Update Product</button>
+                                <button class="btn btn-info addMed" >Restock Product</button>
+                                <button class="btn btn-danger delMed">Delete Item</button></td>
+                            </tr>
+                            <?php endforeach; ?>
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -243,27 +243,27 @@ echo $this->Html->link(
                                 </tr>
                             </thead>
                             <tbody>
-<?php foreach ($data_serv as $f): ?>
-                                    <tr>
-                                        <td></td>
-                                <input type="hidden" class="desc_serv" value="<?php echo $f['Description']; ?>" />
-                                <td class="id_serv"><?php echo $f['Id_Product']; ?>
-                                </td>
-                                <td class="name_serv"><?php echo $f['Product_Name']; ?></td>
-                                <input type="hidden" class="category_serv" value="<?php echo $f['Category_Id']; ?>" />
-                                <input type="hidden" class="instruction_serv" value="<?php echo $f['Service_Inst']; ?>" />
-                                <input type="hidden" class="code_serv" value="<?php echo $f['Service_Code']; ?>" />
-                                <input type="hidden" class="disc_serv" value="<?php echo $f['Percentage_Amount']; ?>" />
-                                <input type="hidden" class="disc2_serv" value="<?php echo $f['Fixed_Amount']; ?>" />
-                                <input type="hidden" class="desc_disc_serv" value="<?php echo $f['Discount_Description']; ?>" />
-                                <td><?php echo $f['Category_Name']; ?></td>
-                                <td class="price_serv"><?php echo $f['Price']; ?> </td>
-                                <td>
-                                    <button class="btn btn-primary updServ">Update Service</button>
-                                    <button class="btn btn-danger delServ">Delete Service</button>
-                                </td>
-                                </tr>
-<?php endforeach; ?>
+                                <?php foreach ($data_serv as $f): ?>
+                                <tr>
+                                    <td></td>
+                            <input type="hidden" class="desc_serv" value="<?php echo $f['Description']; ?>" />
+                            <td class="id_serv"><?php echo $f['Id_Product']; ?>
+                            </td>
+                            <td class="name_serv"><?php echo $f['Product_Name']; ?></td>
+                            <input type="hidden" class="category_serv" value="<?php echo $f['Category_Id']; ?>" />
+                            <input type="hidden" class="instruction_serv" value="<?php echo $f['Service_Inst']; ?>" />
+                            <input type="hidden" class="code_serv" value="<?php echo $f['Service_Code']; ?>" />
+                            <input type="hidden" class="disc_serv" value="<?php echo $f['Percentage_Amount']; ?>" />
+                            <input type="hidden" class="disc2_serv" value="<?php echo $f['Fixed_Amount']; ?>" />
+                            <input type="hidden" class="desc_disc_serv" value="<?php echo $f['Discount_Description']; ?>" />
+                            <td><?php echo $f['Category_Name']; ?></td>
+                            <td class="price_serv"><?php echo $f['Price']; ?> </td>
+                            <td>
+                                <button class="btn btn-primary updServ">Update Service</button>
+                                <button class="btn btn-danger delServ">Delete Service</button>
+                            </td>
+                            </tr>
+                            <?php endforeach; ?>
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -302,18 +302,18 @@ echo $this->Html->link(
                                 </tr>
                             </thead>
                             <tbody>
-								<?php foreach ($data_pack as $f): ?>
-                                    <tr>
-                                        <td></td>
-                                        <td  class="id_packet"><?php echo $f['Id_Packet']; ?></td>
-                                        <td><?php echo $f['Product_Name']; ?></td>
-                                        <td><?php echo $f['Price']; ?> </td>
-                                        <td>
-                                            <a href="update_packet?id=<?php echo $f['Id_Packet']; ?>" class="btn btn-primary">Update Packet</a>
-                                            <button class="btn btn-danger delPacket">Delete Packet</button>
-                                        </td>
-                                    </tr>
-								<?php endforeach; ?>
+                                <?php foreach ($data_pack as $f): ?>
+                                <tr>
+                                    <td></td>
+                                    <td  class="id_packet"><?php echo $f['Id_Packet']; ?></td>
+                                    <td><?php echo $f['Product_Name']; ?></td>
+                                    <td><?php echo $f['Price']; ?> </td>
+                                    <td>
+                                        <a href="update_packet?id=<?php echo $f['Id_Packet']; ?>" class="btn btn-primary">Update Packet</a>
+                                        <button class="btn btn-danger delPacket">Delete Packet</button>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -370,8 +370,8 @@ echo $this->Html->link(
                             <div class="col-sm-8">
                                 <select class="form-control" id="category_med_show" name="category_med_show">
                                     <option>-</option>
-									<?php foreach ($itemCate as $f): ?>
-                                        <option value="<?php echo $f['SYS_ID']; ?>"><?php echo $f['Name']; ?></option>
+                                    <?php foreach ($itemCate as $f): ?>
+                                    <option value="<?php echo $f['SYS_ID']; ?>"><?php echo $f['Name']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>										
@@ -394,15 +394,15 @@ echo $this->Html->link(
                             </div>										
                         </div>
 
-						<div class="form-group">
-                        <label for="nomor" class="col-sm-3 control-label">Purch. Price:</label>
-                        <div class="col-sm-8">
-                        <input type="text" class="form-control" id="price_purch_med_show" name="price_purch_med_show" placeholder="Obat">
-                                                
-                        </div>										
-                
+                        <div class="form-group">
+                            <label for="nomor" class="col-sm-3 control-label">Purch. Price:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="price_purch_med_show" name="price_purch_med_show" placeholder="Obat">
+
+                            </div>										
+
                         </div>
-						
+
                         <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Discount:</label>
                             <div class="col-sm-8">
@@ -477,8 +477,8 @@ echo $this->Html->link(
                             <div class="col-sm-8">
                                 <select class="form-control" id="po_name_med_show" name="po_name_med_show">
                                     <option>-</option>
-									<?php foreach ($metric as $f): ?>
-                                        <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
+                                    <?php foreach ($metric as $f): ?>
+                                    <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>										
@@ -490,8 +490,8 @@ echo $this->Html->link(
                             <div class="col-sm-8">
                                 <select class="form-control" name="inv_name_med_show" id="inv_name_med_show">
                                     <option>-</option>
-									<?php foreach ($metric as $f): ?>
-                                        <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
+                                    <?php foreach ($metric as $f): ?>
+                                    <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>										
@@ -503,23 +503,23 @@ echo $this->Html->link(
                             <div class="col-sm-8">
                                 <select class="form-control" name="sales_name_med_show" id="sales_name_med_show">
                                     <option>-</option>
-									<?php foreach ($metric as $f): ?>
-                                        <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
+                                    <?php foreach ($metric as $f): ?>
+                                    <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>										
 
                         </div>
 
-						<div class="form-group">
+                        <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Packaging:</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="packaging_med_show" name="packaging_med_show" placeholder="Packaging">
 
                             </div>
                         </div>
-						
-						<div class="form-group">
+
+                        <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Indikasi:</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="indikasi_med_show" name="indikasi_med_show" placeholder="Indikasi">
@@ -527,14 +527,14 @@ echo $this->Html->link(
                             </div>
                         </div>
 
-						<div class="form-group">
+                        <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Efek Samping:</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="efek_samping_med_show" name="efek_samping_med_show" placeholder="Efek Samping	">
 
                             </div>
                         </div>
-						
+
                         <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Min. Stock:</label>
                             <div class="col-sm-8">
@@ -543,14 +543,14 @@ echo $this->Html->link(
                             </div>
                         </div>
 
-						<!--
-                        <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Shelf Life:</label>
-                            <div class="col-sm-8">
-                                <input type="date" class="form-control" id="shelf_life_med_show" name="shelf_life_med_show" placeholder="Shelf Life">
+                        <!--
+<div class="form-group">
+    <label for="nomor" class="col-sm-3 control-label">Shelf Life:</label>
+    <div class="col-sm-8">
+        <input type="date" class="form-control" id="shelf_life_med_show" name="shelf_life_med_show" placeholder="Shelf Life">
 
-                            </div>
-                        </div>-->
+    </div>
+</div>-->
 
                         <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">SKU:</label>
@@ -601,7 +601,7 @@ echo $this->Html->link(
 
                     <input type="hidden" class="form-control" id="id_med_show2" name="id_med_show2" >
                     <input type="hidden" class="form-control" id="current_stock_med_show2" name="current_stock_med_show2" >
-					<div id="exist" style="display:visible;">
+                    <div id="exist" style="display:visible;">
 
                         <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Name:</label>
@@ -636,13 +636,13 @@ echo $this->Html->link(
                                 <input type="number" class="form-control" name="add_med" id="add_med" placeholder="Obat">
                             </div>
                         </div>
-						<div class="form-group">
+                        <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Inventory Name:</label>
                             <div class="col-sm-8">
                                 <select class="form-control" name="current_inv_name_med_show" id="current_inv_name_med_show">
                                     <option>-</option>
-									<?php foreach ($metric as $f): ?>
-                                        <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
+                                    <?php foreach ($metric as $f): ?>
+                                    <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>										
@@ -700,7 +700,7 @@ echo $this->Html->link(
                 <form class="form-horizontal" method="post" action="updateService">
                     <div id="non-exist" style="display:visible;">
 
-					<input type="hidden" class="form-control" id="id_serv_show" name="id_serv_show" >
+                        <input type="hidden" class="form-control" id="id_serv_show" name="id_serv_show" >
                         <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Name:</label>
                             <div class="col-sm-8">
@@ -722,8 +722,8 @@ echo $this->Html->link(
                             <div class="col-sm-8">
                                 <select class="form-control" id="category_serv_show" name="category_serv_show" >
                                     <option>-</option>
-									<?php foreach ($servCate as $f): ?>
-                                        <option value="<?php echo $f['SYS_ID']; ?>"><?php echo $f['Name']; ?></option>
+                                    <?php foreach ($servCate as $f): ?>
+                                    <option value="<?php echo $f['SYS_ID']; ?>"><?php echo $f['Name']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>										
@@ -904,9 +904,9 @@ echo $this->Html->script('plugins/datatables/dataTables.bootstrap');
             $('#po_name_med_show').val($(this).parent().parent().find('.po_name_med').val());
             $('#sales_name_med_show').val($(this).parent().parent().find('.sales_name_med').val());
             $('#inv_name_med_show').val($(this).parent().parent().find('.inv_name_med').val());
-			$('#packaging_med_show').val($(this).parent().parent().find('.packgaing_med').val());
-			$('#indikasi_med_show').val($(this).parent().parent().find('.indikasi_med').val());
-			$('#efek_samping_med_show').val($(this).parent().parent().find('.efek_samping_med').val());
+            $('#packaging_med_show').val($(this).parent().parent().find('.packgaing_med').val());
+            $('#indikasi_med_show').val($(this).parent().parent().find('.indikasi_med').val());
+            $('#efek_samping_med_show').val($(this).parent().parent().find('.efek_samping_med').val());
             $('#min_stock_med_show').val($(this).parent().parent().find('.min_stock_med').val());
             $('#disc_med_show').val($(this).parent().parent().find('.disc_med').val());
             $('#disc2_med_show').val($(this).parent().parent().find('.disc2_med').val());
@@ -921,13 +921,13 @@ echo $this->Html->script('plugins/datatables/dataTables.bootstrap');
         $(document).on("click", ".addMed", function() {
 
             $('#id_med_show2').val($(this).parent().parent().find('.id_med').text());
-			$('#current_stock_med_show2').val($(this).parent().parent().find('.stock_med').text());
+            $('#current_stock_med_show2').val($(this).parent().parent().find('.stock_med').text());
             $('#desc_med_show2').text($(this).parent().parent().find('.desc_med').val());
             $('#name_med_show2').text($(this).parent().parent().find('.name_med').text());
             $('#stock_med_show2').text($(this).parent().parent().find('.stock_med').text());
             $('#category_med_show2').text($(this).parent().parent().find('.category_name_med').text());
             $('#sell_price_med').val($(this).parent().parent().find('.price_sell_med').text());
-			$('#current_inv_name_med_show').val($(this).parent().parent().find('.inv_name_med').val());
+            $('#current_inv_name_med_show').val($(this).parent().parent().find('.inv_name_med').val());
 
             $('#addPr').modal('show');
 

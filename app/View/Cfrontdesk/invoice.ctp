@@ -1,3 +1,15 @@
+<?php
+$this->start('store');
+echo $data['storeName'];
+$this->end();
+?>
+
+
+<?php
+$this->start('user');
+echo '<p>'.$data['username'].'- '.$data['storeName'].'<small>Frontdesk</small></p>';
+$this->end();
+?>
 <?php $this->start('sidebar'); ?>
 <ul class="sidebar-menu">
                         <li>
@@ -104,7 +116,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <h2 class="page-header">
-                                <i class="fa fa-globe"></i> SUNWELL
+                                <i class="fa fa-globe"></i> <?php echo $data['storeName'];?>
                                 <small class="pull-right">Date: <?php echo $invoice['Date'];?></small>
                             </h2>
                         </div>
@@ -116,7 +128,7 @@
                             From
                             <address>
                                 <strong><?php echo $data_store['Nama'];?></strong><br>
-                                <?php echo $data_store['Alamat'];?></strong><br>
+                                <?php echo $data_store['Alamat'];?><br>
                                 Phone: <?php echo $data_store['Nomor_Telepon'];?><br/>
                             </address>
                         </div>

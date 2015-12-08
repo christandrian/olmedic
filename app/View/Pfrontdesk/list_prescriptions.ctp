@@ -15,10 +15,10 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-                '<i class="fa fa-dashboard"></i> <span>Dashboard</span>', array('controller' => 'pfrontdesk',
-            'action' => 'dashboard',
-            'full_base' => true
-                ), array('escape' => false)
+        '<i class="fa fa-dashboard"></i> <span>Dashboard</span>', array('controller' => 'pfrontdesk',
+        'action' => 'dashboard',
+        'full_base' => true
+        ), array('escape' => false)
         );
         ?>
 
@@ -33,19 +33,19 @@ $this->end();
             <li >
                 <?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>', array('controller' => 'pfrontdesk',
-                    'action' => 'prescription',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>', array('controller' => 'pfrontdesk',
+                'action' => 'prescription',
+                'full_base' => true
+                ), array('escape' => false)
                 );
                 ?>
             </li>
             <li class="active"><?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>', array('controller' => 'pfrontdesk',
-                    'action' => 'list_prescription',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>', array('controller' => 'pfrontdesk',
+                'action' => 'list_prescription',
+                'full_base' => true
+                ), array('escape' => false)
                 );
                 ?></li>
         </ul>
@@ -53,20 +53,20 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-                '<i class="fa fa-stack-exchange"></i> <span>Stocks</span>', array('controller' => 'pfrontdesk',
-            'action' => 'stock',
-            'full_base' => true
-                ), array('escape' => false)
+        '<i class="fa fa-stack-exchange"></i> <span>Stocks</span>', array('controller' => 'pfrontdesk',
+        'action' => 'stock',
+        'full_base' => true
+        ), array('escape' => false)
         );
         ?>
     </li>
     <li>
         <?php
         echo $this->Html->link(
-                '<i class="fa fa-money"></i> <span>Payment</span>', array('controller' => 'pfrontdesk',
-            'action' => 'payment',
-            'full_base' => true
-                ), array('escape' => false)
+        '<i class="fa fa-money"></i> <span>Payment</span>', array('controller' => 'pfrontdesk',
+        'action' => 'payment',
+        'full_base' => true
+        ), array('escape' => false)
         );
         ?>
 
@@ -74,10 +74,10 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-                '<i class="fa fa-file-text"></i> <span>Reports</span>', array('controller' => 'pfrontdesk',
-            'action' => 'reports',
-            'full_base' => true
-                ), array('escape' => false)
+        '<i class="fa fa-file-text"></i> <span>Reports</span>', array('controller' => 'pfrontdesk',
+        'action' => 'reports',
+        'full_base' => true
+        ), array('escape' => false)
         );
         ?>
     </li>
@@ -126,18 +126,18 @@ $this->end();
                             <tbody>
 
                                 <?php foreach ($dataPresc as $f): ?>
-                                    <tr>
-                                        <td></td>
-										<input type="hidden" value="<?php echo $f['SYS_ID']; ?>" class="id_presc"/>
-                                        <td><?php echo $f['ID_Prescription']; ?></td>
-                                        <td><?php echo $f['Pasient_Name']; ?></td>
-                                        <td><?php echo $f['Doctor_Name']; ?></td>
-                                        <td><?php echo $f['Institution_Name']; ?></td>
-                                        <td><?php echo $f['Recipe_Date']; ?></td>
-                                        <td><button class="btn btn-info detail" data-toggle="modal" data-target="#details">Detail</button>
-                                            <form action="delete_prescription" method="POST"><input type="hidden" value="<?php echo $f['SYS_ID']; ?>" name="id_presc" /><button class="btn btn-danger delete">Delete</button></form></td>
-                                    </tr>
-                                <?php endforeach; ?>
+                                <tr>
+                                    <td></td>
+                            <input type="hidden" value="<?php echo $f['SYS_ID']; ?>" class="id_presc"/>
+                            <td><?php echo $f['ID_Prescription']; ?></td>
+                            <td><?php echo $f['Pasient_Name']; ?></td>
+                            <td><?php echo $f['Doctor_Name']; ?></td>
+                            <td><?php echo $f['Institution_Name']; ?></td>
+                            <td><?php echo $f['Recipe_Date']; ?></td>
+                            <td><button class="btn btn-info detail" data-toggle="modal" data-target="#details">Detail</button>
+                                <form action="delete_prescription" method="POST"><input type="hidden" value="<?php echo $f['SYS_ID']; ?>" name="id_presc" /><button class="btn btn-danger delete">Delete</button></form></td>
+                            </tr>
+                            <?php endforeach; ?>
 
 
 
@@ -250,10 +250,10 @@ echo $this->Html->script('plugins/datatables/dataTables.bootstrap');
 
             $.post("<?php echo $this->Html->url(array('controller' => 'pfrontdesk', 'action' => 'detail_presc'), true) ?>",
                     datas, function(data) {
-					console.log(data);
+                        console.log(data);
                         var obj = jQuery.parseJSON(data);
-						
-						
+
+
                         $ret = '';
                         var t = $('#example2').DataTable();
                         t.clear().draw();
@@ -265,7 +265,6 @@ echo $this->Html->script('plugins/datatables/dataTables.bootstrap');
                                 value['instruction']
                             ]).draw();
                         });
-                        //var ret = $('#example2').children().eq(1);
                     });
 
         });

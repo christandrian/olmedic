@@ -15,10 +15,10 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-                '<i class="fa fa-dashboard"></i> <span>Dashboard</span>', array('controller' => 'cfrontdesk',
-            'action' => 'dashboard',
-            'full_base' => true
-                ), array('escape' => false)
+        '<i class="fa fa-dashboard"></i> <span>Dashboard</span>', array('controller' => 'cfrontdesk',
+        'action' => 'dashboard',
+        'full_base' => true
+        ), array('escape' => false)
         );
         ?>
 
@@ -33,19 +33,19 @@ $this->end();
             <li>
                 <?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>', array('controller' => 'cfrontdesk',
-                    'action' => 'prescription',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>', array('controller' => 'cfrontdesk',
+                'action' => 'prescription',
+                'full_base' => true
+                ), array('escape' => false)
                 );
                 ?>
             </li>
             <li><?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>', array('controller' => 'cfrontdesk',
-                    'action' => 'list_prescription',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>', array('controller' => 'cfrontdesk',
+                'action' => 'list_prescription',
+                'full_base' => true
+                ), array('escape' => false)
                 );
                 ?></li>
         </ul>
@@ -60,53 +60,53 @@ $this->end();
             <li class="active">
                 <?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>Add New Product</span>', array('controller' => 'cfrontdesk',
-                    'action' => 'addNewProduct',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>Add New Product</span>', array('controller' => 'cfrontdesk',
+                'action' => 'addNewProduct',
+                'full_base' => true
+                ), array('escape' => false)
                 );
                 ?>
             </li>
             <li>
                 <?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>Add New Packet</span>', array('controller' => 'cfrontdesk',
-                    'action' => 'addNewPacket',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>Add New Packet</span>', array('controller' => 'cfrontdesk',
+                'action' => 'addNewPacket',
+                'full_base' => true
+                ), array('escape' => false)
                 );
                 ?></li>
             <li><?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>Add New Service</span>', array('controller' => 'cfrontdesk',
-                    'action' => 'addNewService',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>Add New Service</span>', array('controller' => 'cfrontdesk',
+                'action' => 'addNewService',
+                'full_base' => true
+                ), array('escape' => false)
                 );
                 ?></li>
             <li><?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>Add New Category</span>', array('controller' => 'cfrontdesk',
-                    'action' => 'addNewCategory',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>Add New Category</span>', array('controller' => 'cfrontdesk',
+                'action' => 'addNewCategory',
+                'full_base' => true
+                ), array('escape' => false)
                 );
                 ?></li>
             <li><?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>Add New Brand</span>', array('controller' => 'cfrontdesk',
-                    'action' => 'addNewBrand',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>Add New Brand</span>', array('controller' => 'cfrontdesk',
+                'action' => 'addNewBrand',
+                'full_base' => true
+                ), array('escape' => false)
                 );
                 ?></li>
             <li >
                 <?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>List</span>', array('controller' => 'cfrontdesk',
-                    'action' => 'stock',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>List</span>', array('controller' => 'cfrontdesk',
+                'action' => 'stock',
+                'full_base' => true
+                ), array('escape' => false)
                 );
                 ?></li>
         </ul>
@@ -114,10 +114,10 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-                '<i class="fa fa-money"></i> <span>Payment</span>', array('controller' => 'cfrontdesk',
-            'action' => 'payment',
-            'full_base' => true
-                ), array('escape' => false)
+        '<i class="fa fa-money"></i> <span>Payment</span>', array('controller' => 'cfrontdesk',
+        'action' => 'payment',
+        'full_base' => true
+        ), array('escape' => false)
         );
         ?>
 
@@ -125,10 +125,10 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-                '<i class="fa fa-file-text"></i> <span>Reports</span>', array('controller' => 'cfrontdesk',
-            'action' => 'reports',
-            'full_base' => true
-                ), array('escape' => false)
+        '<i class="fa fa-file-text"></i> <span>Reports</span>', array('controller' => 'cfrontdesk',
+        'action' => 'reports',
+        'full_base' => true
+        ), array('escape' => false)
         );
         ?>
     </li>
@@ -173,29 +173,29 @@ $this->end();
                             </thead>
                             <tbody>
                                 <?php foreach ($data_meds as $f): ?>
-                                    <tr>
-                                        <td></td>
-                                <input type="hidden" class="desc_med" value="<?php //echo $f[ 'Description' ];  ?>" />
-                                <td class="id_med"><?php echo $f['im']["ID_Product_Master"]; ?></td>
-                                <td class="name_med"><?php echo $f['im']['Generic_Name']; ?></td>
-                                <input type="hidden" class="category_med" value="<?php echo $f['im']['ID_Category']; ?>" />
-                                <td><span class="merk_med"><?php echo $f['im']['ID_Merk']; ?></span></td>
-                                <input type="hidden" class="category_med" value="<?php echo $f['im']['ID_Category']; ?>" />
-                                <input type="hidden" class="description_med" value="<?php echo $f['im']['Description']; ?>" />
-                                <input type="hidden" class="brandowner_med" value="<?php echo $f['im']['ID_Brandowner']; ?>" />
-                                <input type="hidden" class="po_med" value="<?php echo $f['im']['Name_s50_po']; ?>" />
-                                <input type="hidden" class="sales_med" value="<?php echo $f['im']['Name_s50_sales']; ?>" />
-                                <input type="hidden" class="inventory_med" value="<?php echo $f['im']['Name_s50_inv']; ?>" />
-                                <input type="hidden" class="packaging_med" value="<?php echo $f['im']['Packaging']; ?>" />
-                                <input type="hidden" class="indikasi_med" value="<?php echo $f['im']['Indikasi']; ?>" />
-                                <input type="hidden" class="efek_samping_med" value="<?php echo $f['im']['Efek_Samping']; ?>" />
-                                <input type="hidden" class="category_name_med" value="<?php echo $f['ic']['Name']; ?>" />
-								<input type="hidden" class="merk_name_med" value="<?php echo $f['merk']['Name']; ?>" />
-								<input type="hidden" class="owner_name_med" value="<?php echo $f['brand']['Owner_name']; ?>" />
+                                <tr>
+                                    <td></td>
+                            <input type="hidden" class="desc_med" value="<?php //echo $f[ 'Description' ];  ?>" />
+                            <td class="id_med"><?php echo $f['im']["ID_Product_Master"]; ?></td>
+                            <td class="name_med"><?php echo $f['im']['Generic_Name']; ?></td>
+                            <input type="hidden" class="category_med" value="<?php echo $f['im']['ID_Category']; ?>" />
+                            <td><span class="merk_med"><?php echo $f['im']['ID_Merk']; ?></span></td>
+                            <input type="hidden" class="category_med" value="<?php echo $f['im']['ID_Category']; ?>" />
+                            <input type="hidden" class="description_med" value="<?php echo $f['im']['Description']; ?>" />
+                            <input type="hidden" class="brandowner_med" value="<?php echo $f['im']['ID_Brandowner']; ?>" />
+                            <input type="hidden" class="po_med" value="<?php echo $f['im']['Name_s50_po']; ?>" />
+                            <input type="hidden" class="sales_med" value="<?php echo $f['im']['Name_s50_sales']; ?>" />
+                            <input type="hidden" class="inventory_med" value="<?php echo $f['im']['Name_s50_inv']; ?>" />
+                            <input type="hidden" class="packaging_med" value="<?php echo $f['im']['Packaging']; ?>" />
+                            <input type="hidden" class="indikasi_med" value="<?php echo $f['im']['Indikasi']; ?>" />
+                            <input type="hidden" class="efek_samping_med" value="<?php echo $f['im']['Efek_Samping']; ?>" />
+                            <input type="hidden" class="category_name_med" value="<?php echo $f['ic']['Name']; ?>" />
+                            <input type="hidden" class="merk_name_med" value="<?php echo $f['merk']['Name']; ?>" />
+                            <input type="hidden" class="owner_name_med" value="<?php echo $f['brand']['Owner_name']; ?>" />
 
-                                <td>
-                                    <button class="btn btn-primary getThis" data-toggle="modal" data-target="#getPr" >Get This Product</button></td>
-                                </tr>
+                            <td>
+                                <button class="btn btn-primary getThis" data-toggle="modal" data-target="#getPr" >Get This Product</button></td>
+                            </tr>
                             <?php endforeach; ?>
                             </tbody>
                             <tfoot>
@@ -245,7 +245,7 @@ $this->end();
                                         <select class="form-control" name="item_category">
                                             <option>-</option>
                                             <?php foreach ($itemCate as $f): ?>
-                                                <option value="<?php echo $f['SYS_ID']; ?>"><?php echo $f['Name']; ?></option>
+                                            <option value="<?php echo $f['SYS_ID']; ?>"><?php echo $f['Name']; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>										
@@ -265,13 +265,13 @@ $this->end();
                                     </div>
                                 </div>
 
-								<div class="form-group">
+                                <div class="form-group">
                                     <label for="nomor" class="col-sm-3 control-label">Merk:</label>
                                     <div class="col-sm-8">
-										<select class="form-control" name="item_merk">
+                                        <select class="form-control" name="item_merk">
                                             <option>-</option>
                                             <?php foreach ($data_merk as $f): ?>
-                                                <option value="<?php echo $f['ID_Merk']; ?>"><?php echo $f['Name']; ?></option>
+                                            <option value="<?php echo $f['ID_Merk']; ?>"><?php echo $f['Name']; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -283,7 +283,7 @@ $this->end();
                                         <select class="form-control" name="item_brand_owner">
                                             <option>-</option>
                                             <?php foreach ($data_brand_owner as $f): ?>
-                                                <option value="<?php echo $f['ID_Brandowner']; ?>"><?php echo $f['Owner_Name']; ?></option>
+                                            <option value="<?php echo $f['ID_Brandowner']; ?>"><?php echo $f['Owner_Name']; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>										
@@ -295,7 +295,7 @@ $this->end();
                                         <input type="text" class="form-control" name="item_code" placeholder="Code">
                                     </div>
                                 </div>
-								
+
                                 <div class="form-group">
                                     <label for="nomor" class="col-sm-3 control-label">Purch. Price:</label>
                                     <div class="col-sm-8">
@@ -375,7 +375,7 @@ $this->end();
                                         <select class="form-control" name="item_po_name">
                                             <option>-</option>
                                             <?php foreach ($metric as $f): ?>
-                                                <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
+                                            <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>										
@@ -386,9 +386,9 @@ $this->end();
                                     <label for="nomor" class="col-sm-3 control-label">Inventory Name:</label>
                                     <div class="col-sm-8">
                                         <select class="form-control" name="item_inventory_name">
-                                            <<option>-</option>
+                                            <option>-</option>
                                             <?php foreach ($metric as $f): ?>
-                                                <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
+                                            <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>										
@@ -401,7 +401,7 @@ $this->end();
                                         <select class="form-control" name="item_sales_name">
                                             <option>-</option>
                                             <?php foreach ($metric as $f): ?>
-                                                <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
+                                            <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>										
@@ -417,13 +417,13 @@ $this->end();
                                     </div>
                                 </div>
 
-								<!--
-                                <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Shelf Life:</label>
-                                    <div class="col-sm-8">
-                                        <input type="date" class="form-control" name="item_shelf_life" placeholder="Shelf Life">
-                                    </div>
-                                </div>-->
+                                <!--
+<div class="form-group">
+    <label for="nomor" class="col-sm-3 control-label">Shelf Life:</label>
+    <div class="col-sm-8">
+        <input type="date" class="form-control" name="item_shelf_life" placeholder="Shelf Life">
+    </div>
+</div>-->
 
                                 <div class="form-group">
                                     <label for="nomor" class="col-sm-3 control-label">SKU:</label>
@@ -432,16 +432,16 @@ $this->end();
 
                                     </div>
                                 </div>
-								<div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Is medicine ?:</label>
-                            <div class="col-sm-8">
-                                <select class="form-control" name="item_is_meds" >
-                                    <option value="0">No</option>
-                                    <option value="1">Yes</option>
-                                </select>
+                                <div class="form-group">
+                                    <label for="nomor" class="col-sm-3 control-label">Is medicine ?:</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" name="item_is_meds" >
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
 
-                            </div>
-                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="form-group">
                                     <label for="nomor" class="col-sm-3 control-label">Image:</label>
@@ -492,51 +492,28 @@ $this->end();
                             </div>
                         </div>
 
-						<div class="form-group">
+                        <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Merk:</label>
                             <div class="col-sm-8">
                                 <p class="form-control-static" id="merk_med_show2"></p>
 
                             </div>
                         </div>
-						
-						<div class="form-group">
+
+                        <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Brand Owner:</label>
                             <div class="col-sm-8">
                                 <p class="form-control-static" id="brand_owner_med_show2"></p>
 
                             </div>
                         </div>
-						
+
                         <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Name:</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="item_name" placeholder="Name">
                             </div>
                         </div>
-
-                        <!--
-                        <div class="form-group">
-                        <label for="nomor" class="col-sm-3 control-label">Category:</label>
-                        <div class="col-sm-8">
-                        <select class="form-control" name="item_category" >
-                                        <option>-</option>
-                        <?php foreach ($itemCate as $f): ?>
-                                            <option value="<?php echo $f['SYS_ID']; ?>"><?php echo $f['Name']; ?></option>
-                        <?php endforeach; ?>
-						</select>
-                        </div>										
-
-                        </div>
-                        
-                        <div class="form-group">
-                        <label for="nomor" class="col-sm-3 control-label">Description:</label>
-                        <div class="col-sm-8">
-                        <input type="text" class="form-control" name="item_description" placeholder="Description">
-                        
-                        </div>
-                        </div>
-                        -->
 
                         <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Quantity:</label>
@@ -546,45 +523,45 @@ $this->end();
                             </div>
                         </div>
 
-						<div class="form-group">
-                        <label for="nomor" class="col-sm-3 control-label">PO Name:</label>
-                        <div class="col-sm-8">
-                        <select class="form-control" name="item_po_name" id="item_po_name">
-                                        <option>-</option>
-                        <?php foreach ($metric as $f): ?>
-                                            <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
-                        <?php endforeach; ?>
-						</select>
-                        </div>										
-
-                        </div>
-                        
                         <div class="form-group">
-                        <label for="nomor" class="col-sm-3 control-label">Inventory Name:</label>
-                        <div class="col-sm-8">
-                        <select class="form-control" name="item_inventory_name" id="item_inventory_name">
-                                        <option>-</option>
-                        <?php foreach ($metric as $f): ?>
-                                            <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
-                        <?php endforeach; ?>
-						</select>
-                        </div>										
+                            <label for="nomor" class="col-sm-3 control-label">PO Name:</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="item_po_name" id="item_po_name">
+                                    <option>-</option>
+                                    <?php foreach ($metric as $f): ?>
+                                    <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>										
 
                         </div>
-                        
+
                         <div class="form-group">
-                        <label for="nomor" class="col-sm-3 control-label">Sales Name:</label>
-                        <div class="col-sm-8">
-                        <select class="form-control" name="item_sales_name" id="item_sales_name">
-                                        <option>-</option>
-                        <?php foreach ($metric as $f): ?>
-                                            <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
-                        <?php endforeach; ?>
-						</select>
-                        </div>										
+                            <label for="nomor" class="col-sm-3 control-label">Inventory Name:</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="item_inventory_name" id="item_inventory_name">
+                                    <option>-</option>
+                                    <?php foreach ($metric as $f): ?>
+                                    <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>										
 
                         </div>
-						
+
+                        <div class="form-group">
+                            <label for="nomor" class="col-sm-3 control-label">Sales Name:</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="item_sales_name" id="item_sales_name">
+                                    <option>-</option>
+                                    <?php foreach ($metric as $f): ?>
+                                    <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>										
+
+                        </div>
+
                         <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Purch. Price:</label>
                             <div class="col-sm-8">
@@ -621,12 +598,12 @@ $this->end();
 
                         </div>
 
-						<div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Discount Description:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="item_discount_description" placeholder="Description">
-                                    </div>										
-                                </div>
+                        <div class="form-group">
+                            <label for="nomor" class="col-sm-3 control-label">Discount Description:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="item_discount_description" placeholder="Description">
+                            </div>										
+                        </div>
 
                         <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Item Code:</label>
@@ -651,15 +628,15 @@ $this->end();
 
                             </div>
                         </div>
-						<div class="form-group">
+                        <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Packaging:</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="item_packaging" name="item_packaging" placeholder="Packaging">
 
                             </div>
                         </div>
-						
-						<div class="form-group">
+
+                        <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Indikasi:</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="item_indikasi" name="item_indikasi" placeholder="Indikasi">
@@ -667,14 +644,14 @@ $this->end();
                             </div>
                         </div>
 
-						<div class="form-group">
+                        <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Efek Samping:</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="item_efek_samping" name="item_efek_samping" placeholder="Efek Samping	">
 
                             </div>
                         </div>
-						
+
                         <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Min. Stock:</label>
                             <div class="col-sm-8">
@@ -683,14 +660,14 @@ $this->end();
                             </div>
                         </div>
 
-						<!--
-                        <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Shelf Life:</label>
-                            <div class="col-sm-8">
-                                <input type="date" class="form-control" name="item_shelf_life" placeholder="Shelf Life">
+                        <!--
+<div class="form-group">
+    <label for="nomor" class="col-sm-3 control-label">Shelf Life:</label>
+    <div class="col-sm-8">
+        <input type="date" class="form-control" name="item_shelf_life" placeholder="Shelf Life">
 
-                            </div>
-                        </div>-->
+    </div>
+</div>-->
 
                         <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">SKU:</label>
@@ -798,15 +775,15 @@ echo $this->Html->script('plugins/datatables/dataTables.bootstrap');
     $('.getThis').on('click', function() {
         var tmp = $(this).parent().parent().find('.id_med').text();
         $('#item_id_master').val(tmp);
-		$('#generic_name_show2').text($('.name_med').text());
-		$('#merk_med_show2').text($('.merk_name_med').val());
-		$('#brand_owner_med_show2').text($('.owner_name_med').val());
-		$('#item_packaging').val($('.packaging_med').val());
-		$('#item_indikasi').val($('.indikasi_med').val());
-		$('#item_efek_samping').val($('.efek_samping_med').val());
-		$('#item_inventory_name').val($('.inventory_med').val());
-		$('#item_sales_name').val($('.sales_med').val());
-		$('#item_po_name').val($('.po_med').val());
-});
+        $('#generic_name_show2').text($('.name_med').text());
+        $('#merk_med_show2').text($('.merk_name_med').val());
+        $('#brand_owner_med_show2').text($('.owner_name_med').val());
+        $('#item_packaging').val($('.packaging_med').val());
+        $('#item_indikasi').val($('.indikasi_med').val());
+        $('#item_efek_samping').val($('.efek_samping_med').val());
+        $('#item_inventory_name').val($('.inventory_med').val());
+        $('#item_sales_name').val($('.sales_med').val());
+        $('#item_po_name').val($('.po_med').val());
+    });
 </script>	
 <?php $this->end(); ?>

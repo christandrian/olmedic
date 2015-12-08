@@ -16,10 +16,10 @@ $this->end();
     <li class="active">
         <?php
         echo $this->Html->link(
-                '<i class="fa fa-dashboard"></i> <span>Dashboard</span>', array('controller' => 'pfrontdesk',
-            'action' => 'dashboard',
-            'full_base' => true
-                ), array('escape' => false)
+        '<i class="fa fa-dashboard"></i> <span>Dashboard</span>', array('controller' => 'pfrontdesk',
+        'action' => 'dashboard',
+        'full_base' => true
+        ), array('escape' => false)
         );
         ?>
 
@@ -34,19 +34,19 @@ $this->end();
             <li>
                 <?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>', array('controller' => 'pfrontdesk',
-                    'action' => 'prescription',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>', array('controller' => 'pfrontdesk',
+                'action' => 'prescription',
+                'full_base' => true
+                ), array('escape' => false)
                 );
                 ?>
             </li>
             <li><?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>', array('controller' => 'pfrontdesk',
-                    'action' => 'list_prescriptions',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>', array('controller' => 'pfrontdesk',
+                'action' => 'list_prescriptions',
+                'full_base' => true
+                ), array('escape' => false)
                 );
                 ?></li>
         </ul>
@@ -54,20 +54,20 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-                '<i class="fa fa-stack-exchange"></i> <span>Stocks</span>', array('controller' => 'pfrontdesk',
-            'action' => 'stock',
-            'full_base' => true
-                ), array('escape' => false)
+        '<i class="fa fa-stack-exchange"></i> <span>Stocks</span>', array('controller' => 'pfrontdesk',
+        'action' => 'stock',
+        'full_base' => true
+        ), array('escape' => false)
         );
         ?>
     </li>
     <li>
         <?php
         echo $this->Html->link(
-                '<i class="fa fa-money"></i> <span>Payment</span>', array('controller' => 'pfrontdesk',
-            'action' => 'payment',
-            'full_base' => true
-                ), array('escape' => false)
+        '<i class="fa fa-money"></i> <span>Payment</span>', array('controller' => 'pfrontdesk',
+        'action' => 'payment',
+        'full_base' => true
+        ), array('escape' => false)
         );
         ?>
 
@@ -75,10 +75,10 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-                '<i class="fa fa-file-text"></i> <span>Reports</span>', array('controller' => 'pfrontdesk',
-            'action' => 'reports',
-            'full_base' => true
-                ), array('escape' => false)
+        '<i class="fa fa-file-text"></i> <span>Reports</span>', array('controller' => 'pfrontdesk',
+        'action' => 'reports',
+        'full_base' => true
+        ), array('escape' => false)
         );
         ?>
     </li>
@@ -95,7 +95,7 @@ $this->end();
 
 <section class="content">
     <div class="row">
-    
-	</div>
+
+    </div>
 </section>
 

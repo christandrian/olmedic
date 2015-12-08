@@ -15,10 +15,10 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-                '<i class="fa fa-dashboard"></i> <span>Dashboard</span>', array('controller' => 'pfrontdesk',
-            'action' => 'dashboard',
-            'full_base' => true
-                ), array('escape' => false)
+        '<i class="fa fa-dashboard"></i> <span>Dashboard</span>', array('controller' => 'pfrontdesk',
+        'action' => 'dashboard',
+        'full_base' => true
+        ), array('escape' => false)
         );
         ?>
 
@@ -33,19 +33,19 @@ $this->end();
             <li class="active">
                 <?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>', array('controller' => 'pfrontdesk',
-                    'action' => 'prescription',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>', array('controller' => 'pfrontdesk',
+                'action' => 'prescription',
+                'full_base' => true
+                ), array('escape' => false)
                 );
                 ?>
             </li>
             <li><?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>', array('controller' => 'pfrontdesk',
-                    'action' => 'list_prescriptions',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>', array('controller' => 'pfrontdesk',
+                'action' => 'list_prescriptions',
+                'full_base' => true
+                ), array('escape' => false)
                 );
                 ?></li>
         </ul>
@@ -53,20 +53,20 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-                '<i class="fa fa-stack-exchange"></i> <span>Stocks</span>', array('controller' => 'pfrontdesk',
-            'action' => 'stock',
-            'full_base' => true
-                ), array('escape' => false)
+        '<i class="fa fa-stack-exchange"></i> <span>Stocks</span>', array('controller' => 'pfrontdesk',
+        'action' => 'stock',
+        'full_base' => true
+        ), array('escape' => false)
         );
         ?>
     </li>
     <li>
         <?php
         echo $this->Html->link(
-                '<i class="fa fa-money"></i> <span>Payment</span>', array('controller' => 'pfrontdesk',
-            'action' => 'payment',
-            'full_base' => true
-                ), array('escape' => false)
+        '<i class="fa fa-money"></i> <span>Payment</span>', array('controller' => 'pfrontdesk',
+        'action' => 'payment',
+        'full_base' => true
+        ), array('escape' => false)
         );
         ?>
 
@@ -74,10 +74,10 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-                '<i class="fa fa-file-text"></i> <span>Reports</span>', array('controller' => 'pfrontdesk',
-            'action' => 'reports',
-            'full_base' => true
-                ), array('escape' => false)
+        '<i class="fa fa-file-text"></i> <span>Reports</span>', array('controller' => 'pfrontdesk',
+        'action' => 'reports',
+        'full_base' => true
+        ), array('escape' => false)
         );
         ?>
     </li>
@@ -115,7 +115,7 @@ $this->end();
                             <input type="text" class="form-control" name="presc_doctor" placeholder="Nama">
                         </div>
                         <div class="form-group">
-                            <label for="nama">Intitution</label>
+                            <label for="nama">Institution</label>
                             <input type="text" class="form-control" name="presc_institution" placeholder="Nama">
                         </div>
 
@@ -151,17 +151,17 @@ $this->end();
                                 </thead>
                                 <tbody>
                                     <?php foreach ($data_meds as $f): ?>
-                                        <tr>
-                                            <td><?php echo $f['Id_Product']; ?></td>
-                                            <td><?php echo $f['Product_Name']; ?></td>
-                                            <td><?php echo $f['Category_Name']; ?></td>
-                                    <input type="hidden" value="<?php echo $f['Id_Product']; ?>" class="item_id" />
-                                    <input type="hidden" value="<?php echo $f['Metric_Sales']; ?>" class="item_metrics" />
-                                    <input type="hidden" value="<?php echo $f['Stock']; ?>" class="item_stock" />
-                                    <input type="hidden" value="<?php echo $f['Price']; ?>" class="item_price" />
-                                    <input type="hidden" value="<?php echo $f['Percentage_Amount']; ?>" class="item_disc" />
-                                    <td><input type="button" class="btn btn-primary add" value="Add"></td>
-                                    </tr>
+                                    <tr>
+                                        <td><?php echo $f['Id_Product']; ?></td>
+                                        <td><?php echo $f['Product_Name']; ?></td>
+                                        <td><?php echo $f['Category_Name']; ?></td>
+                                <input type="hidden" value="<?php echo $f['Id_Product']; ?>" class="item_id" />
+                                <input type="hidden" value="<?php echo $f['Metric_Sales']; ?>" class="item_metrics" />
+                                <input type="hidden" value="<?php echo $f['Stock']; ?>" class="item_stock" />
+                                <input type="hidden" value="<?php echo $f['Price']; ?>" class="item_price" />
+                                <input type="hidden" value="<?php echo $f['Percentage_Amount']; ?>" class="item_disc" />
+                                <td><input type="button" class="btn btn-primary add" value="Add"></td>
+                                </tr>
                                 <?php endforeach; ?>
 
                                 </tbody>
@@ -197,24 +197,24 @@ $this->end();
                                         </tr>
                                     </thead>
                                     <tbody>
-                                      <!--<tr>
-                                                                                            <td></td>
-                                            <td>paramex</td>
-                                            <td><input type="number" /><small> qty</small></td>
-                                                                                            <td><input type="number" readonly/><small> qty</small></td>
-                                            <td><textarea rows="1" cols="40" style="resize:none;"></textarea></td>
-                                                                                            <td><input type="checkbox"></td>
-                                            <td><input type="button" value="&times;" class="btn btn-default delete"/></td>
-                                        </tr>
-                                        <tr>
-                                                                                            <td></td>
-                                            <td>amoshaphin</td>
-                                            <td><input type="number" /><small> qty</small></td>
-                                                                                            <td><input type="number" readonly/><small> qty</small></td>
-                                            <td><textarea rows="1" cols="40" style="resize:none;"></textarea></td>
-                                                                                            <td><input type="checkbox"></td>
-                                            <td><input type="button" value="&times;" class="btn btn-default delete"/></td>
-                                        </tr>-->
+                                        <!--<tr>
+                                                                                              <td></td>
+                                              <td>paramex</td>
+                                              <td><input type="number" /><small> qty</small></td>
+                                                                                              <td><input type="number" readonly/><small> qty</small></td>
+                                              <td><textarea rows="1" cols="40" style="resize:none;"></textarea></td>
+                                                                                              <td><input type="checkbox"></td>
+                                              <td><input type="button" value="&times;" class="btn btn-default delete"/></td>
+                                          </tr>
+                                          <tr>
+                                                                                              <td></td>
+                                              <td>amoshaphin</td>
+                                              <td><input type="number" /><small> qty</small></td>
+                                                                                              <td><input type="number" readonly/><small> qty</small></td>
+                                              <td><textarea rows="1" cols="40" style="resize:none;"></textarea></td>
+                                                                                              <td><input type="checkbox"></td>
+                                              <td><input type="button" value="&times;" class="btn btn-default delete"/></td>
+                                          </tr>-->
                                     </tbody>
                                 </table>
                         </div>

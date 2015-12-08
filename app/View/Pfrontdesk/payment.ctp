@@ -16,10 +16,10 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-                '<i class="fa fa-dashboard"></i> <span>Dashboard</span>', array('controller' => 'pfrontdesk',
-            'action' => 'dashboard',
-            'full_base' => true
-                ), array('escape' => false)
+        '<i class="fa fa-dashboard"></i> <span>Dashboard</span>', array('controller' => 'pfrontdesk',
+        'action' => 'dashboard',
+        'full_base' => true
+        ), array('escape' => false)
         );
         ?>
 
@@ -34,19 +34,19 @@ $this->end();
             <li >
                 <?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>', array('controller' => 'pfrontdesk',
-                    'action' => 'prescription',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>', array('controller' => 'pfrontdesk',
+                'action' => 'prescription',
+                'full_base' => true
+                ), array('escape' => false)
                 );
                 ?>
             </li>
             <li ><?php
                 echo $this->Html->link(
-                        '<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>', array('controller' => 'pfrontdesk',
-                    'action' => 'list_prescriptions',
-                    'full_base' => true
-                        ), array('escape' => false)
+                '<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>', array('controller' => 'pfrontdesk',
+                'action' => 'list_prescriptions',
+                'full_base' => true
+                ), array('escape' => false)
                 );
                 ?></li>
         </ul>
@@ -54,20 +54,20 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-                '<i class="fa fa-stack-exchange"></i> <span>Stocks</span>', array('controller' => 'pfrontdesk',
-            'action' => 'stock',
-            'full_base' => true
-                ), array('escape' => false)
+        '<i class="fa fa-stack-exchange"></i> <span>Stocks</span>', array('controller' => 'pfrontdesk',
+        'action' => 'stock',
+        'full_base' => true
+        ), array('escape' => false)
         );
         ?>
     </li>
     <li class="active">
         <?php
         echo $this->Html->link(
-                '<i class="fa fa-money"></i> <span>Payment</span>', array('controller' => 'pfrontdesk',
-            'action' => 'payment',
-            'full_base' => true
-                ), array('escape' => false)
+        '<i class="fa fa-money"></i> <span>Payment</span>', array('controller' => 'pfrontdesk',
+        'action' => 'payment',
+        'full_base' => true
+        ), array('escape' => false)
         );
         ?>
 
@@ -75,10 +75,10 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-                '<i class="fa fa-file-text"></i> <span>Reports</span>', array('controller' => 'pfrontdesk',
-            'action' => 'reports',
-            'full_base' => true
-                ), array('escape' => false)
+        '<i class="fa fa-file-text"></i> <span>Reports</span>', array('controller' => 'pfrontdesk',
+        'action' => 'reports',
+        'full_base' => true
+        ), array('escape' => false)
         );
         ?>
     </li>
@@ -145,7 +145,7 @@ $this->end();
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Medicine</h3>
-						<?php //echo var_dump($data_pack);?>
+                        <?php //echo var_dump($data_pack);?>
                     </div>
                     <div class="box-body table-responsive">
                         <table id="example2" class="table table-bordered table-hover">
@@ -163,57 +163,57 @@ $this->end();
                             <tbody>
 
                                 <?php foreach ($data_meds as $f): ?>
-                                    <tr>
-                                        <td></td>
-                                        <td><input type="hidden" value="<?php echo $f['Id_Product']; ?>" class="id_prod" />
-                                            <?php echo $f['Product_Name']; ?></td>
-                                        <td><?php echo $f['Category_Name']; ?></td>
-                                        <td><input type="hidden" value="<?php echo $f['Metric_Sales']; ?>" class="metric_prod" />
-											<input type="hidden" value="<?php echo $f['Stock']; ?>" class="stock" />
-                                            <?php echo $f['Stock']; ?></td>
-                                        <td><?php echo $f['Price']; ?></td>
-                                        <td><?php echo $f['Percentage_Amount']; ?></td>
-                                        <td><?php if($f['canBuy']){
-											echo '<button class="btn btn-primary add">Buy</button>';
-										}else{
-											echo '<button class="btn btn-primary add" disabled>Buy</button>';
-										}?></td>
-                                    </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><input type="hidden" value="<?php echo $f['Id_Product']; ?>" class="id_prod" />
+                                        <?php echo $f['Product_Name']; ?></td>
+                                    <td><?php echo $f['Category_Name']; ?></td>
+                                    <td><input type="hidden" value="<?php echo $f['Metric_Sales']; ?>" class="metric_prod" />
+                                        <input type="hidden" value="<?php echo $f['Stock']; ?>" class="stock" />
+                                        <?php echo $f['Stock']; ?></td>
+                                    <td><?php echo $f['Price']; ?></td>
+                                    <td><?php echo $f['Percentage_Amount']; ?></td>
+                                    <td><?php if($f['canBuy']){
+                                        echo '<button class="btn btn-primary add">Buy</button>';
+                                        }else{
+                                        echo '<button class="btn btn-primary add" disabled>Buy</button>';
+                                        }?></td>
+                                </tr>
                                 <?php endforeach; ?>
 
-								<?php foreach ($data_serv as $f): ?>
-                                    <tr>
-                                        <td></td>
-                                        <td><input type="hidden" value="<?php echo $f['Id_Product']; ?>" class="id_prod" />
-                                            <?php echo $f['Product_Name']; ?></td>
-                                        <td><?php echo $f['Category_Name']; ?></td>
-                                        <td>1<input type="hidden" value="" class="metric_prod" />
-										<input type="hidden" value="" class="stock" />
-                                            </td>
-                                        <td><?php echo $f['Price']; ?></td>
-                                        <td><?php echo $f['Percentage_Amount']; ?></td>
-                                        <td><button class="btn btn-primary add">Buy</button></td>
-                                    </tr>
+                                <?php foreach ($data_serv as $f): ?>
+                                <tr>
+                                    <td></td>
+                                    <td><input type="hidden" value="<?php echo $f['Id_Product']; ?>" class="id_prod" />
+                                        <?php echo $f['Product_Name']; ?></td>
+                                    <td><?php echo $f['Category_Name']; ?></td>
+                                    <td>1<input type="hidden" value="" class="metric_prod" />
+                                        <input type="hidden" value="" class="stock" />
+                                    </td>
+                                    <td><?php echo $f['Price']; ?></td>
+                                    <td><?php echo $f['Percentage_Amount']; ?></td>
+                                    <td><button class="btn btn-primary add">Buy</button></td>
+                                </tr>
                                 <?php endforeach; ?>
-								
-								
-								<?php foreach ($data_pack as $f): ?>
-                                    <tr>
-                                        <td></td>
-                                        <td><input type="hidden" value="<?php echo $f['Id_Packet']; ?>" class="id_prod" />
-                                            <?php echo $f['Product_Name']; ?></td>
-                                        <td>-</td>
-                                        <td><input type="hidden" value="" class="metric_prod" />
-										<input type="hidden" value="" class="stock" />
-                                            </td>
-                                        <td><?php echo $f['Price']; ?></td>
-                                        <td><?php echo $f['Percentage_Amount']; ?></td>
-                                        <td><?php if($f['canBuy']){
-											echo '<button class="btn btn-primary add">Buy</button>';
-										}else{
-											echo '<button class="btn btn-primary add" disabled>Buy</button>';
-										}?></td>
-                                    </tr>
+
+
+                                <?php foreach ($data_pack as $f): ?>
+                                <tr>
+                                    <td></td>
+                                    <td><input type="hidden" value="<?php echo $f['Id_Packet']; ?>" class="id_prod" />
+                                        <?php echo $f['Product_Name']; ?></td>
+                                    <td>-</td>
+                                    <td><input type="hidden" value="" class="metric_prod" />
+                                        <input type="hidden" value="" class="stock" />
+                                    </td>
+                                    <td><?php echo $f['Price']; ?></td>
+                                    <td><?php echo $f['Percentage_Amount']; ?></td>
+                                    <td><?php if($f['canBuy']){
+                                        echo '<button class="btn btn-primary add">Buy</button>';
+                                        }else{
+                                        echo '<button class="btn btn-primary add" disabled>Buy</button>';
+                                        }?></td>
+                                </tr>
                                 <?php endforeach; ?>
 
                             </tbody>
@@ -252,23 +252,24 @@ $this->end();
                             </thead>
                             <tbody>
                                 <?php if ($valid) {
-                                    foreach ($arrItem as $f):
-                                        ?>
-                                        <tr>
-                                            <td></td>
-                                            <td><?php echo $f['Item_Name']; ?>
-                                                <input type="hidden" value="<?php echo $f['Id_Product']; ?>" name="id_prod[]" /></td>
-                                            <td>
-                                                <input type="number" name="qty[]" style="width:50px" max="<?php echo $f['Stock']; ?>" min="1" 				value="<?php echo $f['Quantity']; ?>" class="qtycart" />
-                                                <small><?php echo $f['Metric']; ?></small>
-                                            </td>
-                                            <td><input type="hidden" value="<?php echo $f['Price']; ?>" name="price[]" />
-        <?php echo $f['Price']; ?></td>
-                                            <td><?php echo $f['Disc']; ?>
-                                                <input type="hidden" value="<?php echo $f['Disc']; ?>" name="disc[]" /></td>
-                                            <td><input type="button" value="&times;" class="btn btn-default del"/></td>
-                                        </tr>
-                                    <?php endforeach;
+                                foreach ($arrItem as $f):
+                                ?>
+                                <tr>
+                                    <td></td>
+                                    <td><?php echo $f['Item_Name']; ?>
+                                        <input type="hidden" value="<?php echo $f['Id_Product']; ?>" name="id_prod[]" /></td>
+                                    <td>
+                                        <input type="number" name="qty[]" style="width:50px;" max="<?php echo $f['Stock']; ?>" min="1"
+                                               value="<?php echo $f['Quantity']; ?>" class="qtycart" />
+                                        <small><?php echo $f['Metric']; ?></small>
+                                    </td>
+                                    <td><input type="hidden" value="<?php echo $f['Price']; ?>" name="price[]" />
+                                        <?php echo $f['Price']; ?></td>
+                                    <td><?php echo $f['Disc']; ?>
+                                        <input type="hidden" value="<?php echo $f['Disc']; ?>" name="disc[]" /></td>
+                                    <td><input type="button" value="&times;" class="btn btn-default del"/></td>
+                                </tr>
+                                <?php endforeach;
                                 }
                                 ?>
                             </tbody>
@@ -299,16 +300,19 @@ $this->end();
                                 <tr class="success">
 
                                     <td width="25%">Discount</td>
-                                    <td><span id="ds_con" contentEditable=true >0</span></td>
-                            <input type="hidden" name="disc_gen" id="disc_gen" value="0"/>
-                            <td width="25%">Tax</td>
-                            <td class="text-right" ><span id="ts_con" contentEditable=true><?php echo $data["data_store"]['Tax']; ?></span></td>
-                            <input type="hidden" name="tax_gen" id="tax_gen" value="<?php echo $data["data_store"]['Tax']; ?>"/>
-                            </tr>
-                            <tr class="success">
-                                <td colspan="2">Total Payable</td>
-                                <td class="text-right" colspan="2"><span id="total-payable">0</span></td>
-                            </tr>
+                                    <td><span id="ds_con" contentEditable=true >0</span>
+                                        <input type="hidden" name="disc_gen" id="disc_gen" value="0"/></td>
+
+                                    <td width="25%">Tax</td>
+                                    <td class="text-right" ><span id="ts_con" contentEditable=true><?php echo $data['data_store']['Tax']; ?></span>
+                                        <input type="hidden" name="tax_gen" id="tax_gen" value="<?php echo $data['data_store']['Tax']; ?>"/>
+                                    </td>
+
+                                </tr>
+                                <tr class="success">
+                                    <td colspan="2">Total Payable</td>
+                                    <td class="text-right" colspan="2"><span id="total-payable">0</span></td>
+                                </tr>
                             </tbody>
                         </table>
 
@@ -423,9 +427,6 @@ $this->end();
 </form>
 </aside>
 
-
-
-
 <div class="modal fade" id="resep" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -458,7 +459,6 @@ echo $this->Html->script('plugins/timepicker/bootstrap-timepicker.min');
 
         calculate();
 
-
         $('.add').on('click', function(event) {
             event.preventDefault();
             var x = $(this).parent().parent();
@@ -479,12 +479,9 @@ echo $this->Html->script('plugins/timepicker/bootstrap-timepicker.min');
             } else {
                 t2.row.add(['', x.children().eq(1).text() + '<input type="hidden" value="' + x.children().find('.id_prod').val() + '" name="id_prod[]" />', '<input type="number" style="width:50px" max="' + x.find('.stock').val() + '" min="1" name="qty[]" value="1" class="qtycart"/><small>' + x.children().find('.metric_prod').val() + '</small>', x.children().eq(4).text() + '<input type="hidden" value="' + x.children().eq(4).text() + '" name="price[]" />', x.children().eq(5).text() + '<input type="hidden" value="' + x.children().eq(5).text() + '" name="disc[]" />', '<input type="button" value="&times;" class="btn btn-default del"/>'
                 ]).draw();
-
             }
-
             calculate();
         });
-
 
         $(document).on("click", ".del", function() {
             var xx = $(this).parent().parent();
@@ -511,13 +508,8 @@ echo $this->Html->script('plugins/timepicker/bootstrap-timepicker.min');
                     var sum = 0;
                     for (i = 0; i < $('#example3 tbody').children().length; i++) {
                         var nx = $('#example3 tbody').children().eq(i).children();
-                        //alert(nx.eq(2).find('input').val());
-                        //alert(nx.eq(3).text());
-                        //alert(nx.eq(4).text());
-                        sum += (nx.eq(2).find('input').val() * nx.eq(3).text()) * (100 - nx.eq(4).text()) / 100;
-                        //alert(sum);
-//					alert((nx.eq(2).text()*nx.eq(3).text())*(100-nx.eq(3).text()));
 
+                        sum += (nx.eq(2).find('input').val() * nx.eq(3).text()) * (100 - nx.eq(4).text()) / 100;
                     }
                     $('#total').text(sum);
                 } else {
@@ -528,18 +520,11 @@ echo $this->Html->script('plugins/timepicker/bootstrap-timepicker.min');
                 var sum = 0;
                 for (i = 0; i < $('#example3 tbody').children().length; i++) {
                     var nx = $('#example3 tbody').children().eq(i).children();
-                    //alert(nx.eq(2).find('input').val());
-                    //alert(nx.eq(3).text());
-                    //alert(nx.eq(4).text());
                     sum += (nx.eq(2).find('input').val() * nx.eq(3).text()) * (100 - nx.eq(4).text()) / 100;
-                    //alert(sum);
-//					alert((nx.eq(2).text()*nx.eq(3).text())*(100-nx.eq(3).text()));
 
                 }
                 $('#total').text(sum);
             }
-
-
 
             if (ct == 1) {
                 $('#total').text(0);
@@ -549,11 +534,8 @@ echo $this->Html->script('plugins/timepicker/bootstrap-timepicker.min');
 
                 $('#count').text($('#example3 tbody').children().length);
                 var sum2 = $('#total').text();
-                //alert(sum2);
                 sum2 = sum2 - $('#ds_con').text() * 1.0 / 100 * sum2;
-                //alert(sum2);
                 sum2 = sum2 + $('#ts_con').text() * 1.0 / 100 * sum2;
-                //alert($('#ts_con').text());
                 $('#total-payable').text(sum2);
             }
 
@@ -562,7 +544,6 @@ echo $this->Html->script('plugins/timepicker/bootstrap-timepicker.min');
         $(document).on("change", ".qtys", function() {
 
             calculate();
-
 
         });
 
@@ -636,7 +617,6 @@ echo $this->Html->script('plugins/timepicker/bootstrap-timepicker.min');
 
         $('#paid').on('keyup', function() {
 
-
             var chn = $(this).val() - $('#total_').text();
             if (chn < 0) {
                 $("#submits").prop('disabled', true);
@@ -647,21 +627,17 @@ echo $this->Html->script('plugins/timepicker/bootstrap-timepicker.min');
         });
 
         $(document).on("change , keyup", ".qtycart", function() {
-//alert();
             calculate();
-
         });
 
         $(document).on("keyup", "#ds_con", function() {
             $('#disc_gen').val($('#ds_con').text());
             calculate();
-
         });
 
         $(document).on("keyup", "#ts_con", function() {
             $('#tax_gen').val($('#ts_con').text());
             calculate();
-
         });
 
         function calculate() {
@@ -673,13 +649,7 @@ echo $this->Html->script('plugins/timepicker/bootstrap-timepicker.min');
                     var sum = 0;
                     for (i = 0; i < $('#example3 tbody').children().length; i++) {
                         var nx = $('#example3 tbody').children().eq(i).children();
-                        //alert(nx.eq(2).find('input').val());
-                        //alert(nx.eq(3).text());
-                        //alert(nx.eq(4).text());
                         sum += (parseInt(nx.eq(2).find('input').val()) * parseInt(nx.eq(3).text())) * (100 - parseFloat(nx.eq(4).text())) / 100;
-                        // alert(sum);
-//					alert((nx.eq(2).text()*nx.eq(3).text())*(100-nx.eq(3).text()));
-
                     }
                     $('#total').text(sum);
                 } else {
@@ -690,23 +660,19 @@ echo $this->Html->script('plugins/timepicker/bootstrap-timepicker.min');
                 var sum = 0;
                 for (i = 0; i < $('#example3 tbody').children().length; i++) {
                     var nx = $('#example3 tbody').children().eq(i).children();
-                    //alert(nx.eq(2).find('input').val());
-                    //alert(nx.eq(3).text());
-                    //alert(nx.eq(4).text());
+
                     sum += (nx.eq(2).find('input').val() * nx.eq(3).text()) * (100 - nx.eq(4).text()) / 100;
-                    //alert(sum);
-//					alert((nx.eq(2).text()*nx.eq(3).text())*(100-nx.eq(3).text()));
 
                 }
                 $('#total').text(sum);
             }
 
             var sum2 = $('#total').text();
-            //alert(sum2);
+
             sum2 = sum2 - $('#ds_con').text() * 1.0 / 100 * sum2;
-            //alert(sum2);
+
             sum2 = sum2 + $('#ts_con').text() * 1.0 / 100 * sum2;
-            //alert($('#ts_con').text());
+
             $('#total-payable').text(sum2);
         }
     });
