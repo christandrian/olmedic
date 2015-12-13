@@ -23,6 +23,12 @@ class CdoctorController extends AppController {
     public function history() {
         $this->set('title_for_layout', 'Dashboard');
         $this->init();
+		$id_store = CakeSession::read('idStore');
+		 $username = CakeSession::read('username');
+        $id = $this->DashBoard_Doctor->getIdDoctor($username);
+        $id_doctor = $id[0]['ID_Doctor'];
+		$history = $this->DashBoard_Doctor->loadPatientByDoctor_($id_store, $id_doctor);
+		$this->set('history',$history);
     }
 
     public function queue() {
@@ -172,9 +178,15 @@ class CdoctorController extends AppController {
         $this->DashBoard_Doctor->changeQueueStatus($id_store, $queueNumber, $id_doctor, 2, $date_time);
     }
 
-    public function patient() {
+    public function patient($id) {
         $this->set('title_for_layout', 'Dashboard');
-        $this->layout = 'c_doctor';
+        $this->init();
+        $id_store = CakeSession::read('idStore');
+        $id_patient = $id;
+        $result = $this->DashBoard_Doctor->loadPatientByID($id_store, $id_patient);
+        $result2 = $this->DashBoard_Doctor->loadPatientHistory($id_store, $id_patient);
+        $this->set("patient", $result);
+        $this->set("history", $result2);
     }
 
     public function addDoctor() {

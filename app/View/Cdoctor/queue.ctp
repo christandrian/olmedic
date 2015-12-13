@@ -66,7 +66,7 @@ $this->end();
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Queue List </h3>
-                    <?php echo var_dump($queue);?>
+                    <?php //echo var_dump($queue);?>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive">
                     <table id="main" class="table table-bordered table-striped">
@@ -170,12 +170,7 @@ $this->end();
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>123412</td>
-                                                    <td>rudi subandini</td>
-                                                    <td><input type="checkbox" id="check" value="pick"></td>
-                                                </tr>
+                                                
                                             </tbody>
                                             <tfoot>
                                                 <tr>

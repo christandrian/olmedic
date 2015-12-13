@@ -294,7 +294,9 @@ $this->end();
                                     <td><?php echo $f['dc']['fm_doc'].' '.$f['dc']['lm_doc']; ?></td>
                                     <td><?php echo $f['vhc']['Date_Time']; ?></td>
                                     <td>
-                                        <button class="btn btn-primary" data-toggle="modal" data-target="#show" >Detail</button></td>
+										<input class="id_patient" type="hidden" value="<?php echo $f['vhc']['ID_Patient'] ;?>">
+										<input class="id_visit" type="hidden" value="<?php echo $f['vhc']['ID_Visit'] ;?>">
+                                        <button class="btn btn-primary detail" >Detail</button></td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -328,7 +330,7 @@ $this->end();
                 <h4 class="modal-title" id="exampleModalLabel">Pasien X</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" action="a" method="POST">
+               
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                         <div class="panel panel-default">
                             <div class="panel-heading" role="tab" id="headingOne">
@@ -343,8 +345,8 @@ $this->end();
                                     <div class="form-group">
                                         <label for="nomor" class="col-sm-2 control-label">Anamnesa:</label>
                                         <div class="col-sm-8">
-                                            <textarea class="form-control" id="message-text" rows="8" name="keluhan" readonly style="resize:none;"></textarea>
-                                        </div>										
+                                            <textarea class="form-control" id="keluhan" rows="8" readonly style="resize:none;"></textarea>
+                                        </div>                                      
 
                                     </div>
                                 </div>
@@ -360,11 +362,8 @@ $this->end();
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                 <div class="panel-body">
-
-
-
-
-
+                                    <input type="hidden" id="id_diagnose"/>
+                                    <input type="hidden" id="id_visit_"/>
                                     <div class="box-body table-responsive">
                                         <table id="diagnose" class="table table-bordered table-striped">
                                             <thead>
@@ -372,32 +371,22 @@ $this->end();
                                                     <th>No</th>
                                                     <th>ID-X</th>
                                                     <th>Detail</th>
+                                                    <th>Picked?</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>123412</td>
-                                                    <td>skt flu</td>
-
-                                                </tr>
-
-
+                                                
                                             </tbody>
                                             <tfoot>
                                                 <tr>
                                                     <th>No</th>
                                                     <th>ID-X</th>
                                                     <th>Detail</th>
-
+                                                    <th>Picked?</th>
                                                 </tr>
                                             </tfoot>
                                         </table>
-                                    </div>   
-
-
-
-
+                                    </div> 
                                 </div>
                             </div>
                         </div>
@@ -414,9 +403,8 @@ $this->end();
                                     <div class="form-group">
                                         <label for="nomor" class="col-sm-2 control-label">Treatment:</label>
                                         <div class="col-sm-8">
-                                            <textarea class="form-control" id="message-text" rows="8" readonly></textarea>
-                                        </div>										
-
+                                            <textarea class="form-control" id="penanganan" rows="8" name="penanganan" disabled></textarea>
+                                        </div>                                      
                                     </div> </div>
                             </div>
                         </div>
@@ -437,19 +425,12 @@ $this->end();
                                                     <th>No</th>
                                                     <th>Name</th>
                                                     <th>Qty</th>
+                                                    <th>Satuan</th>
                                                     <th>Usage/Note</th>
-
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>paramex</td>
-                                                    <td>10 <small>qty</small></td>
-                                                    <td>3x1</td>
-
-                                                </tr>
-
 
                                             </tbody>
                                             <tfoot>
@@ -457,14 +438,15 @@ $this->end();
                                                     <th>No</th>
                                                     <th>Name</th>
                                                     <th>Qty</th>
+                                                    <th>Satuan</th>
                                                     <th>Usage/Note</th>
-
+                                                    <th>Action</th>
                                                 </tr>
                                             </tfoot>
                                         </table>
                                     </div>
-
-
+                                    <hr>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -472,82 +454,39 @@ $this->end();
                             <div class="panel-heading" role="tab" id="headingThree">
                                 <h4 class="panel-title">
                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                        Images
+                                        Upload Image
                                     </a>
                                 </h4>
                             </div>
                             <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
                                 <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-md-8 col-md-2-offset">
-                                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="max-height: 200px !important;">
+                                    <img src="" width="200" height="200" id="f_product_img_hidden" style="float: left;">
 
-                                                <ol class="carousel-indicators">
-                                                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-
-                                                </ol>
-
-                                                <!-- Wrapper for slides -->
-                                                <div class="carousel-inner" role="listbox">
-                                                    <div class="item active">
-                                                        <img src="https://placehold.it/350x150" alt="...">
-                                                        <div class="carousel-caption">
-                                                            ...
-                                                        </div>
-                                                    </div>
-                                                    <div class="item">
-                                                        <img src="https://placehold.it/350x150" alt="...">
-                                                        <div class="carousel-caption">
-                                                            ...
-                                                        </div>
-                                                    </div>
-                                                    ...
-                                                </div>
-
-                                                <!-- Controls -->
-                                                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                                    <span class="sr-only">Previous</span>
-                                                </a>
-                                                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                                    <span class="sr-only">Next</span>
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                    </div>
+                                  
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
 
+            </div>
         </div>
     </div>
-</div>
+</div>  
 
 
 <?php 
 echo $this->Html->css('datatables/dataTables.bootstrap');
-echo $this->Html->css('datatables/dfileinput');
 $this->start('additional'); 
 echo $this->Html->script('plugins/datatables/jquery.dataTables');
 echo $this->Html->script('plugins/datatables/dataTables.bootstrap');
 echo $this->Html->script('plugins/input-mask/jquery.inputmask');
 echo $this->Html->script('plugins/input-mask/jquery.inputmask.date.extensions');
 echo $this->Html->script('plugins/input-mask/jquery.inputmask.extensions');
-echo $this->Html->script('fileinput.min');
 ?>	
 
-<script src="js/AdminLTE/app.js" type="text/javascript"></script>
 <script>
     $("[data-mask]").inputmask();
 </script>
@@ -621,19 +560,95 @@ echo $this->Html->script('fileinput.min');
             });
         }).draw();
 
-    });
+		var datav;
+        $(document).on('click', '.detail', function() {
+            datav = {id_visit: $(this).siblings('.id_visit').val(), id_patient: $(this).siblings('.id_patient').val()};
+            $('#id_visit_').val($(this).siblings('.id_visit').val());
+            $.post("<?php echo $this->Html->url(array('controller' => 'cdoctor', 'action' => 'getAnamnesa'), true) ?>",
+                    datav, function(data) {
 
-    $(document).ready(function() {
-        $("#test-upload").fileinput({
-            'showPreview': false,
-            'allowedFileExtensions': ['jpg', 'png', 'gif'],
-            'elErrorContainer': '#errorBlock'
+                        var obj = jQuery.parseJSON(data);
+                        //console.log(obj)
+                        $('#keluhan').val(obj[0].Anamnesa);
+
+                    })
+                    .done(function() {
+                        $.post("<?php echo $this->Html->url(array('controller' => 'cdoctor', 'action' => 'getTreatmentPrescription'), true) ?>",
+                                datav, function(data) {
+
+                                    var obj = jQuery.parseJSON(data);
+                                    //console.log(obj)
+                                    $('#penanganan').val(obj[0].Treatment);
+                                    var presc = obj[0].Prescription_List.split(',');
+                                    var t = $('#prescription').DataTable();
+                                    t.clear().draw();
+                                    for (i = 0; i < (presc.length); i = i + 4) {
+                                        t.row.add([
+                                            '',
+                                            presc[i],
+                                            presc[i + 1],
+                                            presc[i + 2],
+                                            presc[i + 3], '<input type="button" value="&times;" class="btn btn-default delete" disabled/>'
+                                        ]).draw();
+                                    }
+                                    $('#id_diagnose').val(obj[0].ID_Diagnosis);
+                                    var img = obj[0].Image;
+                                    if (img == '') {
+                                    } else {
+                                        $('#f_product_img_hidden').attr('src', 'http://localhost:1000/olmedic/app/webroot/img/upload/' + img);
+                                    }
+                                    //image
+
+                                }).done(function() {
+                            $.post("<?php echo $this->Html->url(array('controller' => 'cdoctor', 'action' => 'getIDX'), true) ?>",
+                                    datav, function(data) {
+
+                                        var obj = jQuery.parseJSON(data);
+                                        //console.log(obj)
+
+                                        var t = $('#diagnose').DataTable();
+                                        t.clear().draw();
+                                        for (i = 0; i < (obj.length); i++) {
+                                            t.row.add([
+                                                '',
+                                                obj[i].code,
+                                                obj[i].diagnose, '<input type="checkbox" class="checkDiagnose" id="check" value="pick" disabled>'
+                                            ]).draw();
+                                        }
+
+
+                                    }).done(function() {
+                                $.post("<?php echo $this->Html->url(array('controller' => 'cdoctor', 'action' => 'getDetailDiagnose'), true) ?>",
+                                        {id_diagnose: $('#id_diagnose').val()}, function(data) {
+
+                                    var obj = jQuery.parseJSON(data);
+                                    //console.log(obj)
+                                    //checklist si obat
+                                    var t = $('#diagnose').DataTable();
+                                    var datas = t.rows().data();
+                                    ct = 0;
+                                    for (i = 0; i <= datas.length && ct < obj.length; i++) {
+                                        if (datas[i][1] == obj[ct].Diagnosis) {
+                                            //checklist
+                                            t.cell(i, 3).data('<input type="checkbox" class="checkDiagnose" id="check" value="pick" checked="checked" disabled>');
+                                            t.draw();
+                                            ct++;
+                                        }
+                                    }
+
+
+                                }).done(function() {
+                                    $('#show').modal('show');
+
+                                })
+                            })
+                        })
+
+                    });
+
         });
 
-        $("#file-0a").fileinput({
-            'allowedFileExtensions': ['jpg', 'png', 'gif'],
-        });
-
     });
+
 </script>	
 <?php $this->end(); ?>

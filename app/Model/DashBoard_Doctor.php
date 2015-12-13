@@ -3,7 +3,9 @@
 App::uses('AppModel', 'Model');
 
 class DashBoard_Doctor extends AppModel {
-
+	
+	public $useTable = 'store';
+	 
     public function findAll($tableName) {
         $sql = "SELECT * FROM $tableName;";
         $result = $this->query($sql);
@@ -202,4 +204,53 @@ class DashBoard_Doctor extends AppModel {
         return $res;
     }
 
+	public function loadPatientByDoctor_($id_clinic, $id_doctor) {
+        $sql = "SELECT `ID_Visit`,`patient_clinic`.`ID_Patient`, `Social_Number`, `First_Name`, 
+			`Last_Name`, `Birth_Date`, `Address`, `Gender`, `Blood_Type`, `Weight`, 
+			`Handphone_Number`, `Emergency_Contact`
+		FROM `patient_clinic`  
+		JOIN 
+			(
+				SELECT `ID_Patient`, `ID_Visit`
+				FROM `visit_history_clinic` 
+				JOIN (
+					SELECT `Queue_Number`
+					FROM `queue_clinic`
+					Where `ID_Store` = '$id_clinic' AND `ID_Doctor` = '$id_doctor' AND `Status` = '3'
+				) as `Inner_Temp`
+				ON `visit_history_clinic`.`Queue_Number` = `Inner_Temp`.`Queue_Number`
+				WHERE `visit_history_clinic`.`Status` = '1' AND `visit_history_clinic`.`ID_Store` = '$id_clinic'
+			) as `Temp`
+		ON `patient_clinic`.`ID_Patient`= `Temp`.`ID_Patient`";
+        $res = $this->query($sql);
+        $result = array();
+        $counter = 0;
+        foreach ($res as $r) {
+            $result[$counter] = $r['patient_clinic'];
+            $result[$counter]['ID_Visit'] = $r['Temp']['ID_Visit'];
+            $counter++;
+        }
+        return $result;
+    }
+	
+	public function loadPatientByID($id_clinic, $id_patient) {
+        $sql = "SELECT `ID_Patient`, `Social_Number`, `First_Name`, `Last_Name`, `Birth_Date`, `Address`, `Gender`, `Blood_Type`, `Weight`, `Handphone_Number`, `Emergency_Contact` FROM `patient_clinic` WHERE `ID_Store` = '$id_clinic' AND `ID_Patient` = '$id_patient'";
+        $res = $this->query($sql);
+        $result = array();
+        foreach ($res as $r) {
+            $result[] = $r['patient_clinic'];
+        }
+        return $result;
+    }
+	
+	public function loadPatientHistory($id_store, $id_patient) {
+        $sql = "SELECT dc.First_Name as fm_doc ,dc.Last_Name as lm_doc , pc.First_Name as fm_pat , pc.Last_Name as lm_pat,
+			vhc.Status, vhc.ID_Visit, vhc.Queue_Number, vhc.ID_Doc, vhc.Date_Time, vhc.ID_Patient 
+			FROM `visit_history_clinic` as vhc
+			JOIN `doctor_clinic` as dc ON dc.ID_Doctor = vhc.ID_Doc
+			JOIN `patient_clinic` as pc on pc.ID_Patient = vhc.ID_Patient 
+		WHERE vhc.`ID_Store`= '$id_store' AND vhc.`ID_Patient` = '$id_patient' AND vhc.`Status`=1;";
+        $res = $this->query($sql);
+        return $res;
+    }
 }

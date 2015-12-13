@@ -952,11 +952,11 @@ ON `patient_clinic`.`ID_Patient`= `Temp`.`ID_Patient`";
 
     public function loadPatientHistory($id_store, $id_patient) {
         $sql = "SELECT dc.First_Name as fm_doc ,dc.Last_Name as lm_doc , pc.First_Name as fm_pat , pc.Last_Name as lm_pat,
-			vhc.Status, vhc.ID_Visit, vhc.Queue_Number, vhc.ID_Doc, vhc.Date_Time
+			vhc.Status, vhc.ID_Visit, vhc.Queue_Number, vhc.ID_Doc, vhc.Date_Time, vhc.ID_Patient 
 			FROM `visit_history_clinic` as vhc
 			JOIN `doctor_clinic` as dc ON dc.ID_Doctor = vhc.ID_Doc
 			JOIN `patient_clinic` as pc on pc.ID_Patient = vhc.ID_Patient 
-		WHERE vhc.`ID_Store`= '$id_store' AND vhc.`ID_Patient` = '$id_patient';";
+		WHERE vhc.`ID_Store`= '$id_store' AND vhc.`ID_Patient` = '$id_patient' AND vhc.`Status`=1;";
         $res = $this->query($sql);
         return $res;
     }

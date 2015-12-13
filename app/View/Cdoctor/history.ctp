@@ -71,6 +71,7 @@ $this->end();
                         <h3 class="box-title">Patient History</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
+					<?php //echo var_dump($history);?>
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -82,19 +83,20 @@ $this->end();
                                 </tr>
                             </thead>
                             <tbody>
+								<?php foreach ($history as $f): ?>
                                 <tr>
                                     <td></td>
-                                    <td>KTP731782319090</td>
-                                    <td>Rudi surudi</td>
-                                    <td>Male</td>
+                                    <td><?php echo $f['Social_Number']; ?></td>
+                                    <td><?php echo $f['First_Name'].' '.$f['Last_Name']; ?></td>
+                                    <td><?php echo $f['Gender']; ?></td>
                                     <td><?php echo $this->Html->link(
                                         'Detail',
-                                        '/cdoctor/patient?id='.'12345',
+                                        '/cdoctor/patient/'.$f['ID_Patient'],
                                         array('class' => 'btn btn-info')
                                         );?>
                                     </td>
                                 </tr>
-
+								 <?php endforeach; ?>
 
                             </tbody>
                             <tfoot>
