@@ -615,15 +615,15 @@ class DashBoard_Clinic extends AppModel {
     public function deleteItem($table_name, $column_identifier, $condition, $isNumber) {
         $sql = "";
         if ($isNumber) {
-            $sql = "DELETE FROM `$table_name` WHERE `$column_identifier` = $condition";
+            $sql = "DELETE FROM `$table_name` WHERE `$column_identifier` = '$condition'";
         } else {
             $sql = "DELETE FROM `$table_name` WHERE `$column_identifier` LIKE '$condition'";
         }
-        $this->query($sql);
+        $this->query($sql);		
     }
 
     public function deleteProduct($id_product) {
-        $sql = "DELETE FROM `product_clinic` WHERE `product_clinic`.`ID_Product` = $id_product;";
+        $sql = "DELETE FROM `product_clinic` WHERE `ID_Product` = '$id_product';";
         $this->query($sql);
     }
 
@@ -633,7 +633,7 @@ class DashBoard_Clinic extends AppModel {
     }
 
     public function deleteInventory($id_inv) {
-        $sql = "DELETE FROM `inventory_stock_clinic` WHERE `ID_Product` = $id_inv";
+        $sql = "DELETE FROM `inventory_stock_clinic` WHERE `ID_Product` = '$id_inv';";
         $this->query($sql);
     }
 

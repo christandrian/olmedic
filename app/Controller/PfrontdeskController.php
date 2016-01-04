@@ -705,21 +705,21 @@ class PfrontdeskController extends AppController {
         $id_prod = $this->request['data']['id_prod_del'];
         $type = $this->request['data']['type'];
         if ($type == 'item') {
-            $this->DashBoard_Pharmacy->deleteInventory($id_prod);
-            $this->DashBoard_Pharmacy->deleteItem('item_pharmacy', 'ID_Product', $id_prod, TRUE);
+           // $this->DashBoard_Pharmacy->deleteInventory($id_prod);
+            //$this->DashBoard_Pharmacy->deleteItem('item_pharmacy', 'ID_Product', $id_prod, TRUE);
             //$this->DashBoard_Pharmacy->deleteProductPurchasePrice($id_prod);
-            $this->DashBoard_Pharmacy->deleteDiscount($id_prod);
+            //$this->DashBoard_Pharmacy->deleteDiscount($id_prod);
             $this->DashBoard_Pharmacy->deleteProduct($id_prod);
         } else if ($type == "service") {
-            $this->DashBoard_Pharmacy->deleteService($id_prod);
-            $this->DashBoard_Pharmacy->deleteServicePrice($id_prod);
+            //$this->DashBoard_Pharmacy->deleteService($id_prod);
+            //$this->DashBoard_Pharmacy->deleteServicePrice($id_prod);
             //$this->DashBoard_Pharmacy->deleteProductPurchasePrice($id_prod);
-            $this->DashBoard_Pharmacy->deleteDiscount($id_prod);
+           // $this->DashBoard_Pharmacy->deleteDiscount($id_prod);
             $this->DashBoard_Pharmacy->deleteProduct($id_prod);
         } else {
-            $this->DashBoard_Pharmacy->deletePacket($id_prod);
-            $this->DashBoard_Pharmacy->deleteDetailPacket($id_prod);
-            $this->DashBoard_Pharmacy->deleteDiscount($id_prod);
+			//$this->DashBoard_Pharmacy->deleteDetailPacket($id_prod);
+            //$this->DashBoard_Pharmacy->deletePacket($id_prod);
+            //$this->DashBoard_Pharmacy->deleteDiscount($id_prod);
             $this->DashBoard_Pharmacy->deleteProduct($id_prod);
         }
         $this->redirect(array("controller" => "pfrontdesk",

@@ -675,24 +675,26 @@ class CfrontdeskController extends AppController {
         if ($type == 'item') {
             //$this->DashBoard_Clinic->deleteInventory($id_prod);
             //$this->DashBoard_Clinic->deleteItem('item_clinic', 'ID_Product', $id_prod, TRUE);
-            ////$this->DashBoard_Clinic->deleteProductPurchasePrice($id_prod);
-            //$this->DashBoard_Clinic->deleteDiscount($id_prod);
-            //$this->DashBoard_Clinic->deleteProduct($id_prod);
-        } else if ($type == "service") {
-            $this->DashBoard_Clinic->deleteService($id_prod);
-            $this->DashBoard_Clinic->deleteServicePrice($id_prod);
             //$this->DashBoard_Clinic->deleteProductPurchasePrice($id_prod);
-            $this->DashBoard_Clinic->deleteDiscount($id_prod);
+            //$this->DashBoard_Clinic->deleteDiscount($id_prod);
+            $this->DashBoard_Clinic->deleteProduct($id_prod);
+        } else if ($type == "service") {
+            //$this->DashBoard_Clinic->deleteService($id_prod);
+            //$this->DashBoard_Clinic->deleteServicePrice($id_prod);
+            //$this->DashBoard_Clinic->deleteProductPurchasePrice($id_prod);
+            //$this->DashBoard_Clinic->deleteDiscount($id_prod);
             $this->DashBoard_Clinic->deleteProduct($id_prod);
         } else {
-            $this->DashBoard_Clinic->deletePacket($id_prod);
-            $this->DashBoard_Clinic->deleteDetailPacket($id_prod);
-            $this->DashBoard_Clinic->deleteDiscount($id_prod);
+            //$this->DashBoard_Clinic->deleteDetailPacket($id_prod);
+            //$this->DashBoard_Clinic->deletePacket($id_prod);
+            //$this->DashBoard_Clinic->deleteDiscount($id_prod);
             $this->DashBoard_Clinic->deleteProduct($id_prod);
         }
-        $this->redirect(array("controller" => "cfrontdesk",
-            "action" => "stock"));
+        //$this->redirect(array("controller" => "cfrontdesk",
+        //    "action" => "stock"));
         //Buat table name, pake nama singkat aja, ex: item = item_phramacy; p 
+		$log = $this->Model->getDataSource()->getLog(false, false);
+		debug($log);
     }
 
     public function payment() {
