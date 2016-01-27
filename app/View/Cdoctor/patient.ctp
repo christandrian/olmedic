@@ -72,7 +72,7 @@ $this->end();
     <section class="content">
         <div class="row">
             <div class="col-md-12">
-                <?php echo $this->form->create(false,array('url'=>'/cfrontdesk/updatePatient/' , 'class'=>'form-horizontal'));?>
+                <?php echo $this->Form->create(false,array('url'=>'/cfrontdesk/updatePatient/' , 'class'=>'form-horizontal'));?>
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Patient Detail </h3>
