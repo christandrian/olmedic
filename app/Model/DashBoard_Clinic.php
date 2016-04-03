@@ -47,7 +47,7 @@ class DashBoard_Clinic extends AppModel {
         $meds_count = sizeof($arrItem);
         //Add to doctor_prescription_pharmachy
         $sql = "
-			INSERT INTO `doctor_prescription_pharmachy` 
+			INSERT INTO `doctor_prescription_clinic` 
 			(`SYS_ID`, `ID_Prescription`, `Pasient_Name`, `Doctor_Name`, `Institution_Name`, `Recipe_Date`, `Meds_Count`, `ID_Store`, `Payment_Status`, `ID_Transaction`) 
 			VALUES (NULL, '$presc_id', '$patient_name', '$doctor_name', '$institution_name', '$date', '$meds_count', '$id_clinic', 'Unpaid', NULL);";
         $this->query($sql);
@@ -67,13 +67,13 @@ class DashBoard_Clinic extends AppModel {
         return $sys_id;
     }
 
-    public function addSellTransaction($id_clinic, $arrItem, $datetime, $item_count, $subtotal, $discount, $tax, $total, $pk, $presc_sys_id) {
+    public function addSellTransaction($id_clinic, $arrItem, $datetime, $item_count, $subtotal, $discount, $tax, $total, $method, $cash, $cc_no, $cc_name, $patient, $doctor, $pk, $presc_sys_id) {
         //Insert to product_sell_transaction_clinic
-        $sql = "INSERT INTO `product_sell_transaction_clinic` (`ID_Transaction`, `Date`, `Total_Product_Count`, `Percentage_Discount`, `Tax`, `Subtotal_Price`, `Total_Price`, `Payment_Method`, `ID_Store`) VALUES ('$pk', '$datetime', '$item_count', '$discount', '$tax', '$subtotal', '$total', 'Cash', '$id_clinic');";
+        $sql = "INSERT INTO `product_sell_transaction_clinic` (`ID_Transaction`, `Date`, `Total_Product_Count`, `Percentage_Discount`, `Tax`, `Subtotal_Price`, `Total_Price`, `Payment_Method`, `Paid_Price`, `Credit_Card_No`, `Credit_Card_Holder`, `Patient_Name`,`Doctor_Name`,`ID_Store`) VALUES ('$pk', '$datetime', '$item_count', '$discount', '$tax', '$subtotal', '$total', '$method', '$cash', '$cc_no', '$cc_name' ,'$patient', '$doctor', '$id_clinic');";
         $this->query($sql);
         //insert to detail_product_sell_transaction_clinic
         foreach ($arrItem as $item) {
-            $sql = "INSERT INTO `detail_product_sell_transaction_clinic` (`ID_Transaction`, `ID_Product`, `Product_Type`, `Quantity`, `Percentage_Discount`, `Fixed_Discount`, `Price_Before_Disc`) VALUES ('$pk', '$item[Id_Product]', 'Medicine', '$item[Quantity]', '$item[Percentage_Discount]', '$item[Fixed_Discount]', '$item[Price]');";
+            $sql = "INSERT INTO `detail_product_sell_transaction_clinic` (`ID_Transaction`, `ID_Product`,  `Quantity`, `Percentage_Discount`, `Fixed_Discount`, `Price_Before_Disc`) VALUES ('$pk', '$item[Id_Product]', '$item[Quantity]', '$item[Percentage_Discount]', '$item[Fixed_Discount]', '$item[Price]');";
             $this->query($sql);
         }
         //Update status of prescription if presc_id is given
@@ -108,7 +108,7 @@ class DashBoard_Clinic extends AppModel {
     }
 
     public function loadDetailInvoice($id_invoice) {
-        $sql = "SELECT dpstp.`Quantity`, pp.Name, dpstp.`ID_Product`, dpstp.`Product_Type`,  dpstp.`Percentage_Discount`, dpstp.`Fixed_Discount`, dpstp.`Price_Before_Disc`  FROM `detail_product_sell_transaction_clinic` as dpstp LEFT JOIN `product_clinic` as pp on pp.ID_Product = dpstp.ID_Product WHERE `ID_Transaction` LIKE '$id_invoice';";
+        $sql = "SELECT dpstp.`Quantity`, pp.Name, dpstp.`ID_Product`,   dpstp.`Percentage_Discount`, dpstp.`Fixed_Discount`, dpstp.`Price_Before_Disc`  FROM `detail_product_sell_transaction_clinic` as dpstp LEFT JOIN `product_clinic` as pp on pp.ID_Product = dpstp.ID_Product WHERE `ID_Transaction` LIKE '$id_invoice';";
         $tempRes = $this->query($sql);
         $result = array();
         $count = 0;
@@ -116,7 +116,6 @@ class DashBoard_Clinic extends AppModel {
             $result[$count]['quantity'] = $temp['dpstp']['Quantity'];
             $result[$count]['item_name'] = $temp['pp']['Name'];
             $result[$count]['id_product'] = $temp['dpstp']['ID_Product'];
-            $result[$count]['product_type'] = $temp['dpstp']['Product_Type'];
             $result[$count]['percentage_discount'] = $temp['dpstp']['Percentage_Discount'];
             $result[$count]['fixed_discount'] = $temp['dpstp']['Fixed_Discount'];
             $result[$count]['price_before'] = $temp['dpstp']['Price_Before_Disc'];
@@ -225,6 +224,11 @@ class DashBoard_Clinic extends AppModel {
         }
         return $result;
     }
+	
+	public function deleteReport($id_invoice) {
+        $sql = "DELETE FROM `detail_product_sell_transaction_clinic` WHERE `ID_Transaction` = '$id_invoice'";
+        $this->query($sql);
+    }
 
     public function loadListPrescription() {
         $tempRes = $this->findAll('doctor_prescription_pharmachy');
@@ -247,7 +251,7 @@ class DashBoard_Clinic extends AppModel {
     }
 
     public function deleteBrandOwner($id_owner, $id_store) {
-        $sql = "DELETE FROM `brand_owner` WHERE `ID_Brandowner` = $id_brandowner AND `ID_Store` = $id_store;";
+        $sql = "DELETE FROM `brand_owner` WHERE `ID_Brandowner` = '$id_owner' AND `ID_Store` = '$id_store';";
         $this->query($sql);
     }
 
@@ -707,6 +711,11 @@ class DashBoard_Clinic extends AppModel {
         $sql = "UPDATE `inventory_stock_clinic` SET `Stock` = '$arr_detail[Stock]', `Price` = '$arr_detail[Sell_Price]', `Purchase_Price` = '$arr_detail[Buy_Price]',  `Metric` = '$arr_detail[Metrics_inv]' WHERE `inventory_stock_clinic`.`ID_Product` = $id_item;";
         $this->query($sql);
     }
+	
+	public function updateInventoryStock_($id_item, $stok) {
+        $sql = "UPDATE `inventory_stock_clinic` SET Stock = (Stock - $stok) WHERE `inventory_stock_clinic`.`ID_Product` = $id_item;";
+        $this->query($sql);
+    }
 
     public function updateService($id_store, $id_service, $arr_detail) {
         //$arr_detail index ==> Name => Product, Description => Product
@@ -907,7 +916,7 @@ class DashBoard_Clinic extends AppModel {
 
     //QUEUE
     public function createQueue($id_store, $queue_number, $id_doctor, $status, $date_time) {
-        $sql = "INSERT INTO `ol_medic`.`queue_clinic` (`ID_Store`, `Queue_Number`, `ID_Doctor`, `Status`, `Time_Modified`) VALUES ('$id_store', '$queue_number', '$id_doctor', '$status', '$date_time');";
+        $sql = "INSERT INTO `ol_medic`.`queue_clinic` (`ID_Store`, `Queue_Number`, `ID_Doctor`, `Status`, `Time_Modified`) VALUES ('$id_store', '$queue_number', '$id_doctor', '$status', NOW() );";
         $res = $this->query($sql);
         return $res;
     }
@@ -919,7 +928,7 @@ class DashBoard_Clinic extends AppModel {
     }
 
     public function removePatientFromQueue($id_store, $queue_number) {
-        $sql = "DELETE FROM `visit_history_clinic` WHERE `ID_Store`= '$id_store' AND `Queue_Number` = $queue_number;";
+        $sql = "DELETE FROM `queue_clinic` WHERE `ID_Store`= '$id_store' AND `Queue_Number` = $queue_number;";
         $res = $this->query($sql);
         return $res;
     }
@@ -1057,16 +1066,34 @@ ON `patient_clinic`.`ID_Patient`= `Temp`.`ID_Patient`";
     }
 
     //New!
-    public function PatientLoadDoctorDiagnose($id_patient, $id_store) {
+    public function PatientLoadDoctorDiagnose($id_patient, $id_store, $id_visit) {
         $sql = "SELECT `ddc`.`ID_Visit`, `ID_Diagnosis`, `Treatment`, `Prescription_List`, `Image`, `Memo`, `Time_Created` 
 		FROM `doctor_diagnosis_clinic` as `ddc` 
 		JOIN (
 			SELECT `ID_Visit`,`ID_Patient` 
 			FROM `visit_history_clinic` 
-			WHERE `ID_Patient` = '$id_patient' AND `ID_Store` = '$id_store'
+			WHERE `ID_Patient` = '$id_patient' AND `ID_Store` = '$id_store' AND `ID_Visit` = '$id_visit'
 		) as `iv` 
 		ON `iv`.`ID_Visit` = `ddc`.`ID_Visit`;";
         $res = $this->query($sql);
+        $result = array();
+        foreach ($res as $r) {
+            $result[] = $r['ddc'];
+        }
+        return $result;
+    }
+	
+	public function PatientLoadDoctorPrescription( $id_store, $id_visit) {
+        $sql = "SELECT `ddc`.`ID_Visit`, `Treatment`, `Prescription_List`, ID_Patient 
+		FROM `doctor_diagnosis_clinic` as `ddc` 
+		JOIN (
+			SELECT `ID_Visit`,`ID_Patient` 
+			FROM `visit_history_clinic` 
+			WHERE `ID_Store` = '$id_store' AND `ID_Visit` = '$id_visit'
+		) as `iv` 
+		ON `iv`.`ID_Visit` = `ddc`.`ID_Visit`;";
+        $res = $this->query($sql);
+		return $res;
         $result = array();
         foreach ($res as $r) {
             $result[] = $r['ddc'];
@@ -1088,8 +1115,19 @@ ON `patient_clinic`.`ID_Patient`= `Temp`.`ID_Patient`";
     }
 
     //VISIT_HISTORY
-    public function createVisitHistory($id_patient, $id_doctor, $id_store, $date_time, $queue_number, $status, $via, $anamnesa, $keterangan) {
-        $sql = "INSERT INTO `ol_medic`.`visit_history_clinic` (`ID_Visit`, `ID_Patient`, `ID_Doc`, `ID_Store`, `Date_Time`, `Queue_Number`, `Status`, `Via`, `Keterangan`, `Anamnesa`) VALUES (NULL, '$id_patient', '$id_doctor', '$id_store', '$date_time', '$queue_number', '$status', '$via', '$keterangan', '$anamnesa');";
+    public function createVisitHistory($id_patient, $id_doctor, $id_store, $date_time, $queue_number, $status, $via, $anamnesa, $keterangan) {	
+			$h= substr($date_time,0,2);
+			$m= substr($date_time,3,2);
+			$s= "00";
+			
+		if(substr($date_time,6)=="PM"){
+			$h = substr($h,1,1);
+			$h=$h*1+12;
+		}
+		
+		$jam = $h.":".$m.":".$s;
+		echo $jam;
+        $sql = "INSERT INTO `ol_medic`.`visit_history_clinic` (`ID_Visit`, `ID_Patient`, `ID_Doc`, `ID_Store`, `Date_Time`, `Queue_Number`, `Status`, `Via`, `Keterangan`, `Anamnesa`) VALUES (NULL, '$id_patient', '$id_doctor', '$id_store', '".date('Y-m-d')." $jam', '$queue_number', '$status', '$via', '$keterangan', '$anamnesa');";
         $res = $this->query($sql);
         return $res;
     }

@@ -24,7 +24,7 @@ $this->end();
 
     </li>
 
-    <li>
+    <li class="active">
         <?php echo $this->Html->link(
         '<i class="fa fa-calendar"></i> <span>Riwayat</span>',
         array('controller' => 'cdoctor',
@@ -35,7 +35,7 @@ $this->end();
         );?>
     </li>
 
-    <li class="active">
+    <li>
         <?php echo $this->Html->link(
         '<i class="fa fa-stack-exchange"></i> <span>Antrian</span>',
         array('controller' => 'cdoctor',
@@ -62,7 +62,7 @@ $this->end();
 
 <section class="content-header">
     <h1>
-        Antrian
+        Detail Pasien
 
     </h1>
 
@@ -70,63 +70,68 @@ $this->end();
 
 <section class="content">
 
+
+    <!-- top row -->
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 connectedSortable">
 
-
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">Daftar Antrian </h3>
-                    <?php //echo var_dump($queue);?>
-                </div><!-- /.box-header -->
-                <div class="box-body table-responsive">
-                    <table id="main" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Pasien</th>
-                                
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($queue as $f): ?>
-                            <tr>
-                                <td></td>
-                                <td id="nama_lengkap"><?php echo $f['First_Name'].' '.$f['Last_Name']; ?></td>
-
-                              
-                                <td>
-                                    <input class="id_patient" type="hidden" value="<?php echo $f['ID_Patient'] ;?>">
-                                    <input class="id_visit" type="hidden" value="<?php echo $f['ID_Visit'] ;?>">
-                                    <input class="queue_number" type="hidden" value="<?php echo $f['Queue_Number'] ;?>">
-                                    <input id="soc_number" type="hidden" value="<?php echo $f['Social_Number'] ;?>">
-                                    <input id="address" type="hidden" value="<?php echo $f['Address'] ;?>">
-                                    <input id="birthdate" type="hidden" value="<?php echo $f['Birth_Date'] ;?>">
-
-                                    <button class="btn btn-primary detail"  >Detail</button>
-                                    <button type="button" class="btn btn-danger finish">SELESAI</button>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>No</th>
-                                <th>Pasien</th>
-                                
-                                <th>Aksi</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
-        </div>
+        </div><!-- /.col -->
     </div>
+    <!-- /.row -->
+
+    
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Riwayat Pasien </h3>
+                        <?php //echo var_dump($history);?>
+                    </div><!-- /.box-header -->
+                    <div class="box-body table-responsive">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Dokter</th>
+                                    <th>Tanggal</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($history as $f): ?>
+                                <tr>
+                                    <td></td>
+                                    <td><?php echo $f['dc']['fm_doc'].' '.$f['dc']['lm_doc']; ?></td>
+                                    <td><?php echo $f['vhc']['Date_Time']; ?></td>
+                                    <td>
+										<input class="id_patient" type="hidden" value="<?php echo $f['vhc']['ID_Patient'] ;?>">
+										<input class="id_visit" type="hidden" value="<?php echo $f['vhc']['ID_Visit'] ;?>">
+                                        <button class="btn btn-primary detail" >Detail</button></td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                   <th>No</th>
+                                    <th>Dokter</th>
+                                    <th>Tanggal</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div>
+        </div>
+    </section>
+
+
+
 
 </section>
 </aside>
+
 
 <div class="modal fade " id="show" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="width">
@@ -298,21 +303,26 @@ $this->end();
             </div>
         </div>
     </div>
-</div>      
+</div>   
+
 
 <?php 
 echo $this->Html->css('datatables/dataTables.bootstrap');
-echo $this->Html->css('fileinput.min');
 $this->start('additional'); 
-echo $this->Html->script('plugins/timepicker/bootstrap-timepicker.min');
 echo $this->Html->script('plugins/datatables/jquery.dataTables');
 echo $this->Html->script('plugins/datatables/dataTables.bootstrap');
-echo $this->Html->script('fileinput.min');
-?>  
+echo $this->Html->script('plugins/input-mask/jquery.inputmask');
+echo $this->Html->script('plugins/input-mask/jquery.inputmask.date.extensions');
+echo $this->Html->script('plugins/input-mask/jquery.inputmask.extensions');
+?>	
+
+<script>
+    $("[data-mask]").inputmask();
+</script>
 
 <script type="text/javascript">
     $(function() {
-        var t = $('#main').DataTable({
+        var t = $('#example1').DataTable({
             "bPaginate": true,
             "bLengthChange": true,
             "bFilter": true,
@@ -324,6 +334,22 @@ echo $this->Html->script('fileinput.min');
 
         t.on('order.dt search.dt', function() {
             t.column(0, {search: 'applied', order: 'applied'}).nodes().each(function(cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw();
+
+        var t1 = $('#main').DataTable({
+            "bPaginate": true,
+            "bLengthChange": true,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": true,
+            "bAutoWidth": true,
+            "order": [[1, 'asc']]
+        });
+
+        t1.on('order.dt search.dt', function() {
+            t1.column(0, {search: 'applied', order: 'applied'}).nodes().each(function(cell, i) {
                 cell.innerHTML = i + 1;
             });
         }).draw();
@@ -363,43 +389,7 @@ echo $this->Html->script('fileinput.min');
             });
         }).draw();
 
-
-        $('#add').on('click', function() {
-
-            t3.row.add([
-                '', $('#nm_presc').val(), $('#qty_presc').val(), $('#metr_presc').val(), $('#usg_presc').val(), '<input type="button" value="&times;" class="btn btn-default delete"/>'
-            ]).draw();
-
-        });
-
-
-
-        $('.finish').on('click', function() {
-            //update or insert
-            //change status
-            var dataf = {id_visit: $(this).siblings('.id_visit').val(), queue_number: $(this).siblings('.queue_number').val()};
-            console.log(dataf);
-            $.post("<?php echo $this->Html->url(array('controller' => 'cdoctor', 'action' => 'finishPatient'), true) ?>",
-                    dataf, function(data) {
-
-                        console.log(data);
-						location.reload();
-                    })
-
-
-        });
-        $(document).on("click", ".delete", function() {
-            var xx = $(this).parent().parent();
-            if (xx.hasClass('selected')) {
-                xx.removeClass('selected');
-            }
-            else {
-                xx.addClass('selected');
-            }
-
-            t3.row('.selected').remove().draw(false);
-        });
-        var datav;
+		var datav;
         $(document).on('click', '.detail', function() {
             datav = {id_visit: $(this).siblings('.id_visit').val(), id_patient: $(this).siblings('.id_patient').val()};
             $('#id_visit_').val($(this).siblings('.id_visit').val());
@@ -416,15 +406,9 @@ echo $this->Html->script('fileinput.min');
                                 datav, function(data) {
 
                                     var obj = jQuery.parseJSON(data);
-                                    console.log(obj)
-									if(obj.length!=0	){
-											$('#penanganan').val(obj[0].Treatment);
-									}else{
-									
-									}
-                                    
-									if(obj.length!=0){
-										var presc = obj[0].Prescription_List.split(',');
+                                    //console.log(obj)
+                                    $('#penanganan').val(obj[0].Treatment);
+                                    var presc = obj[0].Prescription_List.split(',');
                                     var t = $('#prescription').DataTable();
                                     t.clear().draw();
                                     for (i = 0; i < (presc.length); i = i + 4) {
@@ -433,21 +417,16 @@ echo $this->Html->script('fileinput.min');
                                             presc[i],
                                             presc[i + 1],
                                             presc[i + 2],
-                                            presc[i + 3], '<input type="button" value="&times;" class="btn btn-default delete"/>'
+                                            presc[i + 3], '<input type="button" value="&times;" class="btn btn-default delete" disabled/>'
                                         ]).draw();
                                     }
-									}
-                                    if(obj.length!=0){
-										$('#id_diagnose').val(obj[0].ID_Diagnosis);
-										 var img = obj[0].Image;
+                                    $('#id_diagnose').val(obj[0].ID_Diagnosis);
+                                    var img = obj[0].Image;
                                     if (img == '') {
                                     } else {
                                         $('#f_product_img_hidden').attr('src', 'http://localhost:1000/olmedic/app/webroot/img/upload/' + img);
                                     }
                                     //image
-									}
-                                    
-                                   
 
                                 }).done(function() {
                             $.post("<?php echo $this->Html->url(array('controller' => 'cdoctor', 'action' => 'getIDX'), true) ?>",
@@ -462,7 +441,7 @@ echo $this->Html->script('fileinput.min');
                                             t.row.add([
                                                 '',
                                                 obj[i].code,
-                                                obj[i].diagnose, '<input type="checkbox" class="checkDiagnose" id="check" value="pick">'
+                                                obj[i].diagnose, '<input type="checkbox" class="checkDiagnose" id="check" value="pick" disabled>'
                                             ]).draw();
                                         }
 
@@ -480,7 +459,7 @@ echo $this->Html->script('fileinput.min');
                                     for (i = 0; i <= datas.length && ct < obj.length; i++) {
                                         if (datas[i][1] == obj[ct].Diagnosis) {
                                             //checklist
-                                            t.cell(i, 3).data('<input type="checkbox" class="checkDiagnose" id="check" value="pick" checked="checked">');
+                                            t.cell(i, 3).data('<input type="checkbox" class="checkDiagnose" id="check" value="pick" checked="checked" disabled>');
                                             t.draw();
                                             ct++;
                                         }
@@ -495,126 +474,10 @@ echo $this->Html->script('fileinput.min');
                         })
 
                     });
-		//$('#show').modal('show');
-        });
-        $(document).on('click', '.checkDiagnose', function() {
-            var xx = $(this).parent().parent();
-            if (!$(this).is(':checked')) {
-                xx.addClass('selected');
-                idx = $('#diagnose').DataTable().row('.selected');
-                $('#diagnose').DataTable().cell(idx[0], 3).data('<input type="checkbox" class="checkDiagnose" id="check" value="pick">');
-                $('#diagnose').DataTable().draw();
-                $(this).removeAttr('checked');
-                xx.removeClass('selected');
-
-            } else {
-                $(this).attr('checked', 'checked');
-                xx.addClass('selected');
-                idx = $('#diagnose').DataTable().row('.selected');
-                $('#diagnose').DataTable().cell(idx[0], 3).data('<input type="checkbox" class="checkDiagnose" id="check" value="pick" checked="checked">');
-                $('#diagnose').DataTable().draw();
-                xx.removeClass('selected');
-            }
-
-
-
 
         });
 
-        $('.save').on('click', function() {
-
-            // update if exist
-            //insert if not exist
-            t = $('#diagnose').DataTable();
-
-            datas = t.rows().data();
-
-            arrDiagnose = new Array();
-
-            for (i = 0; i < datas.length; i++) {
-
-                if (datas[i][3] === '<input type="checkbox" class="checkDiagnose" id="check" value="pick" checked="checked">') {
-                    //masukin
-                    //alert(i);
-
-                    arrDiagnose.push(datas[i][1]);
-                }
-            }
-
-            var diagnose = arrDiagnose;
-
-
-            var treatment = $('#penanganan').val();
-
-            var t = $('#prescription').DataTable();
-            var datas = t.rows().data();
-            var str = "";
-            for (i = 0; i < datas.length; i++) {
-                str += t.cell(i, 1).data() + "," + t.cell(i, 2).data() + "," + t.cell(i, 3).data() + "," + t.cell(i, 4).data()
-                if (i != datas.length - 1) {
-                    str += ","
-                }
-            }
-
-            var prescription = str;
-
-            var image = new_product_photo;
-
-            diagnosis = new FormData();
-            diagnosis.append('id', $('#id_visit_').val());
-            diagnosis.append('diagnose', diagnose);
-            diagnosis.append('treatment', treatment);
-            diagnosis.append('prescription', prescription);
-            diagnosis.append('image', image);
-            $.ajax({
-                type: 'POST',
-                url: "<?php echo $this->Html->url(array('controller' => 'cdoctor', 'action' => 'saveDiagnosis'), true) ?>",
-                processData: false,
-                contentType: false,
-                data: diagnosis,
-                success: function(response) {
-                    if (response == "") {
-                        alert(response);
-                    } else {
-						alert("Saved");
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(jqXHR);
-                }
-            });
-
-        });
-
-
-        var f_cek_image;
-        var new_product_photo = '';
-        $('body').on('change', '.f_pic_identity', function(evt) {
-            f_cek_image = $(this).prev().val();
-            var i = 0, len = this.files.length, img, reader, file;
-            for (; i < len; i++) {
-                file = this.files[i];
-                new_product_photo = file;
-                if (!!file.type.match(/image.*/)) {
-                    if (window.FileReader) {
-                        reader = new FileReader();
-                        reader.onloadend = function(e) {
-                            f_imageRawSrc(e.target.result, file.fileName);
-                            f_imageRawFileSize(escape(file.size));
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                }
-            }
-        });
-        function f_imageRawSrc(source) {
-            $('#' + f_cek_image).attr('src', source);
-        }
-
-        function f_imageRawFileSize(source) {
-            $('.' + f_cek_image).text(" " + (((source) / 1024) / 1024).toFixed(2) + " MB");
-        }
     });
 
-</script>
+</script>	
 <?php $this->end(); ?>

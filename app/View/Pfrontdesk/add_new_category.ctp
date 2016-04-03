@@ -14,132 +14,115 @@ $this->end();
 <?php $this->start('sidebar'); ?>
 <ul class="sidebar-menu">
     <li>
-        <?php echo $this->Html->link(
-        '<i class="fa fa-dashboard"></i> <span>Dashboard</span>',
-        array('controller' => 'pfrontdesk',
-        'action' => 'dashboard',
-        'full_base' => true
-        ),
-        array('escape'=>false)
-        );?>
-
+        <?php
+        echo $this->Html->link(
+        '<i class="fa fa-dashboard"></i> <span>Beranda</span>', array('controller' => 'pfrontdesk',
+        'action' => 'dashboard', 'full_base' => true), array('escape' => false));
+        ?>
     </li>
     <li class="treeview">
         <a href="#">
             <i class="fa fa-file"></i>
-            <span>Prescription</span>
+            <span>Resep</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
             <li>
-                <?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>',
-                array('controller' => 'pfrontdesk',
-                'action' => 'prescription',
-                'full_base' => true
-                ),
-                array('escape'=>false)
-                );?>
+                <?php
+                echo $this->Html->link(
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Resep</span>', array('controller' => 'pfrontdesk',
+                'action' => 'prescription', 'full_base' => true), array('escape' => false));
+                ?>
             </li>
-            <li><?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>',
-                array('controller' => 'pfrontdesk',
-                'action' => 'list_prescription',
-                'full_base' => true
-                ),
-                array('escape'=>false)
-                );?></li>
+            <li>
+                <?php
+                echo $this->Html->link(
+                '<i class="fa fa-angle-double-right"></i><span>Daftar Resep</span>', array('controller' => 'pfrontdesk',
+                'action' => 'list_prescriptions', 'full_base' => true), array('escape' => false));
+                ?>
+            </li>
         </ul>
     </li>
     <li class="treeview active">
         <a href="#">
             <i class="fa fa-file"></i>
-            <span>Stocks</span>
+            <span>Inventory</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-            <li >
-                <?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Product</span>',
-                array('controller' => 'pfrontdesk',
-                'action' => 'addNewProduct',
-                'full_base' => true
-                ),
-                array('escape'=>false)
-                );?>
+            <li>
+                <?php
+                echo $this->Html->link(
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Item</span>', array('controller' => 'pfrontdesk',
+                'action' => 'addNewProduct', 'full_base' => true), array('escape' => false));
+                ?>
+            </li>
+            <li>
+                <?php
+                echo $this->Html->link(
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Paket</span>', array('controller' => 'pfrontdesk',
+                'action' => 'addNewPacket', 'full_base' => true), array('escape' => false));
+                ?>
+            </li>
+            <li>
+                <?php
+                echo $this->Html->link(
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Jasa</span>', array('controller' => 'pfrontdesk',
+                'action' => 'addNewService', 'full_base' => true), array('escape' => false));
+                ?>
+            </li>
+            <li class="active">
+                <?php
+                echo $this->Html->link(
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Kategori</span>', array('controller' => 'pfrontdesk',
+                'action' => 'addNewCategory', 'full_base' => true), array('escape' => false));
+                ?>
             </li>
             <li >
-                <?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Packet</span>',
-                array('controller' => 'pfrontdesk',
-                'action' => 'addNewPacket',
-                'full_base' => true
-                ),
-                array('escape'=>false)
-                );?></li>
-            <li ><?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Service</span>',
-                array('controller' => 'pfrontdesk',
-                'action' => 'addNewService',
-                'full_base' => true
-                ),
-                array('escape'=>false)
-                );?></li>
-            <li class="active"><?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Category</span>',
-                array('controller' => 'pfrontdesk',
-                'action' => 'addNewCategory',
-                'full_base' => true
-                ),
-                array('escape'=>false)
-                );?></li>
-            <li ><?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Brand</span>',
-                array('controller' => 'pfrontdesk',
-                'action' => 'addNewBrand',
-                'full_base' => true
-                ),
-                array('escape'=>false)
-                );?></li>
-            <li >
-                <?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>List</span>',
-                array('controller' => 'pfrontdesk',
-                'action' => 'stock',
-                'full_base' => true
-                ),
-                array('escape'=>false)
-                );?></li>
+                <?php
+                echo $this->Html->link(
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Brand</span>', array('controller' => 'pfrontdesk',
+                'action' => 'addNewBrand', 'full_base' => true), array('escape' => false));
+                ?>
+            </li>
+            <li>
+                <?php
+                echo $this->Html->link(
+                '<i class="fa fa-angle-double-right"></i><span>Daftar</span>', array('controller' => 'pfrontdesk',
+                'action' => 'stock', 'full_base' => true), array('escape' => false));
+                ?>
+            </li>
         </ul>
     </li>
     <li>
-        <?php echo $this->Html->link(
-        '<i class="fa fa-money"></i> <span>Payment</span>',
-        array('controller' => 'pfrontdesk',
-        'action' => 'payment',
-        'full_base' => true
-        ),
-        array('escape'=>false)
-        );?>
-
+        <?php
+        echo $this->Html->link(
+        '<i class="fa fa-money"></i> <span>Pembayaran</span>', array('controller' => 'pfrontdesk',
+        'action' => 'payment', 'full_base' => true), array('escape' => false));
+        ?>
     </li>
     <li>
-        <?php echo $this->Html->link(
-        '<i class="fa fa-file-text"></i> <span>Reports</span>',
-        array('controller' => 'pfrontdesk',
-        'action' => 'reports',
-        'full_base' => true
-        ),
-        array('escape'=>false)
-        );?>
+        <?php
+        echo $this->Html->link(
+        '<i class="fa fa-file-text"></i> <span>Laporan</span>', array('controller' => 'pfrontdesk',
+        'action' => 'reports', 'full_base' => true), array('escape' => false));
+        ?>
     </li>
-
-</ul>
-<?php $this->end(); ?>
+	<li>
+        <?php
+        echo $this->Html->link(
+        '<i class="fa fa-file-text"></i> <span>Petunjuk Pemakaian</span>', array('controller' => 'pfrontdesk',
+        'action' => 'faq',
+        'full_base' => true
+        ), array('escape' => false)
+        );
+        ?>
+    </li>
+</ul><?php $this->end(); ?>
 
 <section class="content-header">
     <h1>
-        Category
+        Kategori
 
     </h1>
 
@@ -162,38 +145,38 @@ $this->end();
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Category </h3>
+                        <h3 class="box-title">Kategori </h3>
                     </div>
                     <div class="box-body table-responsive">
                         <form class="form-horizontal" method ="post" action="add_category">
                             <div id="non-exist" >
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Name:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Nama:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control"  name="category" placeholder="Category">
+                                        <input type="text" class="form-control"  name="category" placeholder="Category" required>
 
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Code:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Kode:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control"  name="categoryCode" placeholder="Category Code">
+                                        <input type="text" class="form-control"  name="categoryCode" placeholder="Category Code" required>
 
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Description:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Deskripsi:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control"  name="description" placeholder="Description">
+                                        <input type="text" class="form-control"  name="description" placeholder="Description" required>
 
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Parent:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Kategori Grup:</label>
                                     <div class="col-sm-8">
                                         <select class="form-control" name="parent">
                                             <option>-</option>
@@ -215,7 +198,7 @@ $this->end();
                                 <div class="form-group">
 
                                     <div class="col-sm-2 col-md-offset-10">
-                                        <button type="submit" class="btn btn-primary">Add</button>
+                                        <button type="submit" class="btn btn-primary">Tambah</button>
                                     </div>										
 
                                 </div>
@@ -231,7 +214,7 @@ $this->end();
 
 
                     <div class="box-body">
-                        <h3 class="box-title">Category List</h3>
+                        <h3 class="box-title">Daftar Kategori</h3>
                         <div class="box-body table-responsive">
 
                             <table id="example1" class="table table-bordered table-striped table-hover">
@@ -239,11 +222,11 @@ $this->end();
                                     <tr>
                                         <th></th>
                                         <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Code</th>
-                                        <th>Description</th>
-                                        <th>Parent</th>
-                                        <th>Action</th>
+                                        <th>Nama</th>
+                                        <th>Kode</th>
+                                        <th>Deskripsi</th>
+                                        <th>Grup</th>
+                                        <th>Aksi</th>
 
                                     </tr>
                                 </thead>
@@ -279,11 +262,11 @@ $this->end();
                                     <tr>
                                         <th></th>
                                         <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Code</th>
-                                        <th>Description</th>
-                                        <th>Parent</th>
-                                        <th>Action</th>
+                                        <th>Nama</th>
+                                        <th>Kode</th>
+                                        <th>Deskripsi</th>
+                                        <th>Grup</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -303,91 +286,7 @@ $this->end();
 </aside>
 
 
-<div class="modal fade" id="getPr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Add New Product</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
 
-
-                    <div id="exist" >
-
-                        <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Name:</label>
-                            <div class="col-sm-8">
-                                <p class="form-control-static">paramex</p>
-
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Category:</label>
-                            <div class="col-sm-8">
-                                <select class="form-control" multiple>
-                                    <option>-</option>
-                                    <option>A</option>
-                                    <option>B</option>
-                                    <option>C</option>
-                                    <option>D</option>
-                                </select>
-                            </div>										
-
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Qty:</label>
-                            <div class="col-sm-8">
-                                <input type="number" class="form-control" id="qty" placeholder="Obat">
-
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Purch. Price:</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="nomor" placeholder="Obat">
-
-                            </div>										
-
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Sale Price:</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="nomor" placeholder="Obat">
-
-                            </div>										
-
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Note:</label>
-                            <div class="col-sm-8">
-                                <textarea class="form-control" id="message-text" name="keluhan"></textarea>
-                            </div>										
-
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-sm-2 col-md-offset-10">
-                                <button type="submit" class="btn btn-primary">Add</button>
-                            </div>										
-
-                        </div>
-                    </div>
-
-
-
-                </form>
-            </div>
-
-        </div>
-    </div>
-</div>
 <?php 
 echo $this->Html->css('datatables/dataTables.bootstrap');
 $this->start('additional'); 

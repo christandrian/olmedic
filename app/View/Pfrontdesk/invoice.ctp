@@ -15,7 +15,7 @@ $this->end();
 <ul class="sidebar-menu">
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-dashboard"></i> <span>Dashboard</span>',
+        '<i class="fa fa-dashboard"></i> <span>Beranda</span>',
         array('controller' => 'pfrontdesk',
         'action' => 'dashboard',
         'full_base' => true
@@ -27,13 +27,13 @@ $this->end();
     <li class="treeview">
         <a href="#">
             <i class="fa fa-file"></i>
-            <span>Prescription</span>
+            <span>Resep</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
             <li >
                 <?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>',
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Resep</span>',
                 array('controller' => 'pfrontdesk',
                 'action' => 'prescription',
                 'full_base' => true
@@ -42,7 +42,7 @@ $this->end();
                 );?>
             </li>
             <li ><?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>',
+                '<i class="fa fa-angle-double-right"></i><span>Daftar Resep</span>',
                 array('controller' => 'pfrontdesk',
                 'action' => 'list_prescriptions',
                 'full_base' => true
@@ -53,7 +53,7 @@ $this->end();
     </li>
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-stack-exchange"></i> <span>Stocks</span>',
+        '<i class="fa fa-stack-exchange"></i> <span>Inventory</span>',
         array('controller' => 'pfrontdesk',
         'action' => 'stock',
         'full_base' => true
@@ -63,7 +63,7 @@ $this->end();
     </li>
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-money"></i> <span>Payment</span>',
+        '<i class="fa fa-money"></i> <span>Pembayaran</span>',
         array('controller' => 'pfrontdesk',
         'action' => 'payment',
         'full_base' => true
@@ -74,7 +74,7 @@ $this->end();
     </li>
     <li class="active">
         <?php echo $this->Html->link(
-        '<i class="fa fa-file-text"></i> <span>Reports</span>',
+        '<i class="fa fa-file-text"></i> <span>Laporan</span>',
         array('controller' => 'pfrontdesk',
         'action' => 'reports',
         'full_base' => true
@@ -82,10 +82,27 @@ $this->end();
         array('escape'=>false)
         );?>
     </li>
+	<li>
+        <?php
+        echo $this->Html->link(
+        '<i class="fa fa-file-text"></i> <span>Petunjuk Pemakaian</span>', array('controller' => 'pfrontdesk',
+        'action' => 'faq',
+        'full_base' => true
+        ), array('escape' => false)
+        );
+        ?>
+    </li>
 
 </ul>
 <?php $this->end(); ?>
 
+<style>
+	.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+padding:0px!important;
+padding-left:8px!important;
+padding-right:8px!important;
+}
+</style>
 <section class="content-header">
     <h1>
         Invoice
@@ -102,29 +119,34 @@ $this->end();
     </div>
 </div>	
 
-<section class="content invoice">
+<section class="content invoice" style="padding-top:0px;">
 
-    <div class="row">
-        <div class="col-xs-12">
-            <h2 class="page-header">
+    <div class="row" style="height:40px;width:95%;">
+        <div class="col-xs-12" style="height:42px">
+            <h2 class="page-header" style="padding-bottom:3px">
                 <i class="fa fa-globe"></i> <?php echo $data['storeName'];?>
-                <small class="pull-right">Date: <?php echo $invoice['Date'];?></small>
+                <small class="pull-right">Tanggal: <?php echo $invoice['Date'];?></small>
             </h2>
         </div>
     </div>
 
-    <div class="row invoice-info">
+    <div class="row invoice-info" style="height:30px;width:95%;">
         <div class="col-sm-4 invoice-col">
-            From
             <address>
-                <strong><?php echo $data_store['Nama'];?></strong><br>
-                <?php echo $data_store['Alamat'];?><br>
-                Phone: <?php echo $data_store['Nomor_Telepon'];?><br/>
+                <?php echo $data_store['Alamat'];?>. <?php echo $data_store['Nomor_Telepon'];?><br/>
             </address>
         </div>
-
-        <div class="col-sm-4 col-sm-offset-4 invoice-col">
-            <b>Invoice <?php echo $invoice['ID_Transaction'];?></b><br/>
+		
+		<div class="col-sm-2 invoice-col">
+            Pasien: <b><?php echo $invoice['Patient_Name'];?> </b><br/>
+        </div>
+		
+		<div class="col-sm-2 invoice-col">
+            Dokter: <b><?php echo $invoice['Doctor_Name'];?></b><br/>
+        </div>
+		
+        <div class="col-sm-4 invoice-col">
+            Invoice: <b><?php echo $invoice['ID_Transaction'];?></b><br/>
             <br/>
             <!--<b>Order ID:</b> 4F3S8J<br/>
             <b>Payment Due:</b> 2/22/2014<br/>
@@ -133,16 +155,15 @@ $this->end();
     </div>
 
 
-    <div class="row">
+    <div class="row" style="width:95%;">
 
         <div class="col-xs-12 table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Qty</th>
-                        <th>Product Name</th>
-                        <th>Serial #</th>
-                        <th>Description</th>
+                        <th>Kuantitas</th>
+                        <th>Nama Product</th>
+                        <th>No Seri</th>
                         <th>Subtotal</th>
                     </tr>
                 </thead>
@@ -152,8 +173,7 @@ $this->end();
                         <td><?php echo $f[ 'quantity' ]; ?></td>
                         <td><?php echo $f[ 'item_name' ]; ?></td>
                         <td><?php echo $f[ 'id_product' ]; ?></td>
-                        <td><?php echo $f[ 'product_type' ]; ?></td>
-                        <td><?php echo $f[ 'price_after' ]; ?></td>
+                        <td><?php echo number_format($f[ 'price_after' ], 0, '.', '.'); ?></td>
                     </tr>
                     <?php endforeach; ?>
 
@@ -162,28 +182,26 @@ $this->end();
         </div>
     </div>
 
-    <div class="row">
-
-
+    <div class="row" style="width:95%;">
         <div class="col-xs-6 col-xs-offset-6">
-            <p class="lead">Amount Due <?php echo $invoice['Date'];?></p>
+            
             <div class="table-responsive">
                 <table class="table">
                     <tr>
-                        <th style="width:50%">Subtotal:</th>
-                        <td><?php echo $invoice['Subtotal_Price'];?></td>
+                        <th style="width:50%">Subtotal</th>
+                        <td><?php echo number_format($invoice['Subtotal_Price'], 0, '.', '.');?></td>
                     </tr>
                     <tr>
-                        <th>Tax</th>
-                        <td><?php echo $invoice['Tax'];?></td>
+                        <th>Pajak</th>
+                        <td><?php echo number_format($invoice['Tax'], 0, '.', '.').' %';?></td>
                     </tr>
                     <tr>
-                        <th>Discount:</th>
-                        <td><?php echo $invoice['Percentage_Discount'];?></td>
+                        <th>Diskon</th>
+                        <td><?php echo number_format($invoice['Percentage_Discount'], 0, '.', '.').' %';?></td>
                     </tr>
                     <tr>
-                        <th>Total:</th>
-                        <td><?php echo $invoice['Total_Price'];?></td>
+                        <th>Total</th>
+                        <td><?php echo number_format($invoice['Total_Price'], 0, '.', '.');?></td>
                     </tr>
                 </table>
             </div>

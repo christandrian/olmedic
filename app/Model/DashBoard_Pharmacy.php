@@ -60,11 +60,11 @@ class DashBoard_Pharmacy extends AppModel {
         return $sys_id;
     }
 
-    public function addSellTransaction($id_pharmacy, $arrItem, $datetime, $item_count, $subtotal, $discount, $tax, $total, $method, $cash, $cc_no, $cc_name, $pk, $presc_sys_id) {
-        $sql = "INSERT INTO `product_sell_transaction_pharmacy` (`ID_Transaction`, `Date`, `Total_Product_Count`, `Percentage_Discount`, `Tax`, `Subtotal_Price`, `Total_Price`, `Payment_Method`, `Paid_Price`, `Credit_Card_No`, `Credit_Card_Holder`, `ID_Store`) VALUES ('$pk', '$datetime', '$item_count', '$discount', '$tax', '$subtotal', '$total', '$method', '$cash', '$cc_no', '$cc_name' , '$id_pharmacy');";
+    public function addSellTransaction($id_pharmacy, $arrItem, $datetime, $item_count, $subtotal, $discount, $tax, $total, $method, $cash, $cc_no, $cc_name, $patient, $doctor, $pk, $presc_sys_id) {
+        $sql = "INSERT INTO `product_sell_transaction_pharmacy` (`ID_Transaction`, `Date`, `Total_Product_Count`, `Percentage_Discount`, `Tax`, `Subtotal_Price`, `Total_Price`, `Payment_Method`, `Paid_Price`, `Credit_Card_No`, `Credit_Card_Holder`, `Patient_Name`,`Doctor_Name`,`ID_Store`) VALUES ('$pk', '$datetime', '$item_count', '$discount', '$tax', '$subtotal', '$total', '$method', '$cash', '$cc_no', '$cc_name' ,'$patient', '$doctor', '$id_pharmacy');";
         $this->query($sql);
         foreach ($arrItem as $item) {
-            $sql = "INSERT INTO `detail_product_sell_transaction_pharmacy` (`ID_Transaction`, `ID_Product`, `Product_Type`, `Quantity`, `Percentage_Discount`, `Fixed_Discount`, `Price_Before_Disc`) VALUES ('$pk', '$item[Id_Product]', 'Medicine', '$item[Quantity]', '$item[Percentage_Discount]', '$item[Fixed_Discount]', '$item[Price]');";
+            $sql = "INSERT INTO `detail_product_sell_transaction_pharmacy` (`ID_Transaction`, `ID_Product`,  `Quantity`, `Percentage_Discount`, `Fixed_Discount`, `Price_Before_Disc`) VALUES ('$pk', '$item[Id_Product]',  '$item[Quantity]', '$item[Percentage_Discount]', '$item[Fixed_Discount]', '$item[Price]');";
             $this->query($sql);
         }
         if (!is_null($presc_sys_id)) {
@@ -97,7 +97,7 @@ class DashBoard_Pharmacy extends AppModel {
     }
 
     public function loadDetailInvoice($id_invoice) {
-        $sql = "SELECT dpstp.`Quantity`, pp.Name, dpstp.`ID_Product`, dpstp.`Product_Type`,  dpstp.`Percentage_Discount`, dpstp.`Fixed_Discount`, dpstp.`Price_Before_Disc`  FROM `detail_product_sell_transaction_pharmacy` as dpstp LEFT JOIN `product_pharmacy` as pp on pp.ID_Product = dpstp.ID_Product WHERE `ID_Transaction` LIKE '$id_invoice';";
+        $sql = "SELECT dpstp.`Quantity`, pp.Name, dpstp.`ID_Product`,   dpstp.`Percentage_Discount`, dpstp.`Fixed_Discount`, dpstp.`Price_Before_Disc`  FROM `detail_product_sell_transaction_pharmacy` as dpstp LEFT JOIN `product_pharmacy` as pp on pp.ID_Product = dpstp.ID_Product WHERE `ID_Transaction` LIKE '$id_invoice';";
         $tempRes = $this->query($sql);
         $result = array();
         $count = 0;
@@ -105,7 +105,6 @@ class DashBoard_Pharmacy extends AppModel {
             $result[$count]['quantity'] = $temp['dpstp']['Quantity'];
             $result[$count]['item_name'] = $temp['pp']['Name'];
             $result[$count]['id_product'] = $temp['dpstp']['ID_Product'];
-            $result[$count]['product_type'] = $temp['dpstp']['Product_Type'];
             $result[$count]['percentage_discount'] = $temp['dpstp']['Percentage_Discount'];
             $result[$count]['fixed_discount'] = $temp['dpstp']['Fixed_Discount'];
             $result[$count]['price_before'] = $temp['dpstp']['Price_Before_Disc'];
@@ -140,6 +139,68 @@ class DashBoard_Pharmacy extends AppModel {
             $count++;
         }
         return $result;
+    }
+	
+	public function loadDetailListPrescription_($presc_id) {
+        $sql = "
+			SELECT 
+				ddpp.ID_Product as id_product,
+				pp.name as 'item_name',
+				ddpp.Quantity as 'quantity',
+				ip.Name_s50_inv as 'metric',
+				ddpp.Instruction as 'instruction',
+				isp.Stock as 'stock'
+			FROM `detail_doctor_prescription_pharmacy` as ddpp
+			JOIN `product_pharmacy` as pp ON ddpp.ID_Product = pp.ID_Product
+			JOIN `item_pharmacy` as ip ON ip.ID_Product = pp.ID_Product
+			JOIN `inventory_stock_pharmacy` as isp ON isp.ID_Product = pp.ID_Product
+			WHERE ddpp.`ID_Receipt` = $presc_id
+			";
+        $tempRes = $this->query($sql);
+        $result = array();
+        $count = 0;
+        foreach ($tempRes as $temp) {
+            $result[$count]['id_product'] = $temp['ddpp']['id_product'];
+            $result[$count]['item_name'] = $temp['pp']['item_name'];
+            $result[$count]['quantity'] = $temp['ddpp']['quantity'];
+            $result[$count]['metric'] = $temp['ip']['metric'];
+            $result[$count]['instruction'] = $temp['ddpp']['instruction'];
+			$result[$count]['stock'] = $temp['isp']['stock'];
+            $count++;
+        }
+        return $result;
+    }
+	
+	public function updatePrescription($id_pharmacy, $id, $arrPresc){
+	$sql = "UPDATE `doctor_prescription_pharmachy` SET `ID_Prescription`='".$arrPresc['presc_id']."',`Pasient_Name`='".$arrPresc['presc_name']."',`Doctor_Name`='".$arrPresc['presc_doctor']."',`Institution_Name`='".$arrPresc['presc_institution']."',`Recipe_Date`='".$arrPresc['presc_date']."' WHERE `SYS_ID`= $id";
+	$this->query($sql);
+	
+	}
+	
+	public function updateDetailPresc($id_presc, $arr_presc_detail) {
+
+        $this->deleteDetailPresc($id_presc);
+
+        $this->addDetailPresc($id_presc, $arr_presc_detail);
+    }
+	public function addDetailPresc( $presc_id, $arrItem) {
+
+        $meds_count = sizeof($arrItem);
+		$sql = "UPDATE `doctor_prescription_pharmachy` SET `Meds_Count` = $meds_count WHERE `SYS_ID`= $presc_id";
+		$this->query($sql);
+        foreach ($arrItem as $item) {
+            $id_product = $item['Id_Product'];
+            $quantity = $item['Quantity'];
+            $instruction = $item['Instruction'];
+            $sql = "INSERT INTO `detail_doctor_prescription_pharmacy` (`ID_Receipt`, `ID_Product`, `Quantity`, `Instruction`) 
+			VALUES ('$sys_id', '$id_product', '$quantity', '$instruction');";
+            ($this->query($sql));
+        }
+        return $sys_id;
+    }
+	public function deleteDetailPresc($id_presc) {
+        $sql = "DELETE FROM `detail_doctor_prescription_pharmacy` WHERE `ID_Receipt`= $id_presc";
+        $this->query($sql);
     }
 
     public function loadDetailPacket($id_packet) {
@@ -192,7 +253,8 @@ class DashBoard_Pharmacy extends AppModel {
 					dpp.`Recipe_Date`, 
 					dpp.`Meds_Count`, 
 					dpp.`ID_Store`, 
-					dpp.`Payment_Status`
+					dpp.`Payment_Status`,
+					pstp.`Total_Price`
 			FROM `product_sell_transaction_pharmacy` as pstp
 			LEFT JOIN `doctor_prescription_pharmachy` as dpp ON dpp.ID_Transaction = pstp.ID_Transaction AND dpp.ID_Store = pstp.ID_Store
 			WHERE pstp.ID_Store like '$id_pharmacy'";
@@ -207,6 +269,7 @@ class DashBoard_Pharmacy extends AppModel {
             $result[$count]['doctor_name'] = $temp['dpp']['Doctor_Name'];
             $result[$count]['institution_name'] = $temp['dpp']['Institution_Name'];
             $result[$count]['recipe_date'] = $temp['dpp']['Recipe_Date'];
+			 $result[$count]['total_price'] = $temp['pstp']['Total_Price'];
             //$result[$count]['meds_count'] = $temp['dpp']['Meds_Count'];
             //$result[$count]['id_store'] = $temp['dpp']['ID_Store'];
             //$result[$count]['payment_status'] = $temp['dpp']['Payment_Status'];
@@ -215,10 +278,28 @@ class DashBoard_Pharmacy extends AppModel {
         return $result;
     }
 
-    public function loadListPrescription() {
-        $tempRes = $this->findAll('doctor_prescription_pharmachy');
+	public function deleteReport($id_invoice) {
+        $sql = "DELETE FROM `detail_product_sell_transaction_pharmacy` WHERE `ID_Transaction` = '$id_invoice'";
+        $this->query($sql);
+    }
+	
+    public function loadListPrescription($id_pharmacy) {
+		$sql = "SELECT *  FROM `doctor_prescription_pharmachy` WHERE `ID_Store` LIKE '$id_pharmacy' AND Status = 0";
+        $temp = $this->query($sql);
+        //$tempRes = $this->findAll('doctor_prescription_pharmachy');
         $result = array();
-        foreach ($tempRes as $res) {
+        foreach ($temp as $res) {
+            $result[] = $res['doctor_prescription_pharmachy'];
+        }
+        return $result;
+    }
+	
+	public function loadListPrescription_($id_pharmacy,$id) {
+		$sql = "SELECT *  FROM `doctor_prescription_pharmachy` WHERE `ID_Store` LIKE '$id_pharmacy' AND Status = 0 AND SYS_ID = '$id'";
+        $temp = $this->query($sql);
+        //$tempRes = $this->findAll('doctor_prescription_pharmachy');
+        $result = array();
+        foreach ($temp as $res) {
             $result[] = $res['doctor_prescription_pharmachy'];
         }
         return $result;
@@ -687,6 +768,11 @@ class DashBoard_Pharmacy extends AppModel {
         $this->query($sql);
     }
 
+	public function updateInventoryStock_($id_item, $stok) {
+        $sql = "UPDATE `inventory_stock_pharmacy` SET Stock = (Stock - $stok) WHERE `inventory_stock_clinic`.`ID_Product` = $id_item;";
+        $this->query($sql);
+    }
+	
     public function updateService($id_store, $id_service, $arr_detail) {
         //$arr_detail index ==> Name => Product, Description => Product
         //Service_Code=>Service,  Instruction => Service, Id_Category =>service,
@@ -799,7 +885,8 @@ class DashBoard_Pharmacy extends AppModel {
 
     //Update 9 September
     public function deleteDoctorPrescription($id_presc) {
-        $sql = "DELETE FROM `doctor_prescription_pharmachy` WHERE `SYS_ID` = '$id_presc'";
+        $sql = "UPDATE `doctor_prescription_pharmachy` SET Status=1 WHERE `SYS_ID` = '$id_presc'";
+		//$sql = "DELETE FROM `doctor_prescription_pharmachy` WHERE `SYS_ID` = '$id_presc'";
         $this->query($sql);
     }
 

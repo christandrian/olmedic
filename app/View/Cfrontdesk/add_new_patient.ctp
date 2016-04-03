@@ -14,7 +14,7 @@ $this->end();
 <ul class="sidebar-menu">
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-dashboard"></i> <span>Dashboard</span>',
+        '<i class="fa fa-dashboard"></i> <span>Beranda</span>',
         array('controller' => 'cfrontdesk',
         'action' => 'dashboard',
         'full_base' => true
@@ -23,16 +23,16 @@ $this->end();
         );?>
 
     </li>
-    <li class="treeview active">
+    <li class="treeview">
         <a href="#">
             <i class="fa fa-file"></i>
-            <span>Patients</span>
+            <span>Pasien</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-            <li class="active">
+            <li>
                 <?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Patient</span>',
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Pasien</span>',
                 array('controller' => 'cfrontdesk',
                 'action' => 'addNewPatient',
                 'full_base' => true
@@ -40,8 +40,8 @@ $this->end();
                 array('escape'=>false)
                 );?>
             </li>
-            <li ><?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>List Patients</span>',
+            <li><?php echo $this->Html->link(
+                '<i class="fa fa-angle-double-right"></i><span>Daftar Pasien</span>',
                 array('controller' => 'cfrontdesk',
                 'action' => 'list_patients',
                 'full_base' => true
@@ -52,7 +52,7 @@ $this->end();
     </li>
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-stack-exchange"></i> <span>Queue</span>',
+        '<i class="fa fa-stack-exchange"></i> <span>Antrian</span>',
         array('controller' => 'cfrontdesk',
         'action' => 'queue',
         'full_base' => true
@@ -62,7 +62,7 @@ $this->end();
     </li>
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-stack-exchange"></i> <span>Stocks</span>',
+        '<i class="fa fa-stack-exchange"></i> <span>Inventory</span>',
         array('controller' => 'cfrontdesk',
         'action' => 'stock',
         'full_base' => true
@@ -72,7 +72,7 @@ $this->end();
     </li>
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-money"></i> <span>Payment</span>',
+        '<i class="fa fa-money"></i> <span>Pembayaran</span>',
         array('controller' => 'cfrontdesk',
         'action' => 'payment',
         'full_base' => true
@@ -83,7 +83,7 @@ $this->end();
     </li>
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-file-text"></i> <span>Reports</span>',
+        '<i class="fa fa-file-text"></i> <span>Laporan</span>',
         array('controller' => 'cfrontdesk',
         'action' => 'reports',
         'full_base' => true
@@ -91,13 +91,22 @@ $this->end();
         array('escape'=>false)
         );?>
     </li>
-
+	<li>
+        <?php echo $this->Html->link(
+        '<i class="fa fa-file-text"></i> <span>Petunjuk Penggunaan</span>',
+        array('controller' => 'cfrontdesk',
+        'action' => 'faq',
+        'full_base' => true
+        ),
+        array('escape'=>false)
+        );?>
+    </li>
 </ul>
 <?php $this->end(); ?>
 
 <section class="content-header">
     <h1>
-        Registration
+        Pendaftaran
     </h1>
 
 </section>
@@ -115,18 +124,18 @@ $this->end();
                     <div class="box-body">
 
                         <div class="form-group">
-                            <label for="nama">First Name</label>
+                            <label for="nama">Nama Depan</label>
                             <input type="text" class="form-control" name="first_name" placeholder="First Name">
 
                         </div>
 
                         <div class="form-group">
-                            <label for="nama">Last Name</label>
+                            <label for="nama">Nama Belakang</label>
                             <input type="text" class="form-control" name="last_name" placeholder="Last Name">
 
                         </div>
 
-                        <label for="nomor">Identity Number</label>
+                        <label for="nomor">No. Identitas</label>
                         <div class="form-inline">
 
                             <div class="form-group">
@@ -142,18 +151,18 @@ $this->end();
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="tanggal">Birthdate</label>
+                            <label for="tanggal">Tanggal Lahir</label>
                             <input type="date" class="form-control" name="birth_date" placeholder="Birth Date">
                         </div>
                         <div class="form-group">
-                            <label>Gender</label>
+                            <label>Jenis Kelamin</label>
                             <select name="gender" class="form-control">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>                                                
+                                <option value="Male">Laki-laki</option>
+                                <option value="Female">Perempuan</option>                                                
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Blood Type</label>
+                            <label>Golongan Darah</label>
                             <select name="blood_type" class="form-control">
                                 <option value="A">A</option>
                                 <option value="B">B</option>
@@ -162,7 +171,7 @@ $this->end();
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="nama">Weight</label>
+                            <label for="nama">Berat</label>
                             <input type="number" class="form-control" name="weight" placeholder="kgs">
 
                         </div>
@@ -180,7 +189,7 @@ $this->end();
 
                 <div class="box-body">
                     <div class="form-group">
-                        <label>Address</label>
+                        <label>Alamat</label>
                         <textarea name="address" class="form-control" rows="3" placeholder="Enter ..."></textarea>
                     </div>
 
@@ -196,7 +205,7 @@ $this->end();
 
 
                     <div class="form-group">
-                        <label>Emergency contact</label>
+                        <label>Kontak Darurat</label>
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <i class="fa fa-phone"></i>
@@ -206,7 +215,7 @@ $this->end();
                     </div><!-- /.form group -->
                 </div><!-- /.box-body -->
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Proses</button>
                 </div>
                 </form>
             </div><!-- /.box -->

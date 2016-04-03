@@ -16,29 +16,29 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-        '<i class="fa fa-dashboard"></i> <span>Dashboard</span>', array('controller' => 'pfrontdesk',
+        '<i class="fa fa-dashboard"></i> <span>Beranda</span>', array('controller' => 'pfrontdesk',
         'action' => 'dashboard', 'full_base' => true), array('escape' => false));
         ?>
     </li>
     <li class="treeview">
         <a href="#">
             <i class="fa fa-file"></i>
-            <span>Prescription</span>
+            <span>Resep</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
             <li>
                 <?php
                 echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>', array('controller' => 'pfrontdesk',
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Resep</span>', array('controller' => 'pfrontdesk',
                 'action' => 'prescription', 'full_base' => true), array('escape' => false));
                 ?>
             </li>
             <li>
                 <?php
                 echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>', array('controller' => 'pfrontdesk',
-                'action' => 'list_prescription', 'full_base' => true), array('escape' => false));
+                '<i class="fa fa-angle-double-right"></i><span>Daftar Resep</span>', array('controller' => 'pfrontdesk',
+                'action' => 'list_prescriptions', 'full_base' => true), array('escape' => false));
                 ?>
             </li>
         </ul>
@@ -46,49 +46,49 @@ $this->end();
     <li class="treeview active">
         <a href="#">
             <i class="fa fa-file"></i>
-            <span>Stocks</span>
+            <span>Inventory</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
             <li>
                 <?php
                 echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Product</span>', array('controller' => 'pfrontdesk',
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Item</span>', array('controller' => 'pfrontdesk',
                 'action' => 'addNewProduct', 'full_base' => true), array('escape' => false));
                 ?>
             </li>
             <li>
                 <?php
                 echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Packet</span>', array('controller' => 'pfrontdesk',
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Paket</span>', array('controller' => 'pfrontdesk',
                 'action' => 'addNewPacket', 'full_base' => true), array('escape' => false));
                 ?>
             </li>
             <li>
                 <?php
                 echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Service</span>', array('controller' => 'pfrontdesk',
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Jasa</span>', array('controller' => 'pfrontdesk',
                 'action' => 'addNewService', 'full_base' => true), array('escape' => false));
                 ?>
             </li>
             <li>
                 <?php
                 echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Category</span>', array('controller' => 'pfrontdesk',
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Kategori</span>', array('controller' => 'pfrontdesk',
                 'action' => 'addNewCategory', 'full_base' => true), array('escape' => false));
                 ?>
             </li>
             <li class="active">
                 <?php
                 echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Brand</span>', array('controller' => 'pfrontdesk',
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Brand</span>', array('controller' => 'pfrontdesk',
                 'action' => 'addNewBrand', 'full_base' => true), array('escape' => false));
                 ?>
             </li>
             <li>
                 <?php
                 echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>List</span>', array('controller' => 'pfrontdesk',
+                '<i class="fa fa-angle-double-right"></i><span>Daftar</span>', array('controller' => 'pfrontdesk',
                 'action' => 'stock', 'full_base' => true), array('escape' => false));
                 ?>
             </li>
@@ -97,15 +97,25 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-        '<i class="fa fa-money"></i> <span>Payment</span>', array('controller' => 'pfrontdesk',
+        '<i class="fa fa-money"></i> <span>Pembayaran</span>', array('controller' => 'pfrontdesk',
         'action' => 'payment', 'full_base' => true), array('escape' => false));
         ?>
     </li>
     <li>
         <?php
         echo $this->Html->link(
-        '<i class="fa fa-file-text"></i> <span>Reports</span>', array('controller' => 'pfrontdesk',
+        '<i class="fa fa-file-text"></i> <span>Laporan</span>', array('controller' => 'pfrontdesk',
         'action' => 'reports', 'full_base' => true), array('escape' => false));
+        ?>
+    </li>
+	<li>
+        <?php
+        echo $this->Html->link(
+        '<i class="fa fa-file-text"></i> <span>Petunjuk Pemakaian</span>', array('controller' => 'pfrontdesk',
+        'action' => 'faq',
+        'full_base' => true
+        ), array('escape' => false)
+        );
         ?>
     </li>
 </ul>
@@ -133,7 +143,7 @@ $this->end();
                         <form class="form-horizontal" method="post" action="add_brand_owner">
                             <div id="non-exist" >
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Owner Name:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Nama Owner:</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control" name="owner" placeholder="Owner Name">
                                     </div>
@@ -146,7 +156,7 @@ $this->end();
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-2 col-md-offset-10">
-                                        <button type="submit" class="btn btn-primary">Add</button>
+                                        <button type="submit" class="btn btn-primary">Tambah</button>
                                     </div>										
                                 </div>
                             </div>
@@ -157,16 +167,16 @@ $this->end();
             <div class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-body">
-                        <h3 class="box-title">Brand Owner List</h3>
+                        <h3 class="box-title">Daftar Brand Owner</h3>
                         <div class="box-body table-responsive">
                             <table id="example1" class="table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th></th>
                                         <th>ID</th>
-                                        <th>Name</th>
+                                        <th>Nama</th>
                                         <th>Memo</th>
-                                        <th>Action</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -182,11 +192,11 @@ $this->end();
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th></th>
+                                         <th></th>
                                         <th>ID</th>
-                                        <th>Name</th>
+                                        <th>Nama</th>
                                         <th>Memo</th>
-                                        <th>Action</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -252,7 +262,8 @@ echo $this->Html->script('plugins/datatables/dataTables.bootstrap');
                 data: {'id': xx.children().eq(1).text()},
                 url: '<?php echo Router::url(array('controller' => 'pfrontdesk', 'action' => 'deleteBrandOwner', 'full_base' => true));?>',
                         success: function(data, textStatus) {
-                            alert(data);
+                            //alert(data);
+							location.reload();
                         },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log(jqXHR);

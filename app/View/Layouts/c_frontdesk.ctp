@@ -40,7 +40,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         echo $this->fetch('script');
         ?>
     </head>
-    <body class="skin-blue">
+    <body class="skin-red">
 
         <header class="header">
             <a href="" class="logo">
@@ -66,7 +66,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                             </a>
                             <ul class="dropdown-menu">
 
-                                <li class="user-header bg-light-blue">
+                                <li class="user-header bg-red">
                                     <?php echo $this->fetch('user'); ?>
 
                                 </li>

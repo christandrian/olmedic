@@ -1,0 +1,1 @@
+DELETE FROM `inventory_stock_clinic` WHERE `ID_Product` = 5DELETE FROM `inventory_stock_clinic` WHERE `ID_Product` = 1

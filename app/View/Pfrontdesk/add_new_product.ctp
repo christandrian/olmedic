@@ -15,130 +15,115 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-        '<i class="fa fa-dashboard"></i> <span>Dashboard</span>', array('controller' => 'pfrontdesk',
-        'action' => 'dashboard',
-        'full_base' => true
-        ), array('escape' => false)
-        );
+        '<i class="fa fa-dashboard"></i> <span>Beranda</span>', array('controller' => 'pfrontdesk',
+        'action' => 'dashboard', 'full_base' => true), array('escape' => false));
         ?>
-
     </li>
     <li class="treeview">
         <a href="#">
             <i class="fa fa-file"></i>
-            <span>Prescription</span>
+            <span>Resep</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
             <li>
                 <?php
                 echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>', array('controller' => 'pfrontdesk',
-                'action' => 'prescription',
-                'full_base' => true
-                ), array('escape' => false)
-                );
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Resep</span>', array('controller' => 'pfrontdesk',
+                'action' => 'prescription', 'full_base' => true), array('escape' => false));
                 ?>
             </li>
-            <li><?php
+            <li>
+                <?php
                 echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>', array('controller' => 'pfrontdesk',
-                'action' => 'list_prescription',
-                'full_base' => true
-                ), array('escape' => false)
-                );
-                ?></li>
+                '<i class="fa fa-angle-double-right"></i><span>Daftar Resep</span>', array('controller' => 'pfrontdesk',
+                'action' => 'list_prescriptions', 'full_base' => true), array('escape' => false));
+                ?>
+            </li>
         </ul>
     </li>
     <li class="treeview active">
         <a href="#">
             <i class="fa fa-file"></i>
-            <span>Stocks</span>
+            <span>Inventory</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-            <li class="active">
+            <li  class="active">
                 <?php
                 echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Product</span>', array('controller' => 'pfrontdesk',
-                'action' => 'addNewProduct',
-                'full_base' => true
-                ), array('escape' => false)
-                );
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Item</span>', array('controller' => 'pfrontdesk',
+                'action' => 'addNewProduct', 'full_base' => true), array('escape' => false));
                 ?>
             </li>
             <li>
                 <?php
                 echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Packet</span>', array('controller' => 'pfrontdesk',
-                'action' => 'addNewPacket',
-                'full_base' => true
-                ), array('escape' => false)
-                );
-                ?></li>
-            <li><?php
-                echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Service</span>', array('controller' => 'pfrontdesk',
-                'action' => 'addNewService',
-                'full_base' => true
-                ), array('escape' => false)
-                );
-                ?></li>
-            <li><?php
-                echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Category</span>', array('controller' => 'pfrontdesk',
-                'action' => 'addNewCategory',
-                'full_base' => true
-                ), array('escape' => false)
-                );
-                ?></li>
-            <li><?php
-                echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Brand</span>', array('controller' => 'pfrontdesk',
-                'action' => 'addNewBrand',
-                'full_base' => true
-                ), array('escape' => false)
-                );
-                ?></li>
-            <li >
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Paket</span>', array('controller' => 'pfrontdesk',
+                'action' => 'addNewPacket', 'full_base' => true), array('escape' => false));
+                ?>
+            </li>
+            <li>
                 <?php
                 echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>List</span>', array('controller' => 'pfrontdesk',
-                'action' => 'stock',
-                'full_base' => true
-                ), array('escape' => false)
-                );
-                ?></li>
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Jasa</span>', array('controller' => 'pfrontdesk',
+                'action' => 'addNewService', 'full_base' => true), array('escape' => false));
+                ?>
+            </li>
+            <li>
+                <?php
+                echo $this->Html->link(
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Kategori</span>', array('controller' => 'pfrontdesk',
+                'action' => 'addNewCategory', 'full_base' => true), array('escape' => false));
+                ?>
+            </li>
+            <li>
+                <?php
+                echo $this->Html->link(
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Brand</span>', array('controller' => 'pfrontdesk',
+                'action' => 'addNewBrand', 'full_base' => true), array('escape' => false));
+                ?>
+            </li>
+            <li>
+                <?php
+                echo $this->Html->link(
+                '<i class="fa fa-angle-double-right"></i><span>Daftar</span>', array('controller' => 'pfrontdesk',
+                'action' => 'stock', 'full_base' => true), array('escape' => false));
+                ?>
+            </li>
         </ul>
     </li>
     <li>
         <?php
         echo $this->Html->link(
-        '<i class="fa fa-money"></i> <span>Payment</span>', array('controller' => 'pfrontdesk',
-        'action' => 'payment',
-        'full_base' => true
-        ), array('escape' => false)
-        );
+        '<i class="fa fa-money"></i> <span>Pembayaran</span>', array('controller' => 'pfrontdesk',
+        'action' => 'payment', 'full_base' => true), array('escape' => false));
         ?>
-
     </li>
     <li>
         <?php
         echo $this->Html->link(
-        '<i class="fa fa-file-text"></i> <span>Reports</span>', array('controller' => 'pfrontdesk',
-        'action' => 'reports',
+        '<i class="fa fa-file-text"></i> <span>Laporan</span>', array('controller' => 'pfrontdesk',
+        'action' => 'reports', 'full_base' => true), array('escape' => false));
+        ?>
+    </li>
+	
+	<li>
+        <?php
+        echo $this->Html->link(
+        '<i class="fa fa-file-text"></i> <span>Petunjuk Pemakaian</span>', array('controller' => 'pfrontdesk',
+        'action' => 'faq',
         'full_base' => true
         ), array('escape' => false)
         );
         ?>
     </li>
-
 </ul>
 <?php $this->end(); ?>
 
 <section class="content-header">
     <h1>
-        Stocks
+        Inventory
 
     </h1>
 
@@ -157,7 +142,7 @@ $this->end();
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Item List </h3>
+                        <h3 class="box-title">Daftar Item </h3>
                         <?php //echo var_dump($data_meds); ?>
                     </div>
                     <div class="box-body table-responsive">
@@ -166,9 +151,9 @@ $this->end();
                                 <tr>
                                     <th>No</th>
                                     <th>ID</th>
-                                    <th>Name</th>
+                                    <th>Nama</th>
                                     <th>Brand Owner</th>
-                                    <th>Action</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -194,7 +179,7 @@ $this->end();
                             <input type="hidden" class="owner_name_med" value="<?php echo $f['brand']['Owner_name']; ?>" />
 
                             <td>
-                                <button class="btn btn-primary getThis" data-toggle="modal" data-target="#getPr" >Get This Product</button></td>
+                                <button class="btn btn-primary getThis" data-toggle="modal" data-target="#getPr" >Ambil Data Item</button></td>
                             </tr>
                             <?php endforeach; ?>
                             </tbody>
@@ -202,9 +187,9 @@ $this->end();
                                 <tr>
                                     <th>No</th>
                                     <th>ID</th>
-                                    <th>Name</th>
+                                    <th>Nama</th>
                                     <th>Brand Owner</th>
-                                    <th>Action</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -219,28 +204,28 @@ $this->end();
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">New Item List </h3>
+                        <h3 class="box-title">Tambah Item Baru </h3>
                     </div>
                     <div class="box-body table-responsive">
                         <form class="form-horizontal" enctype="multipart/form-data" method="post" action="add_item">
                             <div id="non-exist" >
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Name:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Nama:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="item_name" placeholder="Name">
+                                        <input type="text" class="form-control" name="item_name" placeholder="Name" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Generic Name:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Nama Generik:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="item_generic_name" placeholder="Generic Name">
+                                        <input type="text" class="form-control" name="item_generic_name" placeholder="Generic Name" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Category:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Kategori:</label>
                                     <div class="col-sm-8">
                                         <select class="form-control" name="item_category">
                                             <option>-</option>
@@ -248,20 +233,20 @@ $this->end();
                                             <option value="<?php echo $f['SYS_ID']; ?>"><?php echo $f['Name']; ?></option>
                                             <?php endforeach; ?>
                                         </select>
-                                    </div>										
+                                    </div>                                      
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Decription/Note:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Deskripsi/Catatan:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="item_description" placeholder="Description/Note">
+                                        <input type="text" class="form-control" name="item_description" placeholder="Description/Note" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Quantity:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Kuantitas:</label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control" name="item_stock" placeholder="Quantity">
+                                        <input type="number" class="form-control" name="item_stock" placeholder="Quantity" required>
                                     </div>
                                 </div>
 
@@ -286,69 +271,69 @@ $this->end();
                                             <option value="<?php echo $f['ID_Brandowner']; ?>"><?php echo $f['Owner_Name']; ?></option>
                                             <?php endforeach; ?>
                                         </select>
-                                    </div>										
+                                    </div>                                      
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Item Code:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Kode Item:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="item_code" placeholder="Code">
+                                        <input type="text" class="form-control" name="item_code" placeholder="Code" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Purch. Price:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Harga Beli:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="item_buy_price" placeholder="Purch Price">
-                                    </div>										
+                                        <input type="text" class="form-control" name="item_buy_price" placeholder="Purch Price" required>
+                                    </div>                                      
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Sell Price:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Harga Jual:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="item_sell_price" placeholder="Sell Price">
-                                    </div>										
+                                        <input type="text" class="form-control" name="item_sell_price" placeholder="Sell Price" required>
+                                    </div>                                      
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Discount:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Diskon:</label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control" name="item_discount" placeholder="10.1%">
-                                    </div>										
+                                        <input type="number" class="form-control" name="item_discount" placeholder="10.1%" required>
+                                    </div>                                      
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Discount 2:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Diskon 2:</label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control" name="item_discount2" placeholder="1000">
-                                    </div>										
+                                        <input type="number" class="form-control" name="item_discount2" placeholder="1000" required>
+                                    </div>                                      
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Discount Description:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Deskripsi Diskon:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="item_discount_description" placeholder="Description">
-                                    </div>										
+                                        <input type="text" class="form-control" name="item_discount_description" placeholder="Description" required>
+                                    </div>                                      
                                 </div>
 
                                 <div class="form-group">
                                     <label for="nomor" class="col-sm-3 control-label">Supplier:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="item_supplier" placeholder="Supplier">
+                                        <input type="text" class="form-control" name="item_supplier" placeholder="Supplier" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Packaging:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Kemasan:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="item_packaging" placeholder="Packaging">
+                                        <input type="text" class="form-control" name="item_packaging" placeholder="Packaging" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="nomor" class="col-sm-3 control-label">Indikasi:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="item_indikasi" placeholder="Indikasi">
+                                        <input type="text" class="form-control" name="item_indikasi" placeholder="Indikasi" required>
 
                                     </div>
                                 </div>
@@ -356,21 +341,21 @@ $this->end();
                                 <div class="form-group">
                                     <label for="nomor" class="col-sm-3 control-label">Efek Samping:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="item_efek_samping" placeholder="Efek_Samping">
+                                        <input type="text" class="form-control" name="item_efek_samping" placeholder="Efek_Samping" required>
 
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Note:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Catatan:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="item_note" placeholder="Note">
+                                        <input type="text" class="form-control" name="item_note" placeholder="Note" required>
 
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">PO Name:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Satuan di Pembelian:</label>
                                     <div class="col-sm-8">
                                         <select class="form-control" name="item_po_name">
                                             <option>-</option>
@@ -378,12 +363,12 @@ $this->end();
                                             <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
                                             <?php endforeach; ?>
                                         </select>
-                                    </div>										
+                                    </div>                                      
 
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Inventory Name:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Satuan di Gudang:</label>
                                     <div class="col-sm-8">
                                         <select class="form-control" name="item_inventory_name">
                                             <option>-</option>
@@ -391,12 +376,12 @@ $this->end();
                                             <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
                                             <?php endforeach; ?>
                                         </select>
-                                    </div>										
+                                    </div>                                      
 
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Sales Name:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Satuan di Penjualan:</label>
                                     <div class="col-sm-8">
                                         <select class="form-control" name="item_sales_name">
                                             <option>-</option>
@@ -404,7 +389,7 @@ $this->end();
                                             <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
                                             <?php endforeach; ?>
                                         </select>
-                                    </div>										
+                                    </div>                                      
 
                                 </div>
 
@@ -412,7 +397,7 @@ $this->end();
                                 <div class="form-group">
                                     <label for="nomor" class="col-sm-3 control-label">Min. Stock:</label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control" name="item_min_stock" placeholder="Min. Stock">
+                                        <input type="number" class="form-control" name="item_min_stock" placeholder="Min. Stock" required>
 
                                     </div>
                                 </div>
@@ -428,12 +413,12 @@ $this->end();
                                 <div class="form-group">
                                     <label for="nomor" class="col-sm-3 control-label">SKU:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="item_sku" placeholder="SKU">
+                                        <input type="text" class="form-control" name="item_sku" placeholder="SKU" required>
 
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Is medicine ?:</label>
+                                    <label for="nomor" class="col-sm-3 control-label">Obat ?:</label>
                                     <div class="col-sm-8">
                                         <select class="form-control" name="item_is_meds" >
                                             <option value="0">No</option>
@@ -443,20 +428,20 @@ $this->end();
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="nomor" class="col-sm-3 control-label">Image:</label>
+                                <!--<div class="form-group">
+                                    <label for="nomor" class="col-sm-3 control-label">Gambar:</label>
                                     <div class="col-sm-8">
                                         <input type="file" name="item_image" class="form-control"/>
 
                                     </div>
-                                </div>
+                                </div>-->
 
                                 <!-- image-->
                                 <div class="form-group">
 
                                     <div class="col-sm-2 col-md-offset-10">
-                                        <button type="submit" class="btn btn-primary">Add</button>
-                                    </div>										
+                                        <button type="submit" class="btn btn-primary">Tambah</button>
+                                    </div>                                      
                                 </div>
                             </div>
                         </form>
@@ -476,7 +461,7 @@ $this->end();
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Add New Product</h4>
+                <h4 class="modal-title" id="exampleModalLabel">Tambah Item Baru</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" enctype="multipart/form-data" method="post" action="add_item_from_master">
@@ -485,7 +470,7 @@ $this->end();
                         <input type="hidden" class="form-control" name="item_id_master" id="item_id_master">
 
                         <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Generic Name:</label>
+                            <label for="nomor" class="col-sm-3 control-label">Nama Generik:</label>
                             <div class="col-sm-8">
                                 <p class="form-control-static" id="generic_name_show2"></p>
 
@@ -509,15 +494,15 @@ $this->end();
                         </div>
 
                         <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Name:</label>
+                            <label for="nomor" class="col-sm-3 control-label">Nama:</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="item_name" placeholder="Name">
+                                <input type="text" class="form-control" name="item_name" placeholder="Name" required>
                             </div>
                         </div>
 
                         <!--
                         <div class="form-group">
-                        <label for="nomor" class="col-sm-3 control-label">Category:</label>
+                        <label for="nomor" class="col-sm-3 control-label">Kategori:</label>
                         <div class="col-sm-8">
                         <select class="form-control" name="item_category" >
                                         <option>-</option>
@@ -525,29 +510,29 @@ $this->end();
                                             <option value="<?php echo $f['SYS_ID']; ?>"><?php echo $f['Name']; ?></option>
                         <?php endforeach; ?>
                                                 </select>
-                        </div>										
+                        </div>                                      
 
                         </div>
                         
                         <div class="form-group">
-                        <label for="nomor" class="col-sm-3 control-label">Description:</label>
+                        <label for="nomor" class="col-sm-3 control-label">Deskripsi:</label>
                         <div class="col-sm-8">
-                        <input type="text" class="form-control" name="item_description" placeholder="Description">
+                        <input type="text" class="form-control" name="item_description" placeholder="Description" required>
                         
                         </div>
                         </div>
                         -->
 
                         <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Quantity:</label>
+                            <label for="nomor" class="col-sm-3 control-label">Kuantitas:</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" name="item_stock" placeholder="Quantity">
+                                <input type="number" class="form-control" name="item_stock" placeholder="Quantity" required>
 
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">PO Name:</label>
+                            <label for="nomor" class="col-sm-3 control-label">Satuan di Pembelian:</label>
                             <div class="col-sm-8">
                                 <select class="form-control" name="item_po_name" id="item_po_name">
                                     <option>-</option>
@@ -555,12 +540,12 @@ $this->end();
                                     <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                            </div>										
+                            </div>                                      
 
                         </div>
 
                         <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Inventory Name:</label>
+                            <label for="nomor" class="col-sm-3 control-label">Satuan di Gudang:</label>
                             <div class="col-sm-8">
                                 <select class="form-control" name="item_inventory_name" id="item_inventory_name">
                                     <option>-</option>
@@ -568,12 +553,12 @@ $this->end();
                                     <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                            </div>										
+                            </div>                                      
 
                         </div>
 
                         <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Sales Name:</label>
+                            <label for="nomor" class="col-sm-3 control-label">Satuan di Penjualan</label>
                             <div class="col-sm-8">
                                 <select class="form-control" name="item_sales_name" id="item_sales_name">
                                     <option>-</option>
@@ -581,57 +566,57 @@ $this->end();
                                     <option value="<?php echo $f['Name']; ?>"><?php echo $f['Name']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                            </div>										
+                            </div>                                      
 
                         </div>
 
                         <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Purch. Price:</label>
+                            <label for="nomor" class="col-sm-3 control-label">Harga Beli:</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" name="item_buy_price" placeholder="Purch. Price">
+                                <input type="number" class="form-control" name="item_buy_price" placeholder="Purch. Price" required>
 
-                            </div>										
+                            </div>                                      
 
                         </div>
 
                         <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Sell Price:</label>
+                            <label for="nomor" class="col-sm-3 control-label">Harga Jual:</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" name="item_sell_price" placeholder="Sell Price">
+                                <input type="number" class="form-control" name="item_sell_price" placeholder="Sell Price" required>
 
-                            </div>										
+                            </div>                                      
 
                         </div>
 
                         <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Discount:</label>
+                            <label for="nomor" class="col-sm-3 control-label">Diskon:</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" name="item_discount" placeholder="10%">
+                                <input type="number" class="form-control" name="item_discount" placeholder="10%" required>
 
-                            </div>										
+                            </div>                                      
 
                         </div>
 
                         <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Discount 2:</label>
+                            <label for="nomor" class="col-sm-3 control-label">Diskon 2:</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" name="item_discount2" placeholder="1000">
+                                <input type="number" class="form-control" name="item_discount2" placeholder="1000" required>
 
-                            </div>										
+                            </div>                                      
 
                         </div>
 
                         <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Discount Description:</label>
+                            <label for="nomor" class="col-sm-3 control-label">Deskripsi Diskon:</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="item_discount_description" placeholder="Description">
-                            </div>										
+                            </div>                                      
                         </div>
 
                         <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Item Code:</label>
+                            <label for="nomor" class="col-sm-3 control-label">Kode:</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="item_code" placeholder="Code">
+                                <input type="text" class="form-control" name="item_code" placeholder="Code" required>
 
                             </div>
                         </div>
@@ -639,22 +624,22 @@ $this->end();
                         <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Supplier:</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="item_supplier" placeholder="Supplier">
+                                <input type="text" class="form-control" name="item_supplier" placeholder="Supplier" required>
 
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Note:</label>
+                            <label for="nomor" class="col-sm-3 control-label">Catatan:</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="item_note" placeholder="Note">
+                                <input type="text" class="form-control" name="item_note" placeholder="Note" required>
 
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Packaging:</label>
+                            <label for="nomor" class="col-sm-3 control-label">Kemasan:</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="item_packaging" name="item_packaging" placeholder="Packaging">
+                                <input type="text" class="form-control" id="item_packaging" name="item_packaging" placeholder="Packaging" required>
 
                             </div>
                         </div>
@@ -662,7 +647,7 @@ $this->end();
                         <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Indikasi:</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="item_indikasi" name="item_indikasi" placeholder="Indikasi">
+                                <input type="text" class="form-control" id="item_indikasi" name="item_indikasi" placeholder="Indikasi" required>
 
                             </div>
                         </div>
@@ -670,15 +655,15 @@ $this->end();
                         <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Efek Samping:</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="item_efek_samping" name="item_efek_samping" placeholder="Efek Samping	">
+                                <input type="text" class="form-control" id="item_efek_samping" name="item_efek_samping" placeholder="Efek Samping" required>
 
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Min. Stock:</label>
+                            <label for="nomor" class="col-sm-3 control-label">Stok minimum:</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" name="item_min_stock" placeholder="Min. Stock">
+                                <input type="number" class="form-control" name="item_min_stock" placeholder="Min. Stock" required>
 
                             </div>
                         </div>
@@ -695,13 +680,13 @@ $this->end();
                         <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">SKU:</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="item_sku" placeholder="SKU">
+                                <input type="text" class="form-control" name="item_sku" placeholder="SKU" required>
 
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="nomor" class="col-sm-3 control-label">Is medicine ?:</label>
+                            <label for="nomor" class="col-sm-3 control-label">Obat ?:</label>
                             <div class="col-sm-8">
                                 <select class="form-control" name="item_is_meds" >
                                     <option value="0">No</option>
@@ -712,20 +697,20 @@ $this->end();
                         </div>
 
 
-                        <div class="form-group">
+                        <!--<div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Image:</label>
                             <div class="col-sm-8">
                                 <input type="file" name="item_image" class="form-control"/>
 
                             </div>
-                        </div>
+                        </div>-->
 
                         <!-- image-->
                         <div class="form-group">
 
                             <div class="col-sm-2 col-md-offset-10">
                                 <button type="submit" class="btn btn-primary">Add</button>
-                            </div>										
+                            </div>                                      
 
                         </div>
 

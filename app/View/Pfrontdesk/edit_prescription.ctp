@@ -101,7 +101,7 @@ $this->end();
     </h1>
 
 </section>
-<form id="formPrescription" method ="post" action="add_new_prescription">
+<form id="formPrescription" method ="post" action="editPrescription">
     <section class="content">
 
         <div class="row">
@@ -110,28 +110,30 @@ $this->end();
                     <div class="box-header">
 
                     </div>
-
+					
                     <div class="box-body">
                         <div class="form-group">
+							
                             <label for="nama">ID Resep</label>
-                            <input type="text" class="form-control" name="presc_id" placeholder="Nomor" required>
+                            <input type="text" class="form-control" name="presc_id" value="<?php echo $presc_name;?>" placeholder="Nomor" required>
+							<input type="hidden" class="form-control" name="id" value="<?php echo $id;?>"> 
                         </div>
                         <div class="form-group">
                             <label for="nama">Pasien</label>
-                            <input type="text" class="form-control" name="presc_name" placeholder="Nama" required>
+                            <input type="text" class="form-control" name="presc_name" value="<?php echo $patient_name;?>" placeholder="Nama" required>
                         </div>
                         <div class="form-group">
                             <label for="nama">Dokter</label>
-                            <input type="text" class="form-control" name="presc_doctor" placeholder="Nama" required>
+                            <input type="text" class="form-control" name="presc_doctor" value="<?php echo $doctor_name;?>" placeholder="Nama" required>
                         </div>
                         <div class="form-group">
                             <label for="nama">Klinik</label>
-                            <input type="text" class="form-control" name="presc_institution" placeholder="Nama" required>
+                            <input type="text" class="form-control" name="presc_institution" value="<?php echo $institution;?>" placeholder="Nama" required>
                         </div>
 
                         <div class="form-group">
                             <label for="tanggal">Tanggal</label>
-                            <input type="date" class="form-control" name="presc_date" placeholder="Tanggal" required>
+                            <input type="date" class="form-control" name="presc_date" placeholder="Tanggal" value="<?php echo $tanggal;?>" required>
                         </div>
 
                         <div class="form-group">
@@ -201,13 +203,35 @@ $this->end();
                                             <th>Qty</th>
                                             <th>Stock</th>
                                             <th>Penggunaan</th>
-                                            <th>Beli?</th>
                                             <th>Aksi</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                     
+										<?php 
+										//echo var_dump($data_detail_presc);
+										foreach( $data_detail_presc as $f ): ?>
+												<tr>
+													
+													<td class="id_med"></td>
+													<td class="name_med">
+													<input type="hidden" value="<?php echo $f[ 'id_product' ]; ?>" name="item_id_presc[]">
+													<?php echo $f[ 'item_name' ]; ?></td>
+													<td class="qty_med">
+													<input type="number" name="item_qty_presc[]" value="<?php echo $f['quantity'];?>"  class="qty_presc form-control"/><small><?php echo $f['metric'];?></small>
+													
+													</td>
+													<td class="stock_med">
+													<input type="number" class="item_stock_presc form-control" value="<?php echo $f['stock'];?>" readonly/><small><?php echo $f['metric'];?></small></td>
+													<td class="usage_med">
+													<textarea rows="1" class="form-control" cols="40" style="resize:none;" name="item_id_usage[]"><?php echo $f['instruction'];?></textarea>
+													
+													</td>
+													
+													
+													<td><input type="button" value="&times;" class="btn btn-default delete"/></td>
+												</tr>
+											<?php endforeach; ?>
                                     </tbody>
                                 </table>
                         </div>
@@ -240,8 +264,6 @@ echo $this->Html->script('plugins/datatables/dataTables.bootstrap');
                 }
         );
 
-
-
         var t = $('#down').DataTable({
             "columnDefs": [{
                     "searchable": false,
@@ -265,15 +287,10 @@ echo $this->Html->script('plugins/datatables/dataTables.bootstrap');
 
             t.row.add([
                 '',
-                '<input type="hidden" value="' + x.find('.item_id').val() + '" name="item_id_presc[]">' +
-                        '<input type="hidden" value="' + x.children().eq(1).text() + '" name="item_id_name[]">' + x.children().eq(1).text(),
-                '<input type="number" name="item_qty_presc[]"  class="qty_presc form-control"/><small>' + x.find('.item_metrics').val() + '</small>' +
-                        '<input type="hidden" name="item_metric[]" value="' + x.find('.item_metrics').val() + '">',
+                '<input type="hidden" value="' + x.find('.item_id').val() + '" name="item_id_presc[]">' + x.children().eq(1).text(),
+                '<input type="number" name="item_qty_presc[]"  class="qty_presc form-control"/><small>' + x.find('.item_metrics').val() + '</small>',
                 '<input type="number" class="item_stock_presc form-control" name="item_stock[]" value="' + x.find('.item_stock').val() + '" readonly/><small>' + x.find('.item_metrics').val() + '</small>',
-                '<textarea rows="1" class="form-control" cols="40" style="resize:none;" name="item_id_usage[]"></textarea>' +
-                        '<input type="hidden" value="' + x.find('.item_price').val() + '" name="item_price_presc[]">' +
-                        '<input type="hidden" value="' + x.find('.item_disc').val() + '" name="item_disc_presc[]">',
-                '<select class="checks form-control" disabled  name="checker[]"><option value="false">Tidak</option><option value="true">Ya</option></select>',
+                '<textarea rows="1" class="form-control" cols="40" style="resize:none;" name="item_id_usage[]"></textarea>',
                 '<input type="button" value="&times;" class="btn btn-default delete"/>'
             ]).draw();
 
@@ -291,19 +308,6 @@ echo $this->Html->script('plugins/datatables/dataTables.bootstrap');
             }
 
             t.row('.selected').remove().draw(false);
-        });
-
-
-        $(document).on("change", ".qty_presc", function() {
-
-            var xx = $(this).parent().parent();
-            if (xx.find('.item_stock_presc').val() * 1 > xx.find('.qty_presc').val() * 1) {
-                xx.find('.checks').prop("disabled", false);
-            } else {
-
-                xx.find('.checks').prop("disabled", true);
-            }
-
         });
 
     });

@@ -14,7 +14,7 @@ $this->end();
 <ul class="sidebar-menu">
     <li >
         <?php echo $this->Html->link(
-        '<i class="fa fa-dashboard"></i> <span>Dashboard</span>',
+        '<i class="fa fa-dashboard"></i> <span>Beranda</span>',
         array('controller' => 'cdoctor',
         'action' => 'dashboard',
         'full_base' => true
@@ -26,7 +26,7 @@ $this->end();
 
     <li class="active">
         <?php echo $this->Html->link(
-        '<i class="fa fa-calendar"></i> <span>History</span>',
+        '<i class="fa fa-calendar"></i> <span>Riwayat</span>',
         array('controller' => 'cdoctor',
         'action' => 'history',
         'full_base' => true
@@ -37,7 +37,7 @@ $this->end();
 
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-stack-exchange"></i> <span>Queue</span>',
+        '<i class="fa fa-stack-exchange"></i> <span>Antrian</span>',
         array('controller' => 'cdoctor',
         'action' => 'queue',
         'full_base' => true
@@ -46,13 +46,23 @@ $this->end();
         );?>
 
     </li>
+	<li>
+        <?php echo $this->Html->link(
+        '<i class="fa fa-stack-exchange"></i> <span>Petunjuk Penggunaan</span>',
+        array('controller' => 'cdoctor',
+        'action' => 'faq',
+        'full_base' => true
+        ),
+        array('escape'=>false)
+        );?>
 
+    </li>
 </ul>
 <?php $this->end(); ?>
 
 <section class="content-header">
     <h1>
-        Patient Details
+        Detail Pasien
 
     </h1>
 
@@ -72,17 +82,17 @@ $this->end();
     <section class="content">
         <div class="row">
             <div class="col-md-12">
-                <?php echo $this->Form->create(false,array('url'=>'/cfrontdesk/updatePatient/' , 'class'=>'form-horizontal'));?>
+                <?php echo $this->form->create(false,array('url'=>'/cfrontdesk/updatePatient/' , 'class'=>'form-horizontal'));?>
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Patient Detail </h3>
+                        <h3 class="box-title">Detail Pasien </h3>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
 
                         <div id="non-exist" >
 
                             <div class="form-group">
-                                <label for="nomor" class="col-sm-3 control-label">Name:</label>
+                                <label for="nomor" class="col-sm-3 control-label">Nama:</label>
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" name="first_name" placeholder="First Name" value="<?php echo $patient[0]['First_Name']; ?>" readonly>
  
@@ -94,7 +104,7 @@ $this->end();
                             </div>
 
                             <div class="form-group">
-                                <label for="nomor" class="col-sm-3 control-label">Identity Number:</label>
+                                <label for="nomor" class="col-sm-3 control-label">No Identitas:</label>
                                 <div class="col-sm-8">
                                     <input type="hidden" class="form-control" name="soc_number" value="<?php echo $patient[0]['Social_Number']; ?>" readonly>
 
@@ -106,7 +116,7 @@ $this->end();
 
                             <div class="form-group">
 
-                                <label for="nomor" class="col-sm-3 control-label">Birthdate:</label>
+                                <label for="nomor" class="col-sm-3 control-label">Tanggal Lahir:</label>
 
                                 <div class="col-sm-4">
                                     <input type="date" class="form-control" name="birth_date" value="<?php echo $patient[0]['Birth_Date']; ?>" placeholder="Tgl. Lahir" readonly>
@@ -114,7 +124,7 @@ $this->end();
                             </div>
 
                             <div class="form-group">
-                                <label for="nomor" class="col-sm-3 control-label">Blood Type:</label>
+                                <label for="nomor" class="col-sm-3 control-label">Golongan Darah:</label>
                                 <div class="col-sm-4">
                                     <select class="form-control" name="blood_type" readonly>
                                         <?php
@@ -148,19 +158,19 @@ $this->end();
 
                             </div>
                             <div class="form-group">
-                                <label for="nomor" class="col-sm-3 control-label">Gender:</label>
+                                <label for="nomor" class="col-sm-3 control-label">Jenis Kelamin:</label>
                                 <div class="col-sm-4">
                                     <select class="form-control" name="gender" value="<?php echo $patient[0]['Gender']; ?>" readonly>
                                         if($patient[0]['Gender']=='Male'){
-                                        echo '<option selected value="Male">Male</option>';
+                                        echo '<option selected value="Male">Laki-Laki</option>';
                                         }else{
-                                        echo '<option value="Male">Male</option>';
+                                        echo '<option value="Male">Laki-laki</option>';
                                         }
 
                                         if($patient[0]['Gender']=='Female'){
-                                        echo '<option selected value="Female">Female</option>';
+                                        echo '<option selected value="Female">Perempuan</option>';
                                         }else{
-                                        echo '<option value="Female">Female</option>';
+                                        echo '<option value="Female">Perempuan</option>';
                                         }
                                     </select>
                                 </div>										
@@ -168,7 +178,7 @@ $this->end();
                             </div>
 
                             <div class="form-group">
-                                <label for="nomor" class="col-sm-3 control-label">Weight:</label>
+                                <label for="nomor" class="col-sm-3 control-label">Berat:</label>
                                 <div class="col-sm-4">
                                     <input type="number" class="form-control" name="weight" value="<?php echo $patient[0]['Weight']; ?>" placeholder="kgs" readonly>
 
@@ -189,7 +199,7 @@ $this->end();
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">Emergency contact</label>
+                                <label class="col-sm-3 control-label">Kontak Darurat</label>
                                 <div class="col-sm-4">
                                     <div class="input-group">
                                         <div class="input-group-addon">
@@ -202,7 +212,7 @@ $this->end();
                             </div>
 
                             <div class="form-group">
-                                <label for="nomor" class="col-sm-3 control-label">Address:</label>
+                                <label for="nomor" class="col-sm-3 control-label">Alamat:</label>
                                 <div class="col-sm-8">
                                     <textarea class="form-control" name="address" rows="3" style="resize:none;" readonly><?php echo $patient[0]['Address']; ?></textarea>
                                 </div>										
@@ -217,212 +227,10 @@ $this->end();
             </div>
         </div>
     </section>
-    <section class="content">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">History List </h3>
-                        <?php //echo var_dump($history);?>
-                    </div><!-- /.box-header -->
-                    <div class="box-body table-responsive">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Doctor</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($history as $f): ?>
-                                <tr>
-                                    <td></td>
-                                    <td><?php echo $f['dc']['fm_doc'].' '.$f['dc']['lm_doc']; ?></td>
-                                    <td><?php echo $f['vhc']['Date_Time']; ?></td>
-                                    <td>
-										<input class="id_patient" type="hidden" value="<?php echo $f['vhc']['ID_Patient'] ;?>">
-										<input class="id_visit" type="hidden" value="<?php echo $f['vhc']['ID_Visit'] ;?>">
-                                        <button class="btn btn-primary detail" >Detail</button></td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Doctor</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div><!-- /.box-body -->
-                </div><!-- /.box -->
-            </div>
-        </div>
-    </section>
-
-
-
-
-</section>
+    
 </aside>
 
 
-<div class="modal fade " id="show" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" style="width">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Pasien X</h4>
-            </div>
-            <div class="modal-body">
-               
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingOne">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        Anamnesa
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                <div class="panel-body">
-                                    <div class="form-group">
-                                        <label for="nomor" class="col-sm-2 control-label">Anamnesa:</label>
-                                        <div class="col-sm-8">
-                                            <textarea class="form-control" id="keluhan" rows="8" readonly style="resize:none;"></textarea>
-                                        </div>                                      
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingTwo">
-                                <h4 class="panel-title">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        Diagnose
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                <div class="panel-body">
-                                    <input type="hidden" id="id_diagnose"/>
-                                    <input type="hidden" id="id_visit_"/>
-                                    <div class="box-body table-responsive">
-                                        <table id="diagnose" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>ID-X</th>
-                                                    <th>Detail</th>
-                                                    <th>Picked?</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>ID-X</th>
-                                                    <th>Detail</th>
-                                                    <th>Picked?</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div> 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingThree">
-                                <h4 class="panel-title">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        Treatment
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                <div class="panel-body">
-                                    <div class="form-group">
-                                        <label for="nomor" class="col-sm-2 control-label">Treatment:</label>
-                                        <div class="col-sm-8">
-                                            <textarea class="form-control" id="penanganan" rows="8" name="penanganan" disabled></textarea>
-                                        </div>                                      
-                                    </div> </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingFour">
-                                <h4 class="panel-title">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
-                                        PRESCRIPTION
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                                <div class="panel-body">
-                                    <div class="box-body table-responsive">
-                                        <table id="prescription" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Name</th>
-                                                    <th>Qty</th>
-                                                    <th>Satuan</th>
-                                                    <th>Usage/Note</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Name</th>
-                                                    <th>Qty</th>
-                                                    <th>Satuan</th>
-                                                    <th>Usage/Note</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                    <hr>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingThree">
-                                <h4 class="panel-title">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                        Upload Image
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-                                <div class="panel-body">
-                                    <img src="" width="200" height="200" id="f_product_img_hidden" style="float: left;">
-
-                                  
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-            </div>
-        </div>
-    </div>
-</div>  
 
 
 <?php 

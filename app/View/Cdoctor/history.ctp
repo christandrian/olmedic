@@ -14,7 +14,7 @@ $this->end();
 <ul class="sidebar-menu">
     <li >
         <?php echo $this->Html->link(
-        '<i class="fa fa-dashboard"></i> <span>Dashboard</span>',
+        '<i class="fa fa-dashboard"></i> <span>Beranda</span>',
         array('controller' => 'cdoctor',
         'action' => 'dashboard',
         'full_base' => true
@@ -26,7 +26,7 @@ $this->end();
 
     <li class="active">
         <?php echo $this->Html->link(
-        '<i class="fa fa-calendar"></i> <span>History</span>',
+        '<i class="fa fa-calendar"></i> <span>Riwayat</span>',
         array('controller' => 'cdoctor',
         'action' => 'history',
         'full_base' => true
@@ -37,7 +37,7 @@ $this->end();
 
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-stack-exchange"></i> <span>Queue</span>',
+        '<i class="fa fa-stack-exchange"></i> <span>Antrian</span>',
         array('controller' => 'cdoctor',
         'action' => 'queue',
         'full_base' => true
@@ -46,13 +46,23 @@ $this->end();
         );?>
 
     </li>
+	<li>
+        <?php echo $this->Html->link(
+        '<i class="fa fa-stack-exchange"></i> <span>Petunjuk Penggunaan</span>',
+        array('controller' => 'cdoctor',
+        'action' => 'faq',
+        'full_base' => true
+        ),
+        array('escape'=>false)
+        );?>
 
+    </li>
 </ul>
 <?php $this->end(); ?>
 
 <section class="content-header">
     <h1>
-        Patients History
+        Riwayat Pasien
 
     </h1>
 
@@ -68,7 +78,7 @@ $this->end();
 
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Patient History</h3>
+                        <h3 class="box-title">Riwayat Pasien</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
 					<?php //echo var_dump($history);?>
@@ -76,10 +86,10 @@ $this->end();
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Identity</th>
-                                    <th>Patient</th>
-                                    <th>Gender</th>
-                                    <th>Action</th>
+                                    <th>Identitas</th>
+                                    <th>Pasien</th>
+                                    <th>Jenis Kelamin</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -94,6 +104,11 @@ $this->end();
                                         '/cdoctor/patient/'.$f['ID_Patient'],
                                         array('class' => 'btn btn-info')
                                         );?>
+                                        <?php echo $this->Html->link(
+                                        'Riwayat',
+                                        '/cdoctor/history_patient/'.$f['ID_Patient'],
+                                        array('class' => 'btn btn-primary')
+                                        );?>
                                     </td>
                                 </tr>
 								 <?php endforeach; ?>
@@ -101,11 +116,11 @@ $this->end();
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Identity</th>
-                                    <th>Patient</th>
-                                    <th>Gender</th>
-                                    <th>Action</th>
+                                     <th>No</th>
+                                    <th>Identitas</th>
+                                    <th>Pasien</th>
+                                    <th>Jenis Kelamin</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </tfoot>
                         </table>

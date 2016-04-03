@@ -18,14 +18,14 @@ class CfrontdeskController extends AppController {
 
     public function dashboard() {
         $this->init();
-        $this->set('title_for_layout', 'Dashboards');
+        $this->set('title_for_layout', 'Beranda');
     }
 
     //page add new patient
     public function addNewPatient() {
         $this->init();
         $id_clinic = CakeSession::read('idStore');
-        $this->set('title_for_layout', 'Add New Patient');
+        $this->set('title_for_layout', 'Tambah Pasien');
     }
 
     //function add new patient
@@ -56,7 +56,7 @@ class CfrontdeskController extends AppController {
         $doctor = $this->DashBoard_Clinic->loadListDoctor($id_store);
         $this->set("result", $result);
         $this->set("doctor", $doctor);
-        $this->set('title_for_layout', 'List Patients');
+        $this->set('title_for_layout', 'Daftar Pasien');
     }
 
     //function add to queue
@@ -92,6 +92,7 @@ class CfrontdeskController extends AppController {
         $result2 = $this->DashBoard_Clinic->loadPatientHistory($id_store, $id_patient);
         $this->set("patient", $result);
         $this->set("history", $result2);
+		$this->set('title_for_layout', 'Detail Pasien');
     }
 
     //function update patient
@@ -112,7 +113,7 @@ class CfrontdeskController extends AppController {
         $res = $this->DashBoard_Clinic->editPatient($social_number, $first_name, $last_name, $birth_date, $address, $gender, $blood_type, $weight, $handphone, $emergency_contact);
         $id = $res[0]["patient_clinic"]["ID_Patient"];
 
-        $this->redirect(array("controller" => "Cfrontdesk", "action" => "patient", $id));
+        $this->redirect(array("controller" => "cfrontdesk", "action" => "patient", $id));
     }
 
     //page queue patient
@@ -121,6 +122,7 @@ class CfrontdeskController extends AppController {
         $id_store = CakeSession::read('idStore');
         $queue = $this->DashBoard_Clinic->loadPatientQueue($id_store);
         $this->set("queue", $queue);
+		$this->set('title_for_layout', 'Antrian');
     }
 
     public function processQueue() {
@@ -132,17 +134,25 @@ class CfrontdeskController extends AppController {
         $queue_num = $this->request['data']['queue_num'];
         $status = $this->request['data']['status'];
         $proc = $this->request['data']['proc'];
-        echo var_dump($this->request['data']);
+        $detail = $this->request['data']['detail'];
+		//echo var_dump($this->request['data']);
         if ($proc == 1) {
             $this->checkPatient($id_store, $queue_num, $id_doctor);
             //masukin pasien k dokter
+			$this->redirect(array("controller" => "cfrontdesk",
+            "action" => "queue"));
         } else if ($proc == 2) {
             //cancel pasien
-            $this->cancelPatient($id_store, $queue_num, $id_visit);
+            $this->cancelPatient($id_store, $queue_num, $id_visit, $detail);
+			$this->redirect(array("controller" => "cfrontdesk",
+            "action" => "queue"));
         } else if ($proc == 3) {
             //payment
             $this->patientFinishPay($id_store, $queue_num, $id_doctor, $id_visit);
         }
+		
+		
+   
     }
 
     //This method is used when the front desk call the patient when the queue number is up
@@ -152,16 +162,6 @@ class CfrontdeskController extends AppController {
         $this->DashBoard_Clinic->changeQueueStatus($id_store, $queueNumber, $id_doctor, 1, $date_time);
     }
 
-    //This method is used when the doctor have finished checking the patient
-    public function finishPatient() {
-        $this->init();
-        $id_store = "Clin000";
-        $queueNumber = "1"; //Ini harus diinput dari patient
-        $id_doctor = 1; //Ini harus diinput dari patient			
-        $date_time = date("Y-m-d H:i:s");
-        //Change queue status into 2
-        $this->DashBoard_Clinic->changeQueueStatus($id_store, $queueNumber, $id_doctor, 2, $date_time);
-    }
 
     //This method is used when the patient have finished the payment process
     public function patientFinishPay($id_store, $queueNumber, $id_doctor, $id_visit) {
@@ -176,20 +176,180 @@ class CfrontdeskController extends AppController {
         $this->DashBoard_Clinic->finishVisitHistory($id_visit);
         //Remove patient from queue
         $this->DashBoard_Clinic->removePatientFromQueue($id_store, $queueNumber);
+
+
+
+			
+			$this->Session->write('id_doctor', $id_doctor);
+			$this->Session->write('id_visit', $id_visit);
+        		
+		$this->redirect(array("controller" => "cfrontdesk",
+            "action" => "payment"));
     }
 
-    public function cancelPatient($id_store, $queueNumber, $id_visit) {
+    public function cancelPatient($id_store, $queueNumber, $id_visit, $detail) {
         $this->init();
         $date_time = date("Y-m-d H:i:s");
         //Update visit history status to -1 (Canceled)
-        $this->DashBoard_Clinic->cancelVisitHistory($id_visit);
+        $this->DashBoard_Clinic->cancelVisitHistory($id_visit,$detail);
         //Remove patient from queue
         $this->DashBoard_Clinic->removePatientFromQueue($id_store, $queueNumber);
     }
 
-    public function loadPatientAnamnesaList() {
+	
+	
+	public function payment() {
+
         $this->init();
-        $id_store = 'Clin000';
+		 $id_clinic = CakeSession::read('idStore');
+        $id_visit = CakeSession::read('id_visit');
+        if (isset($test)) {
+            $this->set("valid", true);
+        } else {
+            $this->set("valid", false);
+        }
+        $test = CakeSession::read('id_doctor');
+        if (isset($test)) {
+			//cari doktor
+			$doctor = $this->DashBoard_Clinic->loadDoctor($test);
+			$this->set("doctor_name", $doctor['First_Name'].' '.$doctor['Last_Name']);
+        }
+		//cari resep
+		$test = $id_visit;
+        if (isset($test)) {
+			$resep = $this->DashBoard_Clinic->PatientLoadDoctorPrescription($id_clinic, $test);
+			//echo var_dump($id_clinic);
+			//echo var_dump($resep);
+            $this->set("resep", $resep[0]['ddc']['Prescription_List']);
+			$this->set("penanganan", $resep[0]['ddc']['Treatment']);
+			$patient = $this->DashBoard_Clinic->loadPatientByID($id_clinic, $resep[0]['iv']['ID_Patient']);
+			//echo var_dump($patient);
+			$this->set("patient_name", $patient[0]['First_Name'].' '.$patient[0]['First_Name']);
+        }
+        
+
+       
+        $data_meds = $this->DashBoard_Clinic->loadMedicine($id_clinic, false);
+        $this->set("data_meds", $data_meds);
+
+        $data_serv = $this->DashBoard_Clinic->loadService($id_clinic, false);
+        $this->set("data_serv", $data_serv);
+
+        $data_pack = $this->DashBoard_Clinic->loadPacket($id_clinic, false);
+        $this->set("data_pack", $data_pack);
+		$this->set('title_for_layout', 'Pembayaran');
+    }
+	
+	public function pay() {
+        $this->autoRender = false;
+        $this->init();
+
+        $id_pharmacy = CakeSession::read('idStore');
+        $presc_SYS_ID = $this->Session->read('SYS_ID');
+        //$presc_id = $this->request['data']['presc_id'];
+        $patient_name = $this->request['data']['patient_name'];
+        $doctor_name = $this->request['data']['doctor_name'];
+        $time = $this->request['data']['time'];
+        $arrItem = array();
+        $subtotal = 0;
+        for ($i = 0; $i < count($this->request['data']['id_prod']); $i++) {
+
+            $arrItem[$i]['Id_Product'] = $this->request['data']['id_prod'][$i];
+            $arrItem[$i]['Quantity'] = $this->request['data']['qty'][$i];
+            $arrItem[$i]['Price'] = $this->request['data']['price'][$i];
+            $arrItem[$i]['Percentage_Discount'] = $this->request['data']['disc'][$i];
+            $arrItem[$i]['Fixed_Discount'] = $arrItem[$i]['Price'] * $arrItem[$i]['Percentage_Discount'] / 100;
+            $subtotal+= $arrItem[$i]['Quantity']*($arrItem[$i]['Price'] - $arrItem[$i]['Fixed_Discount']);
+			$this->DashBoard_Clinic->updateInventoryStock_($arrItem[$i]['Id_Product'],$arrItem[$i]['Quantity']);
+        }
+
+        $datetime = date('Y-m-d H:i:s');
+        $item_count = sizeof($arrItem); // bisa diganti sama get dari parameter
+        //paid by
+
+        if ($this->request['data']['paidby'] == '1') {
+            $method = "Cash";
+            $cash = $this->request['data']['paid'];
+
+            $cc_no = "-";
+            $cc_name = "-";
+        } else if($this->request['data']['paidby'] == '2'){
+            $method = "Credit Card/Debit";
+            $cash = $this->request['data']['total'];
+
+            $cc_no = $this->request['data']['cc_no'];
+            $cc_name = $this->request['data']['cc_name'];
+        }else if($this->request['data']['paidby'] == '3'){
+			$method = "Komplemen";
+			$cash = 0;
+
+            $cc_no = "-";
+            $cc_name = "-";
+		}else{
+			$method = "Piutang/Asuransi";
+			$cash = $this->request['data']['total'];
+
+            $cc_no = "-";
+            $cc_name = $this->request['data']['cc_name'];
+		}
+
+        $discount = $this->request['data']['disc_gen'];
+        $tax = $this->request['data']['tax_gen'];
+        $total = $this->request['data']['total'];
+
+        $pk = $this->DashBoard_Clinic->createPK('detail_product_sell_transcation_pharmacy', 'ID_Transaction', "Trans", "", $id_pharmacy);
+        //Add sell transaction data, update the prescription if the prescription_SYS_ID is given
+        $this->DashBoard_Clinic->addSellTransaction($id_pharmacy, $arrItem, $datetime, $item_count, $subtotal, $discount, $tax, $total, $method, $cash, $cc_no, $cc_name, $patient_name,  $doctor_name, $pk, $presc_SYS_ID);
+
+        $this->set("pk", $pk);
+        $this->Session->delete('SYS_ID');
+        $this->Session->delete('presc_id');
+        $this->Session->delete('patient_name');
+        $this->Session->delete('doctor_name');
+        $this->Session->delete('arrItem');
+        $this->redirect(array("controller" => "cfrontdesk",
+            "action" => "invoice", $pk));
+    }
+	
+    public function reports() {
+        $this->init();
+        $id_clinic = CakeSession::read('idStore');
+        $list = $this->DashBoard_Clinic->loadListInvoice($id_clinic);
+        $this->set("invoice", $list);
+		$this->set('title_for_layout', 'Laporan');
+    }
+	
+	public function delete_report($id) {
+        $this->init();
+        $this->autoRender = false;
+        $id_invoice = $id;
+        $this->DashBoard_Clinic->deleteReport($id_invoice);
+        $this->redirect(array("controller" => "cfrontdesk",
+            "action" => "reports"));
+    }
+
+    public function invoice($id) {
+        $this->init();
+        $id_clinic = CakeSession::read('idStore');
+        $id_invoice = $id;
+
+        $store = $this->DashBoard_Clinic->loadStore($id_clinic);
+        $this->set("data_store", $store);
+        $invoice = $this->DashBoard_Clinic->loadSellTransaction($id_clinic, $id_invoice);
+        $this->set("invoice", $invoice);
+        $detailInvoice = $this->DashBoard_Clinic->loadDetailInvoice($id_invoice);
+        $this->set("detail_invoice", $detailInvoice);
+        $this->set("id", $id_invoice);
+		$this->set('title_for_layout', 'Invoice');
+    }
+	
+	public function faq() {
+        $this->init();
+		$this->set('title_for_layout', 'FAQ');
+    }
+  /*  public function loadPatientAnamnesaList() {
+        $this->init();
+        $id_store = CakeSession::read('idStore');
         $id_patient = '1';
         $result = $this->DashBoard_Clinic->LoadPatientListAnamnesa($id_patient, $id_store);
         $this->set("data", $result);
@@ -198,9 +358,9 @@ class CfrontdeskController extends AppController {
     //New!
     public function loadPatientDoctorDiagnose() {
         $this->init();
-        $id_store = 'Clin000';
+        $id_store = CakeSession::read('idStore');
         $id_patient = '1';
-        $result = $this->DashBoard_Clinic->PatientLoadDoctorDiagnose($id_patient, $id_store);
+        $result = $this->DashBoard_Clinic->($id_patient, $id_store);
         $this->set("data", $result);
     }
 
@@ -210,7 +370,7 @@ class CfrontdeskController extends AppController {
         $id_diagnose = '1';
         $result = $this->DashBoard_Clinic->LoadDetailDiagnose($id_diagnose);
         $this->set("data", $result);
-    }
+    }*/
 
     public function stock() {
         $this->init();
@@ -579,6 +739,7 @@ class CfrontdeskController extends AppController {
         $id_clinic = CakeSession::read('idStore');
 
         $id_brand_owner = $this->request['data']['id'];
+		echo $id_brand_owner;
         $this->DashBoard_Clinic->deleteBrandOwner($id_brand_owner, $id_clinic);
     }
 
@@ -608,6 +769,10 @@ class CfrontdeskController extends AppController {
         $arrPacket['Fixed_Amount'] = $this->request['data']['packet_discount2'];
         $arrPacket['Discount_Description'] = $this->request['data']['packet_discount_description'];
 
+		if(count($this->request['data']['packet_id'])==0){
+		$this->redirect(array("controller" => "cfrontdesk",
+            "action" => "addNewPacket"));
+		}
         for ($i = 0; $i < count($this->request['data']['packet_id']); $i++) {
             $arrDetailPacket[$i]['ID_Product'] = $this->request['data']['packet_id'][$i];
             $arrDetailPacket[$i]['Product_Count'] = $this->request['data']['packet_qty'][$i];
@@ -690,73 +855,13 @@ class CfrontdeskController extends AppController {
             //$this->DashBoard_Clinic->deleteDiscount($id_prod);
             $this->DashBoard_Clinic->deleteProduct($id_prod);
         }
-        //$this->redirect(array("controller" => "cfrontdesk",
-        //    "action" => "stock"));
+        $this->redirect(array("controller" => "cfrontdesk",
+            "action" => "stock"));
         //Buat table name, pake nama singkat aja, ex: item = item_phramacy; p 
-		$log = $this->Model->getDataSource()->getLog(false, false);
-		debug($log);
+		//$log = $this->Model->getDataSource()->getLog(false, false);
+		//debug($log);
     }
 
-    public function payment() {
-
-        $this->init();
-
-        $test = CakeSession::read('SYS_ID');
-        if (isset($test)) {
-            $this->set("SYS_ID", $this->Session->read('SYS_ID'));
-            $this->set("valid", true);
-        } else {
-            $this->set("valid", false);
-        }
-
-        $test = CakeSession::read('presc_id');
-        if (isset($test)) {
-            $this->set("presc_id", $this->Session->read('presc_id'));
-        }
-        $test = CakeSession::read('patient_name');
-        if (isset($test)) {
-            $this->set("patient_name", $this->Session->read('patient_name'));
-        }
-        $test = CakeSession::read('doctor_name');
-        if (isset($test)) {
-            $this->set("doctor_name", $this->Session->read('doctor_name'));
-        }
-        $test = CakeSession::read('arrItem');
-
-        if (isset($test)) {
-            $this->set("arrItem", $test);
-        }
-
-        $id_clinic = CakeSession::read('idStore');
-        $data_meds = $this->DashBoard_Clinic->loadMedicine($id_clinic, true);
-        $this->set("data_meds", $data_meds);
-
-        $data_serv = $this->DashBoard_Clinic->loadService($id_clinic, false);
-        $this->set("data_serv", $data_serv);
-
-        $data_pack = $this->DashBoard_Clinic->loadPacket($id_clinic, false);
-        $this->set("data_pack", $data_pack);
-    }
-
-    public function reports() {
-        $this->init();
-        $id_clinic = CakeSession::read('idStore');
-        $list = $this->DashBoard_Clinic->loadListInvoice($id_clinic);
-        $this->set("invoice", $list);
-    }
-
-    public function invoice($id) {
-        $this->init();
-        $id_clinic = CakeSession::read('idStore');
-        $id_invoice = $id;
-
-        $store = $this->DashBoard_Clinic->loadStore($id_clinic);
-        $this->set("data_store", $store);
-        $invoice = $this->DashBoard_Clinic->loadSellTransaction($id_clinic, $id_invoice);
-        $this->set("invoice", $invoice);
-        $detailInvoice = $this->DashBoard_Clinic->loadDetailInvoice($id_invoice);
-        $this->set("detail_invoice", $detailInvoice);
-        $this->set("id", $id_invoice);
-    }
+    
 
 }

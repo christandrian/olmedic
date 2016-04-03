@@ -84,7 +84,7 @@ class DashBoard_Doctor extends AppModel {
     }
 
     public function LoadPatientListAnamnesa($id_patient, $id_store, $id_visit) {
-        $sql = "SELECT  `Anamnesa` 
+        $sql = "SELECT  Anamnesa
 		FROM `visit_history_clinic` 
 		WHERE `ID_Patient` = '$id_patient' AND `ID_Store` = '$id_store' AND `ID_Visit` = '$id_visit';";
         $res = $this->query($sql);

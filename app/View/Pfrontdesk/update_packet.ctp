@@ -15,7 +15,7 @@ $this->end();
 <ul class="sidebar-menu">
                         <li>
 						<?php echo $this->Html->link(
-								'<i class="fa fa-dashboard"></i> <span>Dashboard</span>',
+								'<i class="fa fa-dashboard"></i> <span>Beranda</span>',
 								array('controller' => 'pfrontdesk',
 										'action' => 'dashboard',
 										'full_base' => true
@@ -27,13 +27,13 @@ $this->end();
 						<li class="treeview">
                             <a href="#">
                                 <i class="fa fa-file"></i>
-                                <span>Prescription</span>
+                                <span>resep</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
                                 <li>
 								<?php echo $this->Html->link(
-								'<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>',
+								'<i class="fa fa-angle-double-right"></i><span>Tambah Resep</span>',
 								array('controller' => 'pfrontdesk',
 										'action' => 'prescription',
 										'full_base' => true
@@ -42,9 +42,9 @@ $this->end();
 								);?>
 								</li>
                                 <li><?php echo $this->Html->link(
-								'<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>',
+								'<i class="fa fa-angle-double-right"></i><span>Daftar Resep</span>',
 								array('controller' => 'pfrontdesk',
-										'action' => 'list_prescription',
+										'action' => 'list_prescriptions',
 										'full_base' => true
 								),
 								array('escape'=>false)
@@ -54,13 +54,13 @@ $this->end();
 						<li class="treeview active">
                             <a href="#">
                                 <i class="fa fa-file"></i>
-                                <span>Stocks</span>
+                                <span>Inventory</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
                                 <li >
 								<?php echo $this->Html->link(
-								'<i class="fa fa-angle-double-right"></i><span>Add New Product</span>',
+								'<i class="fa fa-angle-double-right"></i><span>Tambah Item</span>',
 								array('controller' => 'pfrontdesk',
 										'action' => 'addNewProduct',
 										'full_base' => true
@@ -70,7 +70,7 @@ $this->end();
 								</li>
                                 <li class="active">
 								<?php echo $this->Html->link(
-								'<i class="fa fa-angle-double-right"></i><span>Add New Packet</span>',
+								'<i class="fa fa-angle-double-right"></i><span>Tambah Paket</span>',
 								array('controller' => 'pfrontdesk',
 										'action' => 'addNewPacket',
 										'full_base' => true
@@ -78,7 +78,7 @@ $this->end();
 								array('escape'=>false)
 								);?></li>
 								<li><?php echo $this->Html->link(
-								'<i class="fa fa-angle-double-right"></i><span>Add New Service</span>',
+								'<i class="fa fa-angle-double-right"></i><span>Tambah Servis</span>',
 								array('controller' => 'pfrontdesk',
 										'action' => 'addNewService',
 										'full_base' => true
@@ -86,7 +86,7 @@ $this->end();
 								array('escape'=>false)
 								);?></li>
 								<li><?php echo $this->Html->link(
-								'<i class="fa fa-angle-double-right"></i><span>Add New Category</span>',
+								'<i class="fa fa-angle-double-right"></i><span>Tambah Kategori</span>',
 								array('controller' => 'pfrontdesk',
 										'action' => 'addNewCategory',
 										'full_base' => true
@@ -94,7 +94,7 @@ $this->end();
 								array('escape'=>false)
 								);?></li>
 								<li><?php echo $this->Html->link(
-								'<i class="fa fa-angle-double-right"></i><span>Add New Brand</span>',
+								'<i class="fa fa-angle-double-right"></i><span>tambah Brand</span>',
 								array('controller' => 'pfrontdesk',
 										'action' => 'addNewBrand',
 										'full_base' => true
@@ -103,7 +103,7 @@ $this->end();
 								);?></li>
 								<li >
 								<?php echo $this->Html->link(
-								'<i class="fa fa-angle-double-right"></i><span>List</span>',
+								'<i class="fa fa-angle-double-right"></i><span>Daftar</span>',
 								array('controller' => 'pfrontdesk',
 										'action' => 'stock',
 										'full_base' => true
@@ -114,7 +114,7 @@ $this->end();
                         </li>
 						<li>
 							<?php echo $this->Html->link(
-								'<i class="fa fa-money"></i> <span>Payment</span>',
+								'<i class="fa fa-money"></i> <span>Pembayaran</span>',
 								array('controller' => 'pfrontdesk',
 										'action' => 'payment',
 										'full_base' => true
@@ -125,7 +125,7 @@ $this->end();
                         </li>
 						<li>
 							<?php echo $this->Html->link(
-								'<i class="fa fa-file-text"></i> <span>Reports</span>',
+								'<i class="fa fa-file-text"></i> <span>Laporan</span>',
 								array('controller' => 'pfrontdesk',
 										'action' => 'reports',
 										'full_base' => true
@@ -133,13 +133,24 @@ $this->end();
 								array('escape'=>false)
 								);?>
                          </li>
+						 
+						 <li>
+        <?php
+        echo $this->Html->link(
+        '<i class="fa fa-file-text"></i> <span>Petunjuk Pemakaian</span>', array('controller' => 'pfrontdesk',
+        'action' => 'faq',
+        'full_base' => true
+        ), array('escape' => false)
+        );
+        ?>
+    </li>
                        
                     </ul>
 					<?php $this->end(); ?>
 
 					<section class="content-header">
                     <h1>
-                          Packet
+                          Paket
                         
                     </h1>
                     
@@ -158,36 +169,36 @@ $this->end();
                                     <div class="box-body">
                                         <input type="hidden" name="packet_id" value="<?php echo $id;?>">
 										<div class="form-group">
-                                            <label for="nama">Name</label>
+                                            <label for="nama">Nama</label>
                                             <input type="text" class="form-control" name="packet_name" placeholder="Name" value="<?php echo $data_pack[0]['Product_Name'];?>">
                                         </div>
 										<div class="form-group">
-                                            <label for="nama">Price</label>
+                                            <label for="nama">Harga</label>
                                             <input type="number" class="form-control" name="packet_price" placeholder="Price" value="<?php echo $data_pack[0]['Price'];?>">
                                         </div>
 										<div class="form-group">
-                                            <label for="nama">Description</label>
+                                            <label for="nama">Deskripsi</label>
                                             <input type="text" class="form-control" name="packet_description" placeholder="Description" value="<?php echo $data_pack[0]['Description'];?>">
                                         </div>
 										 
 										 <div class="form-group">
-                                            <label>Discount</label>
+                                            <label>Diskon</label>
                                             <input type="number" class="form-control" name="packet_discount" placeholder="10.5%" value="<?php echo $data_pack[0]['Percentage_Amount'];?>">
                                         </div>
 										
 										
 										<div class="form-group">
-                                            <label>Discount 2</label>
+                                            <label>Diskon 2</label>
                                             <input type="number" class="form-control" name="packet_discount2" placeholder="1000" value="<?php echo $data_pack[0]['Fixed_Amount'];?>">
                                         </div>
 										
 										<div class="form-group">
-                                            <label >Discount Description</label>
+                                            <label >Deskripsi Diskon</label>
                                             <input type="text" class="form-control" name="packet_discount_description" placeholder="Description" value="<?php echo $data_pack[0]['Description_Discount'];?>">
                                         </div>
 										 
                                       <div class="form-group">
-                                            <button type="submit" class="btn btn-primary">Save</button>
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
                                         </div>
                                     </div>
 
@@ -199,16 +210,16 @@ $this->end();
                                
                                  <?php //echo var_dump($data_meds);?>
                                     <div class="box-body">
-									<h3 class="box-title">Medicine</h3>
+									<h3 class="box-title">Produk</h3>
 									<div class="box-body table-responsive">
 									<table id="example2" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
 												<th>No</th>
 												<th>ID</th>
-                                                <th>Name</th>
+                                                <th>Nama</th>
 												<th>Brand Owner</th>
-                                                <th>Action</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -241,7 +252,7 @@ $this->end();
                                
                                 <?php //echo var_dump($data_detail_pack);?>
                                     <div class="box-body">
-									<h3 class="box-title">Packet List</h3>
+									<h3 class="box-title">Detail Paket</h3>
 									<div class="box-body table-responsive">
 									
                                     <table id="example1" class="table table-bordered table-striped table-hover">
@@ -249,9 +260,9 @@ $this->end();
                                             <tr>
 												<th></th>
 												<th>ID</th>
-                                                <th>Name</th>
+                                                <th>Nama</th>
 												<th>Qty</th>
-												<th>Action</th>
+												<th>Aksi</th>
                                                 
                                             </tr>
                                         </thead>
@@ -263,7 +274,9 @@ $this->end();
 													
 													<td class="id_med"><?php echo $f[ 'Id_Product' ]; ?></td>
 													<td class="name_med"><?php echo $f[ 'Name' ]; ?></td>
-													<td class="qty_med"><input type="number" class="form-control" name="packet_qty[]" value="<?php echo $f[ 'Product_Count' ]; ?>"/></td>
+													<td class="qty_med">
+													<input type="hidden" value="<?php echo $f[ 'Id_Product' ]; ?>" name="packet_ids[]"/>
+													<input type="number" class="form-control" name="packet_qty[]" value="<?php echo $f[ 'Product_Count' ]; ?>"/></td>
 													
 													
 													<td><input type="button" value="&times;" class="btn btn-default delete"/></td>
@@ -344,7 +357,7 @@ $(document).on("click", ".add", function(){
 					
 					t.row.add( [
 					'',x.find('.id_med').text(),x.find('.name_med').text(),
-					'<input type="hidden" value="'+x.find(".id_med").text()+'" name="packet_id[]"/><input type="number" class="form-control" name="packet_qty[]"/>'
+					'<input type="hidden" value="'+x.find(".id_med").text()+'" name="packet_ids[]"/><input type="number" class="form-control" name="packet_qty[]"/>'
 					,'<input type="button" value="&times;" class="btn btn-default delete"/>'
 				] ).draw();
 				

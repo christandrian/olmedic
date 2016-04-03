@@ -15,7 +15,7 @@ $this->end();
 <ul class="sidebar-menu">
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-dashboard"></i> <span>Dashboard</span>',
+        '<i class="fa fa-dashboard"></i> <span>Beranda</span>',
         array('controller' => 'cfrontdesk',
         'action' => 'dashboard',
         'full_base' => true
@@ -27,29 +27,39 @@ $this->end();
     <li class="treeview">
         <a href="#">
             <i class="fa fa-file"></i>
-            <span>Prescription</span>
+            <span>Pasien</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
             <li>
                 <?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>',
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Pasien</span>',
                 array('controller' => 'cfrontdesk',
-                'action' => 'prescription',
+                'action' => 'addNewPatient',
                 'full_base' => true
                 ),
                 array('escape'=>false)
                 );?>
             </li>
             <li><?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>',
+                '<i class="fa fa-angle-double-right"></i><span>Daftar Pasien</span>',
                 array('controller' => 'cfrontdesk',
-                'action' => 'list_prescription',
+                'action' => 'list_patients',
                 'full_base' => true
                 ),
                 array('escape'=>false)
                 );?></li>
         </ul>
+    </li>
+    <li >
+        <?php echo $this->Html->link(
+        '<i class="fa fa-stack-exchange"></i> <span>Antrian</span>',
+        array('controller' => 'cfrontdesk',
+        'action' => 'queue',
+        'full_base' => true
+        ),
+        array('escape'=>false)
+        );?>
     </li>
     <li class="treeview active">
         <a href="#">
@@ -60,7 +70,7 @@ $this->end();
         <ul class="treeview-menu">
             <li >
                 <?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Product</span>',
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Item</span>',
                 array('controller' => 'cfrontdesk',
                 'action' => 'addNewProduct',
                 'full_base' => true
@@ -70,7 +80,7 @@ $this->end();
             </li>
             <li class="active">
                 <?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Packet</span>',
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Paket</span>',
                 array('controller' => 'cfrontdesk',
                 'action' => 'addNewPacket',
                 'full_base' => true
@@ -78,7 +88,7 @@ $this->end();
                 array('escape'=>false)
                 );?></li>
             <li><?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Service</span>',
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Servis</span>',
                 array('controller' => 'cfrontdesk',
                 'action' => 'addNewService',
                 'full_base' => true
@@ -86,7 +96,7 @@ $this->end();
                 array('escape'=>false)
                 );?></li>
             <li><?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Category</span>',
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Kategori</span>',
                 array('controller' => 'cfrontdesk',
                 'action' => 'addNewCategory',
                 'full_base' => true
@@ -94,7 +104,7 @@ $this->end();
                 array('escape'=>false)
                 );?></li>
             <li><?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Brand</span>',
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Brand</span>',
                 array('controller' => 'cfrontdesk',
                 'action' => 'addNewBrand',
                 'full_base' => true
@@ -103,7 +113,7 @@ $this->end();
                 );?></li>
             <li >
                 <?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>List</span>',
+                '<i class="fa fa-angle-double-right"></i><span>Daftar</span>',
                 array('controller' => 'cfrontdesk',
                 'action' => 'stock',
                 'full_base' => true
@@ -114,7 +124,7 @@ $this->end();
     </li>
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-money"></i> <span>Payment</span>',
+        '<i class="fa fa-money"></i> <span>Pembayaran</span>',
         array('controller' => 'cfrontdesk',
         'action' => 'payment',
         'full_base' => true
@@ -125,7 +135,7 @@ $this->end();
     </li>
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-file-text"></i> <span>Reports</span>',
+        '<i class="fa fa-file-text"></i> <span>Laporan</span>',
         array('controller' => 'cfrontdesk',
         'action' => 'reports',
         'full_base' => true
@@ -133,164 +143,171 @@ $this->end();
         array('escape'=>false)
         );?>
     </li>
-
+	<li>
+        <?php echo $this->Html->link(
+        '<i class="fa fa-file-text"></i> <span>Petunjuk Penggunaan</span>',
+        array('controller' => 'cfrontdesk',
+        'action' => 'faq',
+        'full_base' => true
+        ),
+        array('escape'=>false)
+        );?>
+    </li>
 </ul>
 <?php $this->end(); ?>
-
 <section class="content-header">
-    <h1>
-        Packet
+                    <h1>
+                          Paket
+                        
+                    </h1>
+                    
+                </section>
+				 <form action="updatePacket" method="post">
+                <section class="content">
 
-    </h1>
+				<div class="row">
+				<div class="col-md-3">
+				<div class="box box-primary">
+                                <div class="box-header">
+                                    
+                                </div>
+                                <!-- form start -->
+                               <?php //echo var_dump($data_pack);?>
+                                    <div class="box-body">
+                                        <input type="hidden" name="packet_id" value="<?php echo $id;?>">
+										<div class="form-group">
+                                            <label for="nama">Nama</label>
+                                            <input type="text" class="form-control" name="packet_name" placeholder="Name" value="<?php echo $data_pack[0]['Product_Name'];?>">
+                                        </div>
+										<div class="form-group">
+                                            <label for="nama">Harga</label>
+                                            <input type="number" class="form-control" name="packet_price" placeholder="Price" value="<?php echo $data_pack[0]['Price'];?>">
+                                        </div>
+										<div class="form-group">
+                                            <label for="nama">Deskripsi</label>
+                                            <input type="text" class="form-control" name="packet_description" placeholder="Description" value="<?php echo $data_pack[0]['Description'];?>">
+                                        </div>
+										 
+										 <div class="form-group">
+                                            <label>Diskon</label>
+                                            <input type="number" class="form-control" name="packet_discount" placeholder="10.5%" value="<?php echo $data_pack[0]['Percentage_Amount'];?>">
+                                        </div>
+										
+										
+										<div class="form-group">
+                                            <label>Diskon 2</label>
+                                            <input type="number" class="form-control" name="packet_discount2" placeholder="1000" value="<?php echo $data_pack[0]['Fixed_Amount'];?>">
+                                        </div>
+										
+										<div class="form-group">
+                                            <label >Deskripsi Diskon</label>
+                                            <input type="text" class="form-control" name="packet_discount_description" placeholder="Description" value="<?php echo $data_pack[0]['Description_Discount'];?>">
+                                        </div>
+										 
+                                      <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                        </div>
+                                    </div>
 
-</section>
-<form action="updatePacket" method="post">
-    <section class="content">
+                                   
+                            </div>
+				</div>
+				<div class="col-md-9">
+				<div class="box box-primary">
+                               
+                                 <?php //echo var_dump($data_meds);?>
+                                    <div class="box-body">
+									<h3 class="box-title">Produk</h3>
+									<div class="box-body table-responsive">
+									<table id="example2" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+												<th>No</th>
+												<th>ID</th>
+                                                <th>Nama</th>
+												<th>Brand Owner</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+											<?php foreach( $data_meds as $f ): ?>
+												<tr>
+													<td></td>
+													<input type="hidden" class="desc_med" value="<?php echo $f[ 'Description' ]; ?>" />
+													<td class="id_med"><?php echo $f[ 'Id_Product' ]; ?></td>
+													<td class="name_med"><?php echo $f[ 'Product_Name' ]; ?></td>
+													<input type="hidden" class="category_med" value="<?php echo $f[ 'Id_Category' ]; ?>" />
+													<td><span class="merk_med"><?php echo $f[ 'Merk_Name' ]; ?></span></td>
+													<td><input type="button" class="btn btn-primary add" value="Add"></td>
+												</tr>
+											<?php endforeach; ?>
+                                            
+											
+                                        </tbody>
+                                    </table>
+                                    
+                                </div>
+								
+                                      
+                                    </div>
 
-        <div class="row">
-            <div class="col-md-3">
-                <div class="box box-primary">
-                    <div class="box-header">
+                                    </form>
+                            </div>
+				</div>
+				<div class="col-md-12">
+				<div class="box box-primary">
+                               
+                                <?php //echo var_dump($data_detail_pack);?>
+                                    <div class="box-body">
+									<h3 class="box-title">Detail Paket</h3>
+									<div class="box-body table-responsive">
+									
+                                    <table id="example1" class="table table-bordered table-striped table-hover">
+                                        <thead>
+                                            <tr>
+												<th></th>
+												<th>ID</th>
+                                                <th>Nama</th>
+												<th>Qty</th>
+												<th>Aksi</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+											<?php foreach( $data_detail_pack as $f ): ?>
+												<tr>
+													<td></td>
+													
+													
+													<td class="id_med"><?php echo $f[ 'Id_Product' ]; ?></td>
+													<td class="name_med"><?php echo $f[ 'Name' ]; ?></td>
+													<td class="qty_med"><input type="number" class="form-control" name="packet_qty[]" value="<?php echo $f[ 'Product_Count' ]; ?>"/></td>
+													
+													
+													<td><input type="button" value="&times;" class="btn btn-default delete"/></td>
+												</tr>
+											<?php endforeach; ?>
+											<!--
+                                            <tr>
+												<td></td>
+                                                <td>2</td>
+                                                <td>amoshaphin</td>
+                                                <td><input type="button" value="&times;" class="btn btn-default delete"/></td>
+                                            </tr>-->
+                                        </tbody>
+                                    </table>
+                                </div>
+								
+                                      
+                                    </div>
 
-                    </div>
-                    <!-- form start -->
-                    <?php //echo var_dump($data_pack);?>
-                    <div class="box-body">
-                        <input type="hidden" name="packet_id" value="<?php echo $id;?>">
-                        <div class="form-group">
-                            <label for="nama">Name</label>
-                            <input type="text" class="form-control" name="packet_name" placeholder="Name" value="<?php echo $data_pack[0]['Product_Name'];?>">
-                        </div>
-                        <div class="form-group">
-                            <label for="nama">Price</label>
-                            <input type="number" class="form-control" name="packet_price" placeholder="Price" value="<?php echo $data_pack[0]['Price'];?>">
-                        </div>
-                        <div class="form-group">
-                            <label for="nama">Description</label>
-                            <input type="text" class="form-control" name="packet_description" placeholder="Description" value="<?php echo $data_pack[0]['Description'];?>">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Discount</label>
-                            <input type="number" class="form-control" name="packet_discount" placeholder="10.5%" value="<?php echo $data_pack[0]['Percentage_Amount'];?>">
-                        </div>
-
-
-                        <div class="form-group">
-                            <label>Discount 2</label>
-                            <input type="number" class="form-control" name="packet_discount2" placeholder="1000" value="<?php echo $data_pack[0]['Fixed_Amount'];?>">
-                        </div>
-
-                        <div class="form-group">
-                            <label >Discount Description</label>
-                            <input type="text" class="form-control" name="packet_discount_description" placeholder="Description" value="<?php echo $data_pack[0]['Description_Discount'];?>">
-                        </div>
-
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="box box-primary">
-
-                    <?php //echo var_dump($data_meds);?>
-                    <div class="box-body">
-                        <h3 class="box-title">Medicine</h3>
-                        <div class="box-body table-responsive">
-                            <table id="example2" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Brand Owner</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach( $data_meds as $f ): ?>
-                                    <tr>
-                                        <td></td>
-                                <input type="hidden" class="desc_med" value="<?php echo $f[ 'Description' ]; ?>" />
-                                <td class="id_med"><?php echo $f[ 'Id_Product' ]; ?></td>
-                                <td class="name_med"><?php echo $f[ 'Product_Name' ]; ?></td>
-                                <input type="hidden" class="category_med" value="<?php echo $f[ 'Id_Category' ]; ?>" />
-                                <td><span class="merk_med"><?php echo $f[ 'Merk_Name' ]; ?></span></td>
-                                <td><input type="button" class="btn btn-primary add" value="Add"></td>
-                                </tr>
-                                <?php endforeach; ?>
-
-
-                                </tbody>
-                            </table>
-
-                        </div>
-
-
-                    </div>
-
-                    </form>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="box box-primary">
-
-                    <?php //echo var_dump($data_detail_pack);?>
-                    <div class="box-body">
-                        <h3 class="box-title">Packet List</h3>
-                        <div class="box-body table-responsive">
-
-                            <table id="example1" class="table table-bordered table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Qty</th>
-                                        <th>Action</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach( $data_detail_pack as $f ): ?>
-                                    <tr>
-                                        <td></td>
-
-
-                                        <td class="id_med"><?php echo $f[ 'Id_Product' ]; ?></td>
-                                        <td class="name_med"><?php echo $f[ 'Name' ]; ?></td>
-                                        <td class="qty_med"><input type="number" class="form-control" name="packet_qty[]" value="<?php echo $f[ 'Product_Count' ]; ?>"/></td>
-
-
-                                        <td><input type="button" value="&times;" class="btn btn-default delete"/></td>
-                                    </tr>
-                                    <?php endforeach; ?>
-                                    <!--
-<tr>
-                                            <td></td>
-<td>2</td>
-<td>amoshaphin</td>
-<td><input type="button" value="&times;" class="btn btn-default delete"/></td>
-</tr>-->
-                                </tbody>
-                            </table>
-                        </div>
-
-
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-    </section>
-</form>
-</aside>
-
+                                    
+                            </div>
+				</div>
+				</div>
+                </section>
+				</form>
+            </aside>
 
 <?php 
 echo $this->Html->css('datatables/dataTables.bootstrap');

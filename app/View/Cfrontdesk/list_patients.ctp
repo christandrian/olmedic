@@ -14,7 +14,7 @@ $this->end();
 <ul class="sidebar-menu">
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-dashboard"></i> <span>Dashboard</span>',
+        '<i class="fa fa-dashboard"></i> <span>Beranda</span>',
         array('controller' => 'cfrontdesk',
         'action' => 'dashboard',
         'full_base' => true
@@ -26,13 +26,13 @@ $this->end();
     <li class="treeview active">
         <a href="#">
             <i class="fa fa-file"></i>
-            <span>Patients</span>
+            <span>Pasien</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
             <li>
                 <?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Patient</span>',
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Pasien</span>',
                 array('controller' => 'cfrontdesk',
                 'action' => 'addNewPatient',
                 'full_base' => true
@@ -41,7 +41,7 @@ $this->end();
                 );?>
             </li>
             <li class="active"><?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>List Patients</span>',
+                '<i class="fa fa-angle-double-right"></i><span>Daftar Pasien</span>',
                 array('controller' => 'cfrontdesk',
                 'action' => 'list_patients',
                 'full_base' => true
@@ -52,7 +52,7 @@ $this->end();
     </li>
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-stack-exchange"></i> <span>Queue</span>',
+        '<i class="fa fa-stack-exchange"></i> <span>Antrian</span>',
         array('controller' => 'cfrontdesk',
         'action' => 'queue',
         'full_base' => true
@@ -62,7 +62,7 @@ $this->end();
     </li>
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-stack-exchange"></i> <span>Stocks</span>',
+        '<i class="fa fa-stack-exchange"></i> <span>Inventory</span>',
         array('controller' => 'cfrontdesk',
         'action' => 'stock',
         'full_base' => true
@@ -72,7 +72,7 @@ $this->end();
     </li>
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-money"></i> <span>Payment</span>',
+        '<i class="fa fa-money"></i> <span>Pembayaran</span>',
         array('controller' => 'cfrontdesk',
         'action' => 'payment',
         'full_base' => true
@@ -83,7 +83,7 @@ $this->end();
     </li>
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-file-text"></i> <span>Reports</span>',
+        '<i class="fa fa-file-text"></i> <span>Laporan</span>',
         array('controller' => 'cfrontdesk',
         'action' => 'reports',
         'full_base' => true
@@ -91,13 +91,22 @@ $this->end();
         array('escape'=>false)
         );?>
     </li>
-
+	<li>
+        <?php echo $this->Html->link(
+        '<i class="fa fa-file-text"></i> <span>Petunjuk Penggunaan</span>',
+        array('controller' => 'cfrontdesk',
+        'action' => 'faq',
+        'full_base' => true
+        ),
+        array('escape'=>false)
+        );?>
+    </li>
 </ul>
 <?php $this->end(); ?>
 
 <section class="content-header">
     <h1>
-        List of Patients
+        Daftar Pasien
 
     </h1>
 
@@ -120,7 +129,7 @@ $this->end();
 
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Patient List</h3>
+                        <h3 class="box-title">Daftar Pasien</h3>
                         <?php  //print_r($result);?>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
@@ -128,10 +137,10 @@ $this->end();
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Identity</th>
-                                    <th>Patient</th>
-                                    <th>Gender</th>
-                                    <th>Action</th>
+                                    <th>Identitas</th>
+                                    <th>Pasien</th>
+                                    <th>Jenis Kelamin</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -147,18 +156,18 @@ $this->end();
                                 '/cfrontdesk/patient/'.$f['ID_Patient'],
                                 array('class' => 'btn btn-info')
                                 );?>
-                                <button class="btn btn-primary add" >Add Patient</button></td>
+                                <button class="btn btn-primary add" >Tambah Antrian</button></td>
                             </tr>
                             <?php endforeach; ?>
 
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Identity</th>
-                                    <th>Patient</th>
-                                    <th>Gender</th>
-                                    <th>Action</th>
+									<th>No</th>
+                                    <th>Identitas</th>
+                                    <th>Pasien</th>
+                                    <th>Jenis Kelamin</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -177,13 +186,13 @@ $this->end();
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Queue Registration</h4>
+                <h4 class="modal-title" id="exampleModalLabel">Pendaftaran Antrian</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="POST" action="queuePatient">
                     <input type="hidden" name="id" id="id_patient_distinct">
                     <div class="form-group">
-                        <label for="nomor" class="col-sm-2 control-label">Doctor:</label>
+                        <label for="nomor" class="col-sm-2 control-label">Dokter:</label>
                         <div class="col-sm-8">
                             <select name="doctor" id="doctor" class="form-control">
                                 <option>-</option>
@@ -196,7 +205,7 @@ $this->end();
                     </div>
 
                     <div class="form-group ">
-                        <label for="nomor" class="col-sm-2 control-label">Time:</label>
+                        <label for="nomor" class="col-sm-2 control-label">Waktu:</label>
                         <div class="col-sm-8">
                             <div class="input-group bootstrap-timepicker">
                                 <input type="text" name="time" id="time" class="form-control timepicker"/>
@@ -235,7 +244,7 @@ $this->end();
                     <div class="form-group">
 
                         <div class="col-sm-2 col-md-offset-10">
-                            <button type="submit" class="btn btn-primary">Add</button>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
                         </div>                                      
 
                     </div>

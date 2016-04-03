@@ -16,7 +16,7 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-        '<i class="fa fa-dashboard"></i> <span>Dashboard</span>', array('controller' => 'pfrontdesk',
+        '<i class="fa fa-dashboard"></i> <span>Beranda</span>', array('controller' => 'pfrontdesk',
         'action' => 'dashboard',
         'full_base' => true
         ), array('escape' => false)
@@ -27,14 +27,14 @@ $this->end();
     <li class="treeview">
         <a href="#">
             <i class="fa fa-file"></i>
-            <span>Prescription</span>
+            <span>Resep</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
             <li >
                 <?php
                 echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Prescription</span>', array('controller' => 'pfrontdesk',
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Resep</span>', array('controller' => 'pfrontdesk',
                 'action' => 'prescription',
                 'full_base' => true
                 ), array('escape' => false)
@@ -43,7 +43,7 @@ $this->end();
             </li>
             <li ><?php
                 echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>List Prescriptions</span>', array('controller' => 'pfrontdesk',
+                '<i class="fa fa-angle-double-right"></i><span>Daftar Resep</span>', array('controller' => 'pfrontdesk',
                 'action' => 'list_prescriptions',
                 'full_base' => true
                 ), array('escape' => false)
@@ -54,7 +54,7 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-        '<i class="fa fa-stack-exchange"></i> <span>Stocks</span>', array('controller' => 'pfrontdesk',
+        '<i class="fa fa-stack-exchange"></i> <span>Inventory</span>', array('controller' => 'pfrontdesk',
         'action' => 'stock',
         'full_base' => true
         ), array('escape' => false)
@@ -64,7 +64,7 @@ $this->end();
     <li class="active">
         <?php
         echo $this->Html->link(
-        '<i class="fa fa-money"></i> <span>Payment</span>', array('controller' => 'pfrontdesk',
+        '<i class="fa fa-money"></i> <span>Pembayaran</span>', array('controller' => 'pfrontdesk',
         'action' => 'payment',
         'full_base' => true
         ), array('escape' => false)
@@ -75,8 +75,18 @@ $this->end();
     <li>
         <?php
         echo $this->Html->link(
-        '<i class="fa fa-file-text"></i> <span>Reports</span>', array('controller' => 'pfrontdesk',
+        '<i class="fa fa-file-text"></i> <span>Laporan</span>', array('controller' => 'pfrontdesk',
         'action' => 'reports',
+        'full_base' => true
+        ), array('escape' => false)
+        );
+        ?>
+    </li>
+	<li>
+        <?php
+        echo $this->Html->link(
+        '<i class="fa fa-file-text"></i> <span>Petunjuk Pemakaian</span>', array('controller' => 'pfrontdesk',
+        'action' => 'faq',
         'full_base' => true
         ), array('escape' => false)
         );
@@ -88,7 +98,7 @@ $this->end();
 
 <section class="content-header">
     <h1>
-        Payment
+        Pembayaran
     </h1>
 
 </section>
@@ -100,14 +110,14 @@ $this->end();
             <div class="col-xs-6">
 
                 <div class="form-group">
-                    <label for="nomor" class="col-sm-3 control-label">Presc. ID</label>
+                    <label for="nomor" class="col-sm-3 control-label">Resep ID</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control input-sm" name="presc_id" placeholder="Presc. ID" value="<?php if ($valid) echo $presc_id; ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="nomor" class="col-sm-3 control-label">Patient:</label>
+                    <label for="nomor" class="col-sm-3 control-label">Pasien:</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control input-sm" name="patient_name" value="<?php if ($valid) echo $patient_name; ?>" placeholder="Name" >
                     </div>										
@@ -120,7 +130,7 @@ $this->end();
 
             <div class="col-xs-6">
                 <div class="form-group">
-                    <label for="nomor" class="col-sm-offset-1 col-sm-3 control-label">Doctor:</label>
+                    <label for="nomor" class="col-sm-offset-1 col-sm-3 control-label">Dokter:</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control input-sm" name="doctor_name" value="<?php if ($valid) echo $doctor_name; ?>" placeholder="Name" >
                     </div>										
@@ -144,7 +154,7 @@ $this->end();
 
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Medicine</h3>
+                        <h3 class="box-title">Daftar Barang</h3>
                         <?php //echo var_dump($data_pack);?>
                     </div>
                     <div class="box-body table-responsive">
@@ -152,12 +162,12 @@ $this->end();
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Name</th>
-                                    <th>Category</th>
-                                    <th>Stock</th>
-                                    <th>Price</th>
-                                    <th>Discount</th>
-                                    <th>Action</th>
+                                    <th>Nama</th>
+                                    <th>Kategori</th>
+                                    <th>Kuantitas</th>
+                                    <th>Harga</th>
+                                    <th>Diskon</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -174,9 +184,9 @@ $this->end();
                                     <td><?php echo $f['Price']; ?></td>
                                     <td><?php echo $f['Percentage_Amount']; ?></td>
                                     <td><?php if($f['canBuy']){
-                                        echo '<button class="btn btn-primary add">Buy</button>';
+                                        echo '<button class="btn btn-primary add">Beli</button>';
                                         }else{
-                                        echo '<button class="btn btn-primary add" disabled>Buy</button>';
+                                        echo '<button class="btn btn-primary add" disabled>Beli</button>';
                                         }?></td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -220,12 +230,12 @@ $this->end();
                             <tfoot>
                                 <tr>
                                     <th></th>
-                                    <th>Name</th>
-                                    <th>Category</th>
-                                    <th>Stock</th>
-                                    <th>Price</th>
-                                    <th>Discount</th>
-                                    <th>Action</th>
+                                    <th>Nama</th>
+                                    <th>Kategori</th>
+                                    <th>Kuantitas</th>
+                                    <th>Harga</th>
+                                    <th>Diskon</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -245,8 +255,8 @@ $this->end();
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Qty</th>
-                                    <th>Price</th>
-                                    <th>Disc.</th>
+                                    <th>Harga</th>
+                                    <th>Disc</th>
                                     <th>X</th>
                                 </tr>
                             </thead>
@@ -291,7 +301,7 @@ $this->end();
                         <table id="totaltbl" class="table table-striped table-condensed " style="margin-bottom:10px;">
                             <tbody>
                                 <tr class="success">
-                                    <td width="25%">Total Items</td>
+                                    <td width="25%">Total Barang</td>
                                     <td><span id="count">0</span></td>
 
                                     <td width="25%">Total</td>
@@ -299,18 +309,18 @@ $this->end();
                                 </tr>
                                 <tr class="success">
 
-                                    <td width="25%">Discount</td>
+                                    <td width="25%">Diskon</td>
                                     <td><span id="ds_con" contentEditable=true >0</span>
                                         <input type="hidden" name="disc_gen" id="disc_gen" value="0"/></td>
 
-                                    <td width="25%">Tax</td>
+                                    <td width="25%">Pajak</td>
                                     <td class="text-right" ><span id="ts_con" contentEditable=true><?php echo $data['data_store']['Tax']; ?></span>
                                         <input type="hidden" name="tax_gen" id="tax_gen" value="<?php echo $data['data_store']['Tax']; ?>"/>
                                     </td>
 
                                 </tr>
                                 <tr class="success">
-                                    <td colspan="2">Total Payable</td>
+                                    <td colspan="2">Total Pembayaran</td>
                                     <td class="text-right" colspan="2"><span id="total-payable">0</span></td>
                                 </tr>
                             </tbody>
@@ -321,8 +331,8 @@ $this->end();
                 <div class="box" >
                     <div class="box-body text-center">
 
-                        <button type="button" class="btn btn-danger btn-lg">CANCEL</button>
-                        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#pay" data-whatever="@mdo" id="payment">PAYMENT</button>
+                        
+                        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#pay" data-whatever="@mdo" id="payment">BAYAR</button>
                     </div>
                 </div>
             </div>
@@ -333,14 +343,11 @@ $this->end();
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="exampleModalLabel">PAYMENT</h4>
+                        <h4 class="modal-title" id="exampleModalLabel">PEMBAYARAN</h4>
                     </div>
                     <div class="modal-body">
 
-
-
-
-                        <div class="form-group">
+                        <!--<div class="form-group">
                             <label for="nomor" class="col-sm-4 control-label text-left">INVOICE:</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="inv" placeholder="Invoice" name="invoice" disabled>
@@ -348,15 +355,15 @@ $this->end();
                         </div>
 
                         <div class="form-group">
-                            <label for="nomor" class="col-sm-4 control-label">Patient:</label>
+                            <label for="nomor" class="col-sm-4 control-label">Pasien:</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="patient_" placeholder="Name" disabled>
                             </div>										
 
-                        </div>
+                        </div>-->
 
                         <div class="form-group">
-                            <label for="nomor" class="col-sm-4 control-label">Quantity:</label>
+                            <label for="nomor" class="col-sm-4 control-label">Kuantitas:</label>
                             <div class="col-sm-6">
                                 <p class="form-control-static" id="qty_">-</p>
                             </div>										
@@ -372,47 +379,55 @@ $this->end();
                         </div>
 
                         <div class="form-group">
-                            <label for="nomor" class="col-sm-4 control-label">Paid by:</label>
+                            <label for="nomor" class="col-sm-4 control-label">Metode Pembayaran:</label>
                             <div class="col-sm-6">
                                 <select class="form-control" id="paidby" name="paidby">
                                     <option value="0">-</option>
                                     <option value="1">Cash</option>
                                     <option value="2">Credit Card/Debit</option>
+                                    <option value="3">Komplemen</option>
+                                    <option value="4">Piutang/Asuransi</option>
                                 </select>
                             </div>										
 
                         </div>
 
                         <div class="form-group cash" style="display:none;">
-                            <label for="nomor" class="col-sm-4 control-label">Paid:</label>
+                            <label for="nomor" class="col-sm-4 control-label">Bayar:</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="paid" name="paid" placeholder="" >
                             </div>
                         </div>
 
                         <div class="form-group cash" style="display:none;">
-                            <label for="nomor" class="col-sm-4 control-label">Change:</label>
+                            <label for="nomor" class="col-sm-4 control-label">Kembalian:</label>
                             <div class="col-sm-6">
                                 <p class="form-control-static" id="change">___</p>
                             </div>										
                         </div>
                         <div class="form-group cc" style="display:none;" >
-                            <label for="nomor" class="col-sm-4 control-label">Credit Card No :</label>
+                            <label for="nomor" class="col-sm-4 control-label">Credit Card:</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="cc_no" name="cc_no" placeholder="" >
                             </div>
                         </div>
                         <div class="form-group cc" style="display:none;" >
-                            <label for="nomor" class="col-sm-4 control-label">Credit Card Holder :</label>
+                            <label for="nomor" class="col-sm-4 control-label">Pemegang Credit Card:</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="cc_name" name="cc_name" placeholder="">
+                            </div>
+                        </div>
+						<div class="form-group pt" style="display:none;" >
+                            <label for="nomor" class="col-sm-4 control-label">Asuransi:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="cc_name" name="cc_name" placeholder="" >
                             </div>
                         </div>
                         <div class="form-group">
 
                             <div class="col-md-4 col-md-offset-8 col-sm-4 col-sm-offset-8">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">CANCEL</button>
-                                <button type="submit" class="btn btn-primary" id="submits" disabled>SUBMIT</button>
+                                <button type="submit" class="btn btn-primary" id="submits" disabled>PROSES</button>
                             </div>										
 
                         </div>
@@ -426,26 +441,6 @@ $this->end();
     </section>
 </form>
 </aside>
-
-<div class="modal fade" id="resep" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">RESEP</h4>
-            </div>
-            <div class="modal-body">
-
-                <div class="form-group">
-                    <label for="message-text" class="control-label">List Resep:</label>
-                    <textarea class="form-control" id="message-text" rows="8" cols="60" readonly></textarea>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-</div>
 <?php
 echo $this->Html->css('datatables/dataTables.bootstrap');
 $this->start('additional');
@@ -553,8 +548,17 @@ echo $this->Html->script('plugins/timepicker/bootstrap-timepicker.min');
             "bFilter": true,
             "bSort": true,
             "bInfo": true,
-            "bAutoWidth": true,
-            "order": [[1, 'asc']]
+            "autoWidth": true,
+            "order": [[1, 'asc']],
+			"aoColumnDefs": [ {
+   "aTargets": [4],
+   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+     var $currencyCell = $(nTd);
+     var commaValue = $currencyCell.text().replace('.00000', "");
+	 var commaValue2 = commaValue.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+     $currencyCell.text('Rp '+commaValue2);
+   }
+}]
         });
 
         t.on('order.dt search.dt', function() {
@@ -595,22 +599,32 @@ echo $this->Html->script('plugins/timepicker/bootstrap-timepicker.min');
         $('#paidby').on('change', function() {
             var tmp = $("#paidby option:selected").val();
 
-            if (tmp == 0) {
+            if (tmp == 0 || tmp == 3 ) {
                 $(".cash").hide();
                 $(".cc").hide();
+				$(".pt").hide();
                 $("#submits").prop('disabled', true);
                 $("#cc_no").prop('required', false);
                 $("#cc_name").prop('required', false);
             } else if (tmp == 1) {
                 $(".cash").show();
                 $(".cc").hide();
+				$(".pt").hide();
                 $("#cc_no").prop('required', false);
                 $("#cc_name").prop('required', false);
             } else if (tmp == 2) {
                 $(".cc").show();
                 $(".cash").hide();
+				$(".pt").hide();
                 $("#submits").prop('disabled', false);
                 $("#cc_no").prop('required', true);
+                $("#cc_name").prop('required', true);
+            } else if (tmp == 4) {
+                $(".pt").show();
+                $(".cash").hide();
+				$(".cc").hide();
+                $("#submits").prop('disabled', false);
+                $("#cc_no").prop('required', false);
                 $("#cc_name").prop('required', true);
             }
         });

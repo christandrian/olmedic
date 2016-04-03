@@ -14,7 +14,7 @@ $this->end();
 <ul class="sidebar-menu">
     <li class="active">
         <?php echo $this->Html->link(
-        '<i class="fa fa-dashboard"></i> <span>Dashboard</span>',
+        '<i class="fa fa-dashboard"></i> <span>Beranda</span>',
         array('controller' => 'cdoctor',
         'action' => 'dashboard',
         'full_base' => true
@@ -26,7 +26,7 @@ $this->end();
 
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-calendar"></i> <span>History</span>',
+        '<i class="fa fa-calendar"></i> <span>Riwayat</span>',
         array('controller' => 'cdoctor',
         'action' => 'history',
         'full_base' => true
@@ -37,9 +37,21 @@ $this->end();
 
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-stack-exchange"></i> <span>Queue</span>',
+        '<i class="fa fa-stack-exchange"></i> <span>Antrian</span>',
         array('controller' => 'cdoctor',
         'action' => 'queue',
+        'full_base' => true
+        ),
+        array('escape'=>false)
+        );?>
+
+    </li>
+	
+	<li>
+        <?php echo $this->Html->link(
+        '<i class="fa fa-stack-exchange"></i> <span>Petunjuk Penggunaan</span>',
+        array('controller' => 'cdoctor',
+        'action' => 'faq',
         'full_base' => true
         ),
         array('escape'=>false)
@@ -52,7 +64,7 @@ $this->end();
 
 <section class="content-header">
     <h1>
-        Dashboard
+        Beranda
 
     </h1>
 

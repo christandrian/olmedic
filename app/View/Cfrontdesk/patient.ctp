@@ -14,7 +14,7 @@ $this->end();
 <ul class="sidebar-menu">
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-dashboard"></i> <span>Dashboard</span>',
+        '<i class="fa fa-dashboard"></i> <span>Beranda</span>',
         array('controller' => 'cfrontdesk',
         'action' => 'dashboard',
         'full_base' => true
@@ -26,13 +26,13 @@ $this->end();
     <li class="treeview active">
         <a href="#">
             <i class="fa fa-file"></i>
-            <span>Patients</span>
+            <span>Pasien</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu active">
             <li>
                 <?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>Add New Patient</span>',
+                '<i class="fa fa-angle-double-right"></i><span>Tambah Pasien</span>',
                 array('controller' => 'cfrontdesk',
                 'action' => 'addNewPatient',
                 'full_base' => true
@@ -41,7 +41,7 @@ $this->end();
                 );?>
             </li>
             <li class="active"><?php echo $this->Html->link(
-                '<i class="fa fa-angle-double-right"></i><span>List Patients</span>',
+                '<i class="fa fa-angle-double-right"></i><span>Daftar Pasien</span>',
                 array('controller' => 'cfrontdesk',
                 'action' => 'list_patients',
                 'full_base' => true
@@ -52,7 +52,7 @@ $this->end();
     </li>
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-stack-exchange"></i> <span>Queue</span>',
+        '<i class="fa fa-stack-exchange"></i> <span>Antrian</span>',
         array('controller' => 'cfrontdesk',
         'action' => 'queue',
         'full_base' => true
@@ -62,7 +62,7 @@ $this->end();
     </li>
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-stack-exchange"></i> <span>Stocks</span>',
+        '<i class="fa fa-stack-exchange"></i> <span>Inventory</span>',
         array('controller' => 'cfrontdesk',
         'action' => 'stock',
         'full_base' => true
@@ -72,7 +72,7 @@ $this->end();
     </li>
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-money"></i> <span>Payment</span>',
+        '<i class="fa fa-money"></i> <span>Pembayaran</span>',
         array('controller' => 'cfrontdesk',
         'action' => 'payment',
         'full_base' => true
@@ -83,7 +83,7 @@ $this->end();
     </li>
     <li>
         <?php echo $this->Html->link(
-        '<i class="fa fa-file-text"></i> <span>Reports</span>',
+        '<i class="fa fa-file-text"></i> <span>Laporan</span>',
         array('controller' => 'cfrontdesk',
         'action' => 'reports',
         'full_base' => true
@@ -91,13 +91,22 @@ $this->end();
         array('escape'=>false)
         );?>
     </li>
-
+	<li>
+        <?php echo $this->Html->link(
+        '<i class="fa fa-file-text"></i> <span>Petunjuk Penggunaan</span>',
+        array('controller' => 'cfrontdesk',
+        'action' => 'faq',
+        'full_base' => true
+        ),
+        array('escape'=>false)
+        );?>
+    </li>
 </ul>
 <?php $this->end(); ?>
 
 <section class="content-header">
     <h1>
-        Patient Details
+        Detail Pasien
 
     </h1>
 
@@ -117,29 +126,29 @@ $this->end();
     <section class="content">
         <div class="row">
             <div class="col-md-12">
-                <?php echo $this->form->create(false,array('url'=>'/cfrontdesk/updatePatient/' , 'class'=>'form-horizontal'));?>
+                <?php echo $this->Form->create(false,array('url'=>'/cfrontdesk/updatePatient/' , 'class'=>'form-horizontal'));?>
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Patient Detail </h3>
+                        <h3 class="box-title">Detail Pasien </h3>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
 
                         <div id="non-exist" >
 
                             <div class="form-group">
-                                <label for="nomor" class="col-sm-3 control-label">Name:</label>
+                                <label for="nomor" class="col-sm-3 control-label">Nama:</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="first_name" placeholder="First Name" value="<?php echo $patient[0]['First_Name']; ?>">
+                                    <input type="text" class="form-control" name="first_name" placeholder="Nama Depan" value="<?php echo $patient[0]['First_Name']; ?>">
 
                                 </div>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="<?php echo $patient[0]['Last_Name']; ?>">
+                                    <input type="text" class="form-control" name="last_name" placeholder="Nama Belakang" value="<?php echo $patient[0]['Last_Name']; ?>">
 
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="nomor" class="col-sm-3 control-label">Identity Number:</label>
+                                <label for="nomor" class="col-sm-3 control-label">No Identitas:</label>
                                 <div class="col-sm-8">
                                     <input type="hidden" class="form-control" name="soc_number" value="<?php echo $patient[0]['Social_Number']; ?>">
 
@@ -151,7 +160,7 @@ $this->end();
 
                             <div class="form-group">
 
-                                <label for="nomor" class="col-sm-3 control-label">Birthdate:</label>
+                                <label for="nomor" class="col-sm-3 control-label">Tanggal Lahir:</label>
 
                                 <div class="col-sm-4">
                                     <input type="date" class="form-control" name="birth_date" value="<?php echo $patient[0]['Birth_Date']; ?>" placeholder="Tgl. Lahir">
@@ -159,7 +168,7 @@ $this->end();
                             </div>
 
                             <div class="form-group">
-                                <label for="nomor" class="col-sm-3 control-label">Blood Type:</label>
+                                <label for="nomor" class="col-sm-3 control-label">Golongan Darah:</label>
                                 <div class="col-sm-4">
                                     <select class="form-control" name="blood_type">
                                         <?php
@@ -193,19 +202,19 @@ $this->end();
 
                             </div>
                             <div class="form-group">
-                                <label for="nomor" class="col-sm-3 control-label">Gender:</label>
+                                <label for="nomor" class="col-sm-3 control-label">Jenis Kelamin:</label>
                                 <div class="col-sm-4">
                                     <select class="form-control" name="gender" value="<?php echo $patient[0]['Gender']; ?>" >
                                         if($patient[0]['Gender']=='Male'){
-                                        echo '<option selected value="Male">Male</option>';
+                                        echo '<option selected value="Male">Laki-laki</option>';
                                         }else{
-                                        echo '<option value="Male">Male</option>';
+                                        echo '<option value="Male">Laki-laki</option>';
                                         }
 
                                         if($patient[0]['Gender']=='Female'){
-                                        echo '<option selected value="Female">Female</option>';
+                                        echo '<option selected value="Female">Perempuan</option>';
                                         }else{
-                                        echo '<option value="Female">Female</option>';
+                                        echo '<option value="Female">Perempuan</option>';
                                         }
                                     </select>
                                 </div>										
@@ -213,7 +222,7 @@ $this->end();
                             </div>
 
                             <div class="form-group">
-                                <label for="nomor" class="col-sm-3 control-label">Weight:</label>
+                                <label for="nomor" class="col-sm-3 control-label">Berat:</label>
                                 <div class="col-sm-4">
                                     <input type="number" class="form-control" name="weight" value="<?php echo $patient[0]['Weight']; ?>" placeholder="kgs">
 
@@ -234,7 +243,7 @@ $this->end();
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">Emergency contact</label>
+                                <label class="col-sm-3 control-label">Kontak Darurat</label>
                                 <div class="col-sm-4">
                                     <div class="input-group">
                                         <div class="input-group-addon">
@@ -247,7 +256,7 @@ $this->end();
                             </div>
 
                             <div class="form-group">
-                                <label for="nomor" class="col-sm-3 control-label">Address:</label>
+                                <label for="nomor" class="col-sm-3 control-label">Alamat:</label>
                                 <div class="col-sm-8">
                                     <textarea class="form-control" name="address" rows="3" style="resize:none;"><?php echo $patient[0]['Address']; ?></textarea>
                                 </div>										
@@ -274,7 +283,7 @@ $this->end();
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">History List </h3>
+                        <h3 class="box-title">Riwayat Pasien </h3>
                         <?php //echo var_dump($history);?>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
@@ -282,9 +291,9 @@ $this->end();
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Doctor</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
+                                    <th>Dokter</th>
+                                    <th>Tanggal</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -303,9 +312,9 @@ $this->end();
                             <tfoot>
                                 <tr>
                                     <th>No</th>
-                                    <th>Doctor</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
+                                    <th>Dokter</th>
+                                    <th>Tanggal</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -356,7 +365,7 @@ $this->end();
                             <div class="panel-heading" role="tab" id="headingTwo">
                                 <h4 class="panel-title">
                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        Diagnose
+                                        Diagnosa
                                     </a>
                                 </h4>
                             </div>
@@ -394,7 +403,7 @@ $this->end();
                             <div class="panel-heading" role="tab" id="headingThree">
                                 <h4 class="panel-title">
                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        Treatment
+                                        Penanganan
                                     </a>
                                 </h4>
                             </div>
@@ -412,7 +421,7 @@ $this->end();
                             <div class="panel-heading" role="tab" id="headingFour">
                                 <h4 class="panel-title">
                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
-                                        PRESCRIPTION
+                                        Resep
                                     </a>
                                 </h4>
                             </div>
@@ -423,11 +432,11 @@ $this->end();
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Name</th>
+                                                    <th>Nama</th>
                                                     <th>Qty</th>
                                                     <th>Satuan</th>
-                                                    <th>Usage/Note</th>
-                                                    <th>Action</th>
+                                                    <th>Penggunaan</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -435,12 +444,12 @@ $this->end();
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <th>No</th>
-                                                    <th>Name</th>
+                                                   <th>No</th>
+                                                    <th>Nama</th>
                                                     <th>Qty</th>
                                                     <th>Satuan</th>
-                                                    <th>Usage/Note</th>
-                                                    <th>Action</th>
+                                                    <th>Penggunaan</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -454,7 +463,7 @@ $this->end();
                             <div class="panel-heading" role="tab" id="headingThree">
                                 <h4 class="panel-title">
                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                        Upload Image
+                                        Upload Gambar
                                     </a>
                                 </h4>
                             </div>
@@ -469,7 +478,7 @@ $this->end();
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
 
             </div>
         </div>

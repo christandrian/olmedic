@@ -17,11 +17,11 @@ class CdoctorController extends AppController {
 
     public function dashboard() {
         $this->init();
-        $this->set('title_for_layout', 'Dashboard');
+        $this->set('title_for_layout', 'Beranda');
     }
 
     public function history() {
-        $this->set('title_for_layout', 'Dashboard');
+        $this->set('title_for_layout', 'Riwayat');
         $this->init();
 		$id_store = CakeSession::read('idStore');
 		 $username = CakeSession::read('username');
@@ -40,9 +40,14 @@ class CdoctorController extends AppController {
         $id_doctor = $id[0]['ID_Doctor'];
         $queue = $this->DashBoard_Doctor->loadPatientByDoctor($id_store, $status, $id_doctor);
         $this->set('queue', $queue);
-        $this->set('title_for_layout', 'Queue');
+        $this->set('title_for_layout', 'Antrian');
     }
 
+		public function faq() {
+        $this->init();
+		$this->set('title_for_layout', 'FAQ');
+    }
+	
     public function getAnamnesa() {
         $this->init();
         $this->autoRender = false;
@@ -186,9 +191,22 @@ class CdoctorController extends AppController {
         $result = $this->DashBoard_Doctor->loadPatientByID($id_store, $id_patient);
         $result2 = $this->DashBoard_Doctor->loadPatientHistory($id_store, $id_patient);
         $this->set("patient", $result);
-        $this->set("history", $result2);
+        //$this->set("history", $result2);
+		$this->set('title_for_layout', 'Detail Pasien');
     }
-
+	
+	public function history_patient($id) {
+        $this->set('title_for_layout', 'Dashboard');
+        $this->init();
+        $id_store = CakeSession::read('idStore');
+        $id_patient = $id;
+        //$result = $this->DashBoard_Doctor->loadPatientByID($id_store, $id_patient);
+        $result2 = $this->DashBoard_Doctor->loadPatientHistory($id_store, $id_patient);
+        //$this->set("patient", $result);
+        $this->set("history", $result2);
+		$this->set('title_for_layout', 'Riwayat Pasien');
+    }
+/*
     public function addDoctor() {
         $this->init();
         $social_number = "TestSocialNumber";
@@ -214,7 +232,7 @@ class CdoctorController extends AppController {
         $blood_type = "O Positif";
         $handphone = "08123456789";
         $this->DashBoard_Clinic->editDoctor($id_doctor, $address, $gender, $first_name, $last_name, $birth_date, $blood_type, $handphone);
-    }
+    }*/
 
     public function loadDoctor() {
         $this->init();
