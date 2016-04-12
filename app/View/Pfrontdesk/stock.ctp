@@ -874,7 +874,7 @@ echo $this->Html->script('plugins/datatables/dataTables.bootstrap');
             $('#po_name_med_show').val($(this).parent().parent().find('.po_name_med').val());
             $('#sales_name_med_show').val($(this).parent().parent().find('.sales_name_med').val());
             $('#inv_name_med_show').val($(this).parent().parent().find('.inv_name_med').val());
-            $('#packaging_med_show').val($(this).parent().parent().find('.packgaing_med').val());
+            $('#packaging_med_show').val($(this).parent().parent().find('.packaging_med').val());
             $('#indikasi_med_show').val($(this).parent().parent().find('.indikasi_med').val());
             $('#efek_samping_med_show').val($(this).parent().parent().find('.efek_samping_med').val());
             $('#min_stock_med_show').val($(this).parent().parent().find('.min_stock_med').val());

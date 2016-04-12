@@ -428,7 +428,7 @@ class CfrontdeskController extends AppController {
         $arrItem['Name_Inv'] = $this->request['data']['item_inventory_name']; //* //1 (Metric_Name)
         $arrItem['Name_Sales'] = $this->request['data']['item_sales_name']; //* //1 (Metric_Name)
         $arrItem['ID_Brandowner'] = $this->request['data']['item_brand_owner']; //1
-        $arrItem['ID_Merk'] = $this->request['data']['item_merk']; //
+        //$arrItem['ID_Merk'] = $this->request['data']['item_merk']; //
         $arrItem['Code_Item'] = $this->request['data']['item_code']; //* //1
         $arrItem['ID_Category'] = $this->request['data']['item_category'];
         $arrItem['Packaging'] = $this->request['data']['item_packaging'];
@@ -501,7 +501,7 @@ class CfrontdeskController extends AppController {
         $arrItem['ID_Category'] = $data['ID_Category'];
         $arrItem['Description'] = $data['Description'];
         //$arrItem['Merk_Name'] =$this->DashBoard_Clinic->findMerkName($data['ID_Merk']);//*
-        $arrItem['ID_Merk'] = $data['ID_Merk'];
+        //$arrItem['ID_Merk'] = $data['ID_Merk'];
         //$arrItem['Brand_Owner_Name'] = $this->DashBoard_Clinic->findBrandownerName($data['ID_Brandowner']);;//*
         $arrItem['ID_Brandowner'] = $data['ID_Brandowner'];
         $arrItem['Name_PO'] = $data['Name_s50_po'];

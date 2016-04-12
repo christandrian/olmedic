@@ -385,8 +385,8 @@ class PfrontdeskController extends AppController {
         $this->set("itemCate", $cate1);
         $data_brand_owner = $this->DashBoard_Pharmacy->loadBrandOwner($id_pharmacy);
         $this->set("data_brand_owner", $data_brand_owner);
-        $data_merk = $this->DashBoard_Pharmacy->loadMerk($id_pharmacy);
-        $this->set("data_merk", $data_merk);
+        //$data_merk = $this->DashBoard_Pharmacy->loadMerk($id_pharmacy);
+        //$this->set("data_merk", $data_merk);
         $metric = $this->DashBoard_Pharmacy->loadMetric();
         $this->set("metric", $metric);
 		$this->set('title_for_layout', 'Tambah Produk');
@@ -409,7 +409,7 @@ class PfrontdeskController extends AppController {
         $arrItem['Name_Inv'] = $this->request['data']['item_inventory_name']; //* //1 (Metric_Name)
         $arrItem['Name_Sales'] = $this->request['data']['item_sales_name']; //* //1 (Metric_Name)
         $arrItem['ID_Brandowner'] = $this->request['data']['item_brand_owner']; //1
-        $arrItem['ID_Merk'] = $this->request['data']['item_merk']; //
+        //$arrItem['ID_Merk'] = $this->request['data']['item_merk']; //
         $arrItem['Code_Item'] = $this->request['data']['item_code']; //* //1
         $arrItem['ID_Category'] = $this->request['data']['item_category'];
         $arrItem['Packaging'] = $this->request['data']['item_packaging'];
@@ -482,7 +482,7 @@ class PfrontdeskController extends AppController {
         $arrItem['ID_Category'] = $data['ID_Category'];
         $arrItem['Description'] = $data['Description'];
         //$arrItem['Merk_Name'] =$this->DashBoard_Pharmacy->findMerkName($data['ID_Merk']);//*
-        $arrItem['ID_Merk'] = $data['ID_Merk'];
+        //$arrItem['ID_Merk'] = $data['ID_Merk'];
         //$arrItem['Brand_Owner_Name'] = $this->DashBoard_Pharmacy->findBrandownerName($data['ID_Brandowner']);;//*
         $arrItem['ID_Brandowner'] = $data['ID_Brandowner'];
         $arrItem['Name_PO'] = $data['Name_s50_po'];

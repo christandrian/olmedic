@@ -337,7 +337,7 @@ class DashBoard_Pharmacy extends AppModel {
 				ip.`SKU` as 'SKU',
 				ip.`Memo` as 'Memo',
 				ip.`Image` as 'Image',
-				merk.`Name` as 'Merk_Name',
+				
 				ip.`ID_Category` as 'Id_Category',
 				ic.name as 'Category_Name',
 				ip.Packaging as 'Packaging',
@@ -353,7 +353,7 @@ class DashBoard_Pharmacy extends AppModel {
 			JOIN `item_pharmacy` as ip on ip.id_product = pp.ID_Product 
 			JOIN `inventory_stock_pharmacy` as isp on isp.ID_Product = ip.id_product
 			JOIN `item_category_pharmacy` as ic on ic.SYS_ID = ip.`ID_Category`
-			JOIN `merk` as merk on merk.id_merk = ip.id_merk
+			
 			LEFT JOIN `product_discount_pharmacy` as pdp on pdp.ID_Product = isp.ID_Product
 			WHERE ";
         if (!$booleanViewAll) {
@@ -380,7 +380,7 @@ class DashBoard_Pharmacy extends AppModel {
             $result[$count]['Indikasi'] = $res['ip']['Indikasi'];
             $result[$count]['Efek_Samping'] = $res['ip']['Efek_Samping'];
             $result[$count]['Id_Merk'] = $res['ip']['Id_Merk'];
-            $result[$count]['Merk_Name'] = $res['merk']['Merk_Name'];
+            //$result[$count]['Merk_Name'] = $res['merk']['Merk_Name'];
             $result[$count]['Min_Stock'] = $res['ip']['Min_Stock'];
             $result[$count]['Shelf_Life'] = $res['ip']['Shelf_Life'];
             $result[$count]['Image'] = base64_encode($res['ip']['Image']);
@@ -580,7 +580,7 @@ class DashBoard_Pharmacy extends AppModel {
 		`Packaging`, `Indikasi`, `Efek_Samping`, 
 		`Min_Stock`, `Shelf_Life`, `SKU`, `Memo`, `isMeds`, `Image`)
 		VALUES ('$id_item','$arr_detail[Generic_Name]','$arr_detail[Name_PO]','$arr_detail[Name_Inv]','$arr_detail[Name_Sales]',
-		'$arr_detail[ID_Merk]','$arr_detail[ID_Brandowner]','$arr_detail[Code_Item]','$arr_detail[ID_Category]',
+		'0','$arr_detail[ID_Brandowner]','$arr_detail[Code_Item]','$arr_detail[ID_Category]',
 		'$arr_detail[Packaging]','$arr_detail[Indikasi]','$arr_detail[Efek_Samping]',
 		";
         if ($arr_detail['Min_Stock'] == '') {

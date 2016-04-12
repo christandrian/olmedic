@@ -284,7 +284,7 @@ $this->end();
                                         <input type="number" class="form-control" name="item_stock" placeholder="Quantity" required>
                                     </div>
                                 </div>
-
+<!--
                                 <div class="form-group">
                                     <label for="nomor" class="col-sm-3 control-label">Merk:</label>
                                     <div class="col-sm-8">
@@ -296,7 +296,7 @@ $this->end();
                                         </select>
                                     </div>
                                 </div>
-
+-->
                                 <div class="form-group">
                                     <label for="nomor" class="col-sm-3 control-label">Brand Owner:</label>
                                     <div class="col-sm-8">
@@ -511,7 +511,7 @@ $this->end();
 
                             </div>
                         </div>
-
+<!--
                         <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Merk:</label>
                             <div class="col-sm-8">
@@ -519,7 +519,7 @@ $this->end();
 
                             </div>
                         </div>
-
+-->
                         <div class="form-group">
                             <label for="nomor" class="col-sm-3 control-label">Brand Owner:</label>
                             <div class="col-sm-8">

@@ -271,7 +271,6 @@ class DashBoard_Clinic extends AppModel {
 				ip.`SKU` as 'SKU',
 				ip.`Memo` as 'Memo',
 				ip.`Image` as 'Image',
-				merk.`Name` as 'Merk_Name',
 				ip.`ID_Category` as 'Id_Category',
 				ic.name as 'Category_Name',
 				ip.Packaging as 'Packaging',
@@ -287,7 +286,6 @@ class DashBoard_Clinic extends AppModel {
 			JOIN `item_clinic` as ip on ip.id_product = pp.ID_Product 
 			JOIN `inventory_stock_clinic` as isc on isc.ID_Product = ip.id_product
 			JOIN `item_category_clinic` as ic on ic.SYS_ID = ip.`ID_Category`
-			JOIN `merk` as merk on merk.id_merk = ip.id_merk
 			LEFT JOIN `product_discount_clinic` as pdp on pdp.ID_Product = isc.ID_Product
 			WHERE ";
         if (!$booleanViewAll) {
@@ -313,8 +311,8 @@ class DashBoard_Clinic extends AppModel {
             $result[$count]['Packaging'] = $res['ip']['Packaging'];
             $result[$count]['Indikasi'] = $res['ip']['Indikasi'];
             $result[$count]['Efek_Samping'] = $res['ip']['Efek_Samping'];
-            $result[$count]['Id_Merk'] = $res['ip']['Id_Merk'];
-            $result[$count]['Merk_Name'] = $res['merk']['Merk_Name'];
+            //$result[$count]['Id_Merk'] = $res['ip']['Id_Merk'];
+            //$result[$count]['Merk_Name'] = $res['merk']['Merk_Name'];
             $result[$count]['Min_Stock'] = $res['ip']['Min_Stock'];
             $result[$count]['Shelf_Life'] = $res['ip']['Shelf_Life'];
             $result[$count]['Image'] = base64_encode($res['ip']['Image']);
@@ -515,7 +513,7 @@ class DashBoard_Clinic extends AppModel {
 		`ID_Merk`, `ID_Brandowner`, `Code_Item_s50`, `ID_Category`, `Min_Stock`, `Shelf_Life`, `SKU`, 
 		`Memo`, `isMeds`, `Image`) 
 		VALUES ('$id_item','$arr_detail[Name_PO]','$arr_detail[Name_Inv]','$arr_detail[Name_Sales]',
-		'$arr_detail[ID_Merk]','$arr_detail[ID_Brandowner]','$arr_detail[Code_Item]','$arr_detail[ID_Category]',
+		'0','$arr_detail[ID_Brandowner]','$arr_detail[Code_Item]','$arr_detail[ID_Category]',
 		";
         //New SQL
         $sql = "
@@ -524,7 +522,7 @@ class DashBoard_Clinic extends AppModel {
 		`Packaging`, `Indikasi`, `Efek_Samping`, 
 		`Min_Stock`, `Shelf_Life`, `SKU`, `Memo`, `isMeds`, `Image`)
 		VALUES ('$id_item','$arr_detail[Generic_Name]','$arr_detail[Name_PO]','$arr_detail[Name_Inv]','$arr_detail[Name_Sales]',
-		'$arr_detail[ID_Merk]','$arr_detail[ID_Brandowner]','$arr_detail[Code_Item]','$arr_detail[ID_Category]',
+		'0','$arr_detail[ID_Brandowner]','$arr_detail[Code_Item]','$arr_detail[ID_Category]',
 		'$arr_detail[Packaging]','$arr_detail[Indikasi]','$arr_detail[Efek_Samping]',
 		";
         if ($arr_detail['Min_Stock'] == '') {
@@ -872,7 +870,7 @@ class DashBoard_Clinic extends AppModel {
 		im.`Name_s50_po`, im.`Name_s50_inv`, im.`Name_s50_sales`, 
 		im.`ID_Merk`, im.`ID_Brandowner`, im.`ID_Category`, 
 		im.`Packaging`, im.`Indikasi`, im.`Efek_Samping`,
-		ic.Name, merk.Name, brand.Owner_name
+		ic.Name,  brand.Owner_name
 		FROM `item_master` as im
 		JOIN `product_clinic` as pc ON pc.ID_Master != im.ID_Product_Master 
 		JOIN `item_category_clinic` as ic on ic.SYS_ID = im.`ID_Category`
@@ -889,7 +887,7 @@ class DashBoard_Clinic extends AppModel {
 		ic.Name, merk.Name, brand.Owner_name
 		FROM `item_master` as im
 		JOIN `item_category_clinic` as ic on ic.SYS_ID = im.`ID_Category`
-		JOIN `merk` as merk on merk.id_merk = im.id_merk
+		
 		JOIN `brand_owner` as brand on brand.ID_Brandowner = im.ID_Brandowner";
             $result = $this->query($sql);
         }
